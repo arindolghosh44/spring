@@ -1,0 +1,19 @@
+package com.becoder.config;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class Message {
+
+	public String getMsg()
+	{
+		return "hello";
+	}
+	
+	
+	
+	
+	
+	
+	
+}

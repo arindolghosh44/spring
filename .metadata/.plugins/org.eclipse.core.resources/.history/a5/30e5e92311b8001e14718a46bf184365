@@ -1,0 +1,18 @@
+package First_spring_App;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+       Ram p=new Ram();
+       p.eat();
+       p.sleep();
+       sam p1=new sam();
+       p1.eat();
+       p1.sleep();
+    }
+}

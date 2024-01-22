@@ -1,0 +1,31 @@
+package com.becoder;
+
+import java.util.List;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.*;
+
+import com.becoder.entities.Student;
+import com.becoder.repository.StudentRepo;
+@SpringBootApplication
+public class SpringDataJpaApplication {
+
+	public static void main(String[] args) {
+		ApplicationContext context=SpringApplication.run(SpringDataJpaApplication.class, args);
+		StudentRepo stRepo=context.getBean(StudentRepo.class);
+		Student st=new Student();
+		st.setName("becodershhshsshsh");
+		st.setAddress("djjdsjsjssss");
+	//	stRepo.save(st);
+		
+		
+		//List <Student> list=(List<Student>)stRepo.findAll();
+		//list.forEach( st1 ->System.out.println(st1));
+		
+		
+		
+		
+	}
+
+}

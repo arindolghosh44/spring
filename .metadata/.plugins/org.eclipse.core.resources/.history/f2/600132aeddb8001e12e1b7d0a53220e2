@@ -1,0 +1,33 @@
+package com.becoder.repository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.becoder.entities.*;
+
+public interface StudentRepo  extends JpaRepository<Student, Integer>{
+//custom method we can generated using this jpaRepository
+	Student findByName(String name);
+	Student findByAddress(String address);
+	Student findByNameAndAddress(String name,String address);
+	//List<Student> findByNameOrId(String name,int id);
+	List<Student> findByNameOrAddress(String name,String address);
+	
+	//	List<Student> findByNameIsNull();
+//	List<Student> findByAddressIsNull();
+	List<Student> findByNameIsNotNull();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

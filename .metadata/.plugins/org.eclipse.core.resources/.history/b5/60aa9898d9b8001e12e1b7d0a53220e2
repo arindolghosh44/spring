@@ -1,0 +1,11 @@
+package com.becoder.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+
+import com.becoder.entities.*;
+
+public interface StudentRepo  extends JpaRepository<Student, Integer>{
+//custom method we can generated using this jpaRepository
+	Student findByName(String name);
+	
+}

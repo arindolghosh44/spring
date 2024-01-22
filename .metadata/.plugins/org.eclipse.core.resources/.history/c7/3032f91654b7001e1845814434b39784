@@ -1,0 +1,34 @@
+package com.becoder.service;
+
+import com.becoder.entity.Employee;
+import com.becoder.repository.EmpRepo;
+
+public class EmpService {
+
+	
+	private EmpRepo repo;
+	
+	
+	public void addEmp(Employee emp) {
+		
+		repo.save(emp);
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

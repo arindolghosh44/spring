@@ -1,0 +1,7 @@
+package com.becoder.repository;
+
+public class StudentRepo  extends JpaRepository<Student, Integer>{
+
+	
+	
+}

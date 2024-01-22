@@ -1,0 +1,5 @@
+package com.becoder.repository;
+
+public interface EmpRepo {
+
+}

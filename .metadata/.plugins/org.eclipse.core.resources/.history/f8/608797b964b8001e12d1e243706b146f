@@ -1,0 +1,9 @@
+package com.becoder.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.*;
+import java.becoder.entities.*;
+
+public class StudentRepo extends extends JpaRepository<Student, Integer>{
+
+}

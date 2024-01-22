@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.becoder.config.Message&apos; to &apos;MyMessage&apos;&#x0D;&#x0A;- Original project: &apos;spring_boot_first&apos;&#x0D;&#x0A;- Original element: &apos;com.becoder.config.Message&apos;&#x0D;&#x0A;- Renamed element: &apos;com.becoder.config.MyMessage&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Message&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.becoder.config{Message.java[Message" matchStrategy="1" name="MyMessage" qualified="false" references="true" similarDeclarations="false" stamp="1705835837640" textual="false" version="1.0"/>
+</session>
