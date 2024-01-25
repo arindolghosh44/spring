@@ -33,12 +33,10 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(
-						requests -> requests.requestMatchers("/").permitAll().anyRequest().authenticated())
-				.formLogin().loginPage("/signin").loginProcessingUrl("/login").defaultSuccessUrl("/about").permitAll()
-				// .failureUrl("/invalid")
-				.and().logout().logoutSuccessUrl("/userlogout").permitAll();
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(
+                        requests -> requests.requestMatchers("/").permitAll().anyRequest().authenticated())
+                .formLogin(login -> login.loginPage("/signin").loginProcessingUrl("/login").defaultSuccessUrl("/about").permitAll()).logout(logout -> logout.logoutSuccessUrl("/userlogout").permitAll());
 		return http.build();
 	}
 

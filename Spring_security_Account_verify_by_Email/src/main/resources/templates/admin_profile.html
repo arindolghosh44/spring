@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="base::layout(~{::section})"
+>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Profile Page</title>
+</head>
+<body>
+<section class="text-center">
+	
+	
+	
+	<h1 class="text-center text-success">Admin Profile page</h1>
+	
+	
+	
+	<h6>Name:[[${user.fullName}]]</h6>
+	<h6>Name:[[${user.email}]]</h6>
+	<h6>Name:[[${user.mobileNumber}]]</h6>
+	<h6>Name:[[${user.Role}]]</h6>
+	<a href="/logout">Logout</a>
+	</section>
+	
+</body>
+</html>
