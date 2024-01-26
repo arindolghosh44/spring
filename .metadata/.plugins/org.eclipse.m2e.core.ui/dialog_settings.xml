@@ -50,18 +50,21 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="server1"/>
 			<item value="Springqjq.qkq"/>
 			<item value="Spring_MVC"/>
 			<item value="Spring_core.s"/>
 			<item value="First_spring_App"/>
 		</list>
 		<list key="groupId">
+			<item value="server1"/>
 			<item value="Springqjq"/>
 			<item value="Spring_MVC"/>
 			<item value="Spring_core"/>
 			<item value="First_spring_App"/>
 		</list>
 		<list key="artifactId">
+			<item value="server2"/>
 			<item value="qkq"/>
 			<item value="Spring_MVC"/>
 			<item value="s"/>

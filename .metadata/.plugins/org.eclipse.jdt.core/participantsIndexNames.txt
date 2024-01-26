@@ -5,6 +5,8 @@ E:\sts\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2424928474.index
 \SpringMVCBoot-1\src\main\java
 E:\sts\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3253522775.index
 \Spring_MVC\src\main\resources
+E:\sts\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2790716245.index
+\server2\src\main\resources
 E:\sts\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4215679346.index
 \SpringMVCBoot-1\src\main\java
 E:\sts\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1674081856.index
