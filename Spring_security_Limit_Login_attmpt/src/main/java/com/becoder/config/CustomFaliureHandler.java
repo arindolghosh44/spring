@@ -31,7 +31,7 @@ public class CustomFaliureHandler extends SimpleUrlAuthenticationFailureHandler 
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 
-		String email = request.getParameter("UserName");
+		String email = request.getParameter("username");
 	User user = userRepo.findByEmail(email);
 
 		if (user != null) {
@@ -44,7 +44,7 @@ public class CustomFaliureHandler extends SimpleUrlAuthenticationFailureHandler 
 
 					} else {
 						userService.lock(user);
-						exception = new LockedException("Account is unlocked !!!!!!!!!!!!!!!!!");
+						exception = new LockedException("Account is locked !!!!!!!!!!!!!!!!!");
 					}
 				} else if (!user.isAccountNotLocked()) {
 					if (userService.unLockedAccountTimeExpired(user)) {

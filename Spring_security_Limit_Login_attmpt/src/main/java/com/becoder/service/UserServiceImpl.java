@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	private JavaMailSender mailSender;
 	
 	
-	private static final long Lock_duration_time=200000;
+	private static final long Lock_duration_time=15000;
 	
 	
 	public static final long attemp_Time=3;
