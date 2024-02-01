@@ -1,7 +1,0 @@
-package com.becoder.repository;
-
-public class StudentRepo  extends CrudRepository<Student, Integer>{
-
-	
-	
-}

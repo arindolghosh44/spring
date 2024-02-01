@@ -1,8 +1,0 @@
-package com.becoder.repository;
-import com.becoder.entities.*;
-import org.springframework.data.repository.*;
-public class StudentRepo  extends CrudRepository<Student, Integer>{
-
-	
-	
-}
