@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.becoder.config.JwtProvider;
+import com.becoder.config.jwtProvider;
 import com.becoder.model.Cart;
 import com.becoder.model.USER_ROLE;
 import com.becoder.model.User;
@@ -38,7 +38,7 @@ public class AuthController {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	private JwtProvider jwtProvider;
+	private jwtProvider jwtProvider;
 
 	@Autowired
 	private CustomerUserDetailsService customerUserDetailsService;

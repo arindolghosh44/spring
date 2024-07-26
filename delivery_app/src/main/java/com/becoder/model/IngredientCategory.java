@@ -34,53 +34,6 @@ public class IngredientCategory {
 	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
 	private List<IngredientsItem> ingredients=new ArrayList<>();
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Restaurent getRestaurent() {
-		return restaurent;
-	}
-
-	public void setRestaurent(Restaurent restaurent) {
-		this.restaurent = restaurent;
-	}
-
-	public List<IngredientsItem> getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(List<IngredientsItem> ingredients) {
-		this.ingredients = ingredients;
-	}
-
-	public IngredientCategory(Long id, String name, Restaurent restaurent, List<IngredientsItem> ingredients) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.restaurent = restaurent;
-		this.ingredients = ingredients;
-	}
-
-	public IngredientCategory() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
 	
 	
 	

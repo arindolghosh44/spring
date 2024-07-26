@@ -25,43 +25,6 @@ public class Category {
 	@JsonIgnore
 	private Restaurent restaurent;
 
-	public Category(Long id, String name, Restaurent restaurent) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.restaurent = restaurent;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Restaurent getRestaurent() {
-		return restaurent;
-	}
-
-	public void setRestaurent(Restaurent restaurent) {
-		this.restaurent = restaurent;
-	}
-
-	public Category() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
 	
 	
 	
