@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"></link>
+</head>
+<body>
+	<!-- <div th:replace="~{header::myheader}"></div>-->
+	<!--  <hr>-->
+	<h1>Thymeleaf Tutorials</h1>
+	<h1>Index Page</h1>
+	<!--<p data-th-text="#{youtube.name}"></p>-->
+	<p th:text="#{youtube.name}"></p>
+	<p th:utext="#{youtube.name}"></p>
+	<h4>Today Date is : [[${today}]]</h4>
+	<h5 th:text="${today}"></h5>
+	<hr />
+
+	<h3 th:text="${user.id}"></h3>
+	<h3 th:text="${user.name}"></h3>
+	<h3 th:text="${user.address}"></h3>
+
+	<div th:object="${user}">
+		<h4>Id :[[*{id}]]</h4>
+		<h4>Name :[[*{name}]]</h4>
+		<h4>address :[[*{address}]]</h4>
+
+	</div>
+
+	<!--  <a th:href="@{'profile/'+${user.id}}">Profile</a>-->
+	<a th:href="@{profile}">Profile</a>
+	</hr>
+
+	<p>
+		In two years ,it will be <span th:text="2024 + 2"></span>
+	</p>
+	<div th:if="${2<6}">True block</div>
+	<div th:if="${user2}==null">null block</div>
+
+	<h4 th:text="|hello guys I am ${msg}|"></h4>
+	<div th:with="num=${2+3}">
+		num=[[${num}]]
+		<th:block th:with="even=${num%2==0}">
+	 even block [[${even}]]
+	
+	
+	
+	</div>
+
+	<div th:replace="~{footer::footer}"></div>
+	<hr>
+	<h1>Setting attribute values</h1>
+	<input type="submit" value="Subscribe!"
+		th:attr="value=#{subscribe.submit}" />
+		
+	<div th:if="2<3">
+		<h1>2 is greater than 3 - if block</h1>
+	</div>
+	
+	<div th:unless="2<3">
+		<h1>2 is less than 3 - else block</h1>
+	</div>
+
+</body>
+</html>
