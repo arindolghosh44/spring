@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html alng="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div th:replace="~{header::myheader}"></div>
+	<!--  <div th:insert="~{header::myheader}"></div>
+	<div th:include="~{header::myheader}"></div>-->
+	<hr />
+
+
+	<h1 class="text-center">User Details</h1>
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<table class="table">
+				<thead>
+					<tr>
+
+						<th scope="col">Id</th>
+						<th scope="col">Name</th>
+						<th scope="col">Address</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u:${userList}">
+
+						<td class=""
+							th:classappend="${u.id%2==0}? 'bg-success' : 'bg-warning'">[[${u.id}]]</td>
+						<td>[[${u.name}]]</td>
+						<td>[[${u.address}]]</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<hr />
+	<div th:replace="~{footer::footer}"></div>
+
+
+</body>
+</html>
