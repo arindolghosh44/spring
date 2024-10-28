@@ -14,6 +14,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\DELL\Downloads\JSONWEBTOKENPRACTICAL.rar"/>
 			<item value="C:\Users\DELL\Downloads\ToDo-App-main"/>
 			<item value="E:\Book_Store_Managemt_System"/>
 			<item value="E:\thymleaf\thymleaf-main"/>
@@ -114,6 +115,19 @@
 		</list>
 		<list key="version">
 			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenCheckoutLocationPage">
+		<list key="scmUrl">
+			<item value="scm:git:C:\Users\DELL\Downloads\JSONWEBTOKENPRACTICAL.rar"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
 		</list>
 	</section>
 </section>
