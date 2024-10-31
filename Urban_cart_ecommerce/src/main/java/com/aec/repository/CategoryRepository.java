@@ -6,8 +6,6 @@ import com.aec.model.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	
-	
-	public boolean existsByName(String name);
-	
+	public Boolean existsByName(String name);
 
 }

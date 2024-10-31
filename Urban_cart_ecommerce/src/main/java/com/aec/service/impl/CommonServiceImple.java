@@ -13,7 +13,7 @@ public class CommonServiceImple implements CommonService{
 
 	@Override
 	public void removeSessionMsg() {
-	HttpServletRequest re=	((ServletRequestAttributes)(RequestContextHolder.getRequestAttributes())).getRequest();
+	HttpServletRequest re=((ServletRequestAttributes)(RequestContextHolder.getRequestAttributes())).getRequest();
 		
 	
 	HttpSession session=re.getSession();

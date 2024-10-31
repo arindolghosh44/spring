@@ -1,7 +1,7 @@
 package com.aec.service.impl;
 
 import java.util.List;
-
+import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +20,50 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category saveCategory(Category category) {
-		// TODO Auto-generated method stub
+		
 		return categoryRepository.save(category);
 	}
 
 	@Override
 	public List<Category> getAllCategory() {
-		// TODO Auto-generated method stub
+	
 		return categoryRepository.findAll();
 	}
 
 	@Override
-	public boolean existsCategory(String name) {
-		// TODO Auto-generated method stub
+	public Boolean existCategory(String name) {
+		
 		return categoryRepository.existsByName(name);
 	}
+
+	
+	
+	
+	
+/*	@Override
+	public Boolean deleteCategory(int id) {
+		Category category = categoryRepository.findById(id).orElse(null);
+
+		if (!ObjectUtils.isEmpty(category)) {
+			categoryRepository.delete(category);
+			return true;
+		}
+		return false;
+	}
+
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
