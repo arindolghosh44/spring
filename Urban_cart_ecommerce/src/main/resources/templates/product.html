@@ -72,13 +72,15 @@
 						<div class="card-body">
 
 							<div class="list-group">
-								<a href="#"
-									class="list-group-item list-group-item-action active"
-									aria-current="true">Category </a> <a href="#"
-									class="list-group-item list-group-item-action">Shirt item</a> <a
-									href="#" class="list-group-item list-group-item-action">
-									Saree</a> <a href="#"
-									class="list-group-item list-group-item-action"> Watch item</a>
+
+								<p class="fs-4 text-center">Category</p>
+								<a href="/products"
+									th:classappend="${paramValue==''} ? 'active':''"
+									class="list-group-item list-group-item-action"
+									aria-current="true"> All </a> <a th:each="c:${categories}"
+									th:href="@{'/products?category='+${c.name}}"
+									th:classappend="${paramValue == c.name} ? 'active':''"
+									class="list-group-item list-group-item-action">[[${c.name}]]</a>
 
 							</div>
 
@@ -92,6 +94,10 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				
+				
 				<div class="col-md-10">
 
 
@@ -100,36 +106,32 @@
 
 							<p class="fs-3 text-center">Products</p>
 							<div class="row">
-
-
-
-								<!-- todo -->
-
-								<div class="col-md-3">
-									<div class="card">
+<th:block th:if="${products.size >0}">
+								<div class="col-md-3" th:each="p:${products}">
+									<div class="card mt-4">
 
 										<div
-											class="card-body text-center shadow-lg bg-info decoration-none"
+											class="card-body text-center shadow-lg bg-info decoration-none "
 											width="100%" height="150px">
 
-											<img alt="image" src="img/th (16).jfif">
+											<img alt="" th:src="@{'/img/product_img/'+${p.image}}"
+												width="100%" height="150px">
 
-											<p class="fs-5 text-center">Laptop</p>
+											<p class="fs-5 text-center">[[${p.title}]]</p>
 
 
 											<div class="row text-center">
 
 												<p class="fs-6 fw-bold">
-													<i class="fa-solid fa-dollar-sign"></i> 500 <span
-														class="fs-6 text-success"> 20% off </span>
-
-
+													<span>&#8377; [[${p.discountPrice}]]</span> <br> <span
+														class="text-decoration-line-through text-secondary">&#8377;
+														[[${p.price}]]</span> <span class="fs-6 text-success">[[${p.discount}]]%
+														off </span>
 												</p>
 
-
-												<a href="/view_details"  class="btn btn-primary col-md-6 offset-md-3"> view
+												<a th:href="@{'/product/'+${p.id}}"
+													class="btn btn-primary col-md-6 offset-md-3">View
 													Details</a>
-
 
 											</div>
 
@@ -144,131 +146,17 @@
 
 								</div>
 
+</th:block>
+								<th:block th:unless="${products.size>0}">
+								<p class="fs-4 text-center mt-4 text-danger">Product not available</p>
+								</th:block>
 
 
-								<!-- To do -->
 
-								<div class="col-md-3">
-									<div class="card">
 
-										<div
-											class="card-body text-center shadow-lg bg-info decoration-none"
-											width="100%" height="150px">
 
-											<img alt="image" src="img/th (16).jfif">
 
-											<p class="fs-5 text-center">Laptop</p>
 
-
-											<div class="row text-center">
-
-												<p class="fs-6 fw-bold">
-													<i class="fa-solid fa-dollar-sign"></i> 500 <span
-														class="fs-6 text-success"> 20% off </span>
-
-
-												</p>
-
-
-												<a class="btn btn-primary col-md-6 offset-md-3"> view
-													Details</a>
-
-
-											</div>
-
-										</div>
-
-
-									</div>
-
-
-
-
-
-								</div>
-
-
-								<div class="col-md-3">
-									<div class="card">
-
-										<div
-											class="card-body text-center shadow-lg bg-info decoration-none"
-											width="100%" height="150px">
-
-											<img alt="image" src="img/th (16).jfif">
-
-											<p class="fs-5 text-center">Laptop</p>
-
-
-											<div class="row text-center">
-
-												<p class="fs-6 fw-bold">
-													<i class="fa-solid fa-dollar-sign"></i> 500 <span
-														class="fs-6 text-success"> 20% off </span>
-
-
-												</p>
-
-
-												<a class="btn btn-primary col-md-6 offset-md-3"> view
-													Details</a>
-
-
-											</div>
-
-										</div>
-
-
-									</div>
-
-
-
-
-
-								</div>
-
-
-
-
-
-								<div class="col-md-3">
-									<div class="card">
-
-										<div
-											class="card-body text-center shadow-lg bg-info decoration-none"
-											width="100%" height="150px">
-
-											<img alt="image" src="img/th (16).jfif">
-
-											<p class="fs-5 text-center">Laptop</p>
-
-
-											<div class="row text-center">
-
-												<p class="fs-6 fw-bold">
-													<i class="fa-solid fa-dollar-sign"></i> 500 <span
-														class="fs-6 text-success"> 20% off </span>
-
-
-												</p>
-
-
-												<a class="btn btn-primary col-md-6 offset-md-3"> view
-													Details</a>
-
-
-											</div>
-
-										</div>
-
-
-									</div>
-
-
-
-
-
-								</div>
 
 
 

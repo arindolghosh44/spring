@@ -45,12 +45,12 @@
 																alt="image1" height="450px">
 														</div>
 														<div class="carousel-item">
-															<img src="img/home-page-banner-ecommerce.jpg" class="d-block w-100"
-																alt="image2" height="450px">
+															<img src="img/home-page-banner-ecommerce.jpg"
+																class="d-block w-100" alt="image2" height="450px">
 														</div>
 														<div class="carousel-item">
-															<img src="img/VQWxKr.jpg"
-																class="d-block w-100" alt="image3" height="450px">
+															<img src="img/VQWxKr.jpg" class="d-block w-100"
+																alt="image3" height="450px">
 														</div>
 													</div>
 													<button class="carousel-control-prev" type="button"
@@ -106,7 +106,20 @@
 
 
 													<p class="fs-4 text-center">Login</p>
+													<div th:if="${param.error}"
+														class="alert alert-danger text-center">
 
+														<th:block
+															th:if="${session.SPRING_SECURITY_LAST_EXCEPTION!=null}">
+									[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
+								</th:block>
+
+
+
+													</div>
+
+													<div th:if="${param.logout}" class="alert alert-success text-center">
+														Logout Sucessfully</div>
 
 
 
@@ -116,13 +129,13 @@
 
 												<div class="card-body bg-warning">
 
-													<form>
+													<form action="/login" method="post">
 
 														<div class="mb-3">
 
 
 															<label class="form-label">Email</label> <input
-																class="form-control" name="email" type="email">
+																class="form-control" name="username" type="email">
 
 
 

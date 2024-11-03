@@ -9,33 +9,35 @@
 	<section>
 
 
-		<div class=" container card-sh" style="margin-top: 70px">
-			<div class="container-fluid  mb-3 display-flex decoration-none">
+		<div class=" container card-sh"
+			style="margin-top: 70px; margin-bottom: 100px">
+			<div class="container-fluid  mb-3 display-flex ">
 
 
 				<div class="row">
 
 
-					<div class="col-md-14">
+					<div class="col-md-12  p-5 ">
 
 
 
-						<div class="card shadow-sm p-3  bg-body-tertiary rounded">
+						<div class="card shadow-sm p-3  bg-body-tertiary rounded ">
 
 
 
-							<div class="card-body">
-								<div class="container mt-5 p-5 bg-light">
+							<div class="card-body ">
+								
 
 									<div class="row">
 
-										<div class="col-md-6 p-5 shadow-lg ">
+										<div class="col-md-6 text-start mt-6" style="margin-top: 60px" >
+										
+											<img alt="" th:src="@{'/img/product_img/'+${product.image}}"
+												width="330px" height="450px">
 
-											<img alt="image" src="img/th (16).jfif" width="100%"
-												height="400px">
-
+												
 										</div>
-										<div class="col-md-6 p-5">
+										<div class="col-md-6 p-5 ">
 
 											<div class="card shadow-lg">
 
@@ -49,42 +51,66 @@
 
 
 												</div>
-
+											
 
 												<div class="card-body bg-info">
 
-													<p class="fs-3 text-center">Laptop</p>
+													<p class="fs-3 text-center">[[${product.title}]]</p>
 													<p>
-														<span class="fs-bold"> Description </span><br> Hp
-														Laptop,256gp processsor 512 gb ram
+														<span class="fs-bold"> Description </span><br>
 
+														[[${product.description}]]
 
 													</p>
 
 
 
 													<p>
-														<span class="fw-bold"> Product Details: </span> <br>Status:<span
-															class="badge bg-success"> Available </span> <span
-															class="badge bg-warning">Out of stock</span><br>
+														<span class="fw-bold"> Product Details: </span> <br>Status:
 
 
-														Category:Laptop<br> POlicy 7 Days warenty Replacement
-														& Return
+
+
+
+
+
+
+														<th:block th:if="${product.stock>0}">
+															<span class="badge bg-success">Available</span>
+														</th:block>
+
+														<th:block th:unless="${product.stock>0}">
+															<span class="badge bg-warning">out of stock</span>
+														</th:block>
+														<br> Category: [[${product.category}]]<br>
+														Policy : 12 Days Replacement & Return
 
 													</p>
 
 
-													<p class="fs-5 fs-bold">
-														Price :&nbsp;&nbsp;&nbsp;&nbsp;<i
-															class="fas fa-rupee-sign"></i> 700000<span
-															class="fs-6 text-decoration-Line-through text-secondary">
-
-
-															20 </span> <span class="fs-6 text-success"> % off </span>
-
+													<p class="fs-5 fw-bold">
+														Price :&nbsp; &nbsp; &nbsp; &nbsp;<i
+															class="fas fa-rupee-sign"></i>
+														[[${product.discountPrice}]] <span
+															class="fs-6 text-decoration-line-through text-secondary">[[${product.price}]]</span>
+														<span class="fs-6  text-success">[[${product.discount}]]%
+															off</span>
 													</p>
 
+													<div class="row">
+														<div class="col-md-4 text-success text-center p-2">
+															<i class="fas fa-money-bill-wave fa-2x"></i>
+															<p>Cash On Delivery</p>
+														</div>
+														<div class="col-md-4 text-danger text-center p-2">
+															<i class="fas fa-undo-alt fa-2x"></i>
+															<p>Return Available</p>
+														</div>
+														<div class="col-md-4 text-primary text-center p-2">
+															<i class="fas fa-truck-moving fa-2x"></i>
+															<p>Free Shipping</p>
+														</div>
+													</div>
 
 
 
@@ -92,16 +118,19 @@
 
 												</div>
 
-
-
+											
 
 												<div class="card-footer text-center bg-info">
 
-													<button type="submit"
-														class="btn bg-primary text-white col-md-12">Add
-														to card</button>
+													<th:block th:if="${product.stock>0}">
+														<a href="login.jsp" class="btn btn-primary col-md-12">Add
+															To Cart</a>
+													</th:block>
 
-
+													<th:block th:unless="${product.stock>0}">
+														<a href="#" class="btn text-white btn-danger col-md-12">Out
+															of Stock</a>
+													</th:block>
 
 
 												</div>
@@ -147,7 +176,7 @@
 			</div>
 
 
-		</div>
+		
 
 
 	</section>
