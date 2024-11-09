@@ -1,6 +1,9 @@
 package com.aec.service.impl;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,10 +69,16 @@ public class CategoryServiceImpl implements CategoryService {
 		List<Category> categories = categoryRepository.findByIsActiveTrue();
 		return categories;
 	}
+
 	
 	
 	
-	
+	@Override
+	public Page<Category> getAllCategorPagination(Integer pageNo, Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNo, pageSize);
+		return categoryRepository.findAll(pageable);
+	}
+
 	
 	
 	

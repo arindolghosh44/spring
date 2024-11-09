@@ -27,7 +27,7 @@
 								<div class="card bg-info shadow-lg  p-0 m-5 mt-0">
 
 									<div class="card-header text-center fs-4 bg-primary">
-											<p class="text-center fs-4">Add Category</p>
+										<p class="text-center fs-4">Add Category</p>
 
 										<th:block th:if="${session.succMsg}">
 
@@ -179,7 +179,8 @@
 
 									<div class="card-body bg-info text-center">
 
-										<table class="table table-info table-striped table-bordered border-primary">
+										<table
+											class="table table-info table-striped table-bordered border-primary">
 											<thead>
 												<tr>
 													<th scope="col">Sl.No</th>
@@ -198,7 +199,9 @@
 														th:src="@{'/img/Category_image/'+${cat.imageName}}"
 														width="50px" height="50px"></td>
 
-													<td><a th:href="@{'/admin/loadEditCategory/'+${cat.id}}"    class="btn btn-primary btn-sm"><i
+													<td><a
+														th:href="@{'/admin/loadEditCategory/'+${cat.id}}"
+														class="btn btn-primary btn-sm"><i
 															class="fa-solid fa-pen-to-square  fa-1x"></i> Edit </a> <a
 														th:href="@{'/admin/deleteCategory/'+${cat.id}}"
 														class="btn btn-danger btn-sm"><i
@@ -207,7 +210,55 @@
 
 											</tbody>
 										</table>
+										<!-- Start Pagination -->
 
+
+												<div class="row">
+								<div class="col-md-4">Total Category :
+									[[${totalElements}]]</div>
+								<div class="col-md-6">
+
+									<nav aria-label="Page navigation example">
+										<ul class="pagination">
+											<li class="page-item"
+												th:classappend="${isFirst} ? 'disabled':''"><a
+												class="page-link"
+												th:href="@{'/admin/category?pageNo='+${pageNo-1}}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+
+											<li th:each="i:${#numbers.sequence(1,totalPages)}"
+												class="page-item"
+												th:classappend="${pageNo+1==i}?'active':''" ]]><a
+												class="page-link"
+												th:href="@{'/admin/category?pageNo='+${i-1}}">[[${i}]]</a></li>
+
+											<li class="page-item"
+												th:classappend="${isLast} ? 'disabled':''"><a
+												class="page-link"
+												th:href="@{'/admin/category?pageNo='+${pageNo+1}}"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</ul>
+									</nav>
+								</div>
+
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										<!-- End pagination -->
 
 
 									</div>

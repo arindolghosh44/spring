@@ -21,7 +21,9 @@ public class SecurityConfig {
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
 	
 	
-	
+	@Autowired
+	@Lazy
+	private AuthFailureHandlerImpl authenticationFailureHandler;
 	
 	
 	
@@ -54,7 +56,7 @@ public class SecurityConfig {
 				.formLogin(form->form.loginPage("/signin")
 						.loginProcessingUrl("/login")
 
-						//.failureHandler(authenticationFailureHandler)
+						.failureHandler(authenticationFailureHandler)
 						.successHandler(authenticationSuccessHandler))
 				.logout(logout->logout.permitAll());
 		
