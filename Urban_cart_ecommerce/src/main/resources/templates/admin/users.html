@@ -70,11 +70,24 @@
 											<td>[[${u.mobileNumber}]]</td>
 											<td>[[${u.address+','+u.city+','+u.state+','+u.pincode}]]</td>
 											<td>[[${u.isEnable}]]</td>
-											<td><a
+											<td>
+											
+											<th:block th:if="${u.email == 'arindol@gmail.com'}">
+											
+											<a href="#" class="btn btn-sm btn-success">Super Admin</a>
+											</th:block>
+											
+											
+											
+												 <th:block th:unless="${u.email == 'arindol@gmail.com'}">
+												 <a
 												th:href="@{'/admin/updateSts?status=true&id='+${u.id}}+'&type='+${userType}"
-												class="btn btn-sm btn-primary">Active</a> <a
-												th:href="@{'/admin/updateSts?status=false&id='+${u.id}}+'&type='+${userType}"
-												class="btn btn-sm btn-danger"> Inactive</a></td>
+												class="btn btn-sm btn-primary">Active</a> 
+												 
+													<a
+														th:href="@{'/admin/updateSts?status=false&id='+${u.id}}+'&type='+${userType}"
+														class="btn btn-sm btn-danger">Inactive</a>
+												</th:block></td>
 										</tr>
 
 									</tbody>

@@ -113,7 +113,7 @@ public class UserController {
 		List<Cart> carts = cartService.getCartsByUser(user.getId());
 		m.addAttribute("carts", carts);
 		if (carts.size() > 0) {
-			Double totalOrderPrice = carts.get(carts.size() - 1).getTotalOrderPrice();
+			Double totalOrderPrice =(double) Math.round((carts.get(carts.size() - 1).getTotalOrderPrice()));
 			m.addAttribute("totalOrderPrice", totalOrderPrice);
 		}
 		return "/user/cart";
@@ -133,14 +133,15 @@ public class UserController {
 	}
 	
 	
+	
 	@GetMapping("/orders")
 	public String orderPage(Principal p, Model m) {
 		UserDtls user = getLoggedInUserDetails(p);
 		List<Cart> carts = cartService.getCartsByUser(user.getId());
 		m.addAttribute("carts", carts);
 		if (carts.size() > 0) {
-			Double orderPrice = carts.get(carts.size() - 1).getTotalOrderPrice();
-			Double totalOrderPrice = carts.get(carts.size() - 1).getTotalOrderPrice() + 250 + 100;
+			Double orderPrice =(double) Math.round((carts.get(carts.size() - 1).getTotalOrderPrice()));
+			Double totalOrderPrice = (double) Math.round((carts.get(carts.size() - 1).getTotalOrderPrice() + 250 + 100));
 			m.addAttribute("orderPrice", orderPrice);
 			m.addAttribute("totalOrderPrice", totalOrderPrice);
 		}
