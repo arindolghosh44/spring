@@ -101,7 +101,7 @@
 
 
 													<label> Enter Price</label> <input type="text"
-														th:value="${product.price}" name="price"
+														th:value="${product.price}" id="price" name="price"
 														class="form-control">
 
 
@@ -116,9 +116,9 @@
 												<div class="mb-3 col">
 
 
-													<label>Discount</label> <input type="text"
-														th:value="${product.discount}" name="discount"
-														class="form-control">
+													<label for="discount">Discount</label> <input type="text"
+														th:value="${product.discount}" id="discount" name="discount"
+														class="form-control"  oninput="updateDiscountedPrice()">
 
 												</div>
 
@@ -126,8 +126,8 @@
 
 
 													<label> Discounted Price</label> <input type="text"
-														readonly th:value="${product.discountPrice}"
-														class="form-control">
+														readonly th:value="${product.discountPrice}" 
+														class="form-control" id="discountPrice" name="discountPrice" >
 
 
 												</div>
@@ -288,7 +288,19 @@
 
 
 		</div>
+			<script>
+    function updateDiscountedPrice() {
+        // Fetch the original price dynamically from the "price" input field
+        const originalPrice = parseFloat(document.getElementById('price').value) || 0;
+        const discount = parseFloat(document.getElementById('discount').value) || 0;
 
+        // Calculate the discounted price
+        const discountedPrice = originalPrice - (originalPrice * (discount / 100));
+
+        // Update the Discounted Price field
+        document.getElementById('discountPrice').value = discountedPrice.toFixed(2);
+    }
+</script>
 
 	</section>
 </body>

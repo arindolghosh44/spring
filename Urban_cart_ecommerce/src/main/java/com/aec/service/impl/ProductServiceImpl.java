@@ -75,8 +75,8 @@ public class ProductServiceImpl implements ProductService {
 		dbProduct.setDiscount(product.getDiscount());
 
 		// 5=100*(5/100); 100-5=95
-		Double disocunt = product.getPrice() * (product.getDiscount() / 100.0);
-		Double discountPrice = product.getPrice() - disocunt;
+		Double disocunt = (double) Math.round(product.getPrice() * (product.getDiscount() / 100.0));
+		Double discountPrice = (double) Math.round(product.getPrice() - disocunt);
 		dbProduct.setDiscountPrice(discountPrice);
 
 		Product updateProduct = productRepository.save(dbProduct);
