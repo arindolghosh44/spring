@@ -11,6 +11,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import com.aec.model.Cart;
+import com.aec.model.Product;
 import com.aec.model.ProductOrder;
 import com.aec.model.UserDtls;
 import com.aec.service.UserService;
@@ -71,6 +73,7 @@ public class CommonUtil {
 				+ "<p>Category : [[category]]</p>"
 				+ "<p>Quantity : [[quantity]]</p>"
 				+ "<p>Price : [[price]]</p>"
+				+"<p>TotalPrice : [[totalprice]]</p>"
 				+ "<p>Payment Type : [[paymentType]]</p>";
 		
 		MimeMessage message = mailSender.createMimeMessage();
@@ -85,6 +88,7 @@ public class CommonUtil {
 		msg=msg.replace("[[category]]", order.getProduct().getCategory());
 		msg=msg.replace("[[quantity]]", order.getQuantity().toString());
 		msg=msg.replace("[[price]]", order.getPrice().toString());
+		msg=msg.replace("[[totalprice]]", order.getTotalPrice().toString());
 		msg=msg.replace("[[paymentType]]", order.getPaymentType());
 		
 		helper.setSubject("Product Order Status");

@@ -46,7 +46,6 @@
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="com.aec.util.AppConstant"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
-    <fullyQualifiedTypeName name="com.aec.model.Cart"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.aec.service.CartService"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -57,7 +56,8 @@
     <fullyQualifiedTypeName name="com.aec.model.ProductOrder"/>
     <fullyQualifiedTypeName name="com.aec.util.CommonUtil"/>
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
-    <fullyQualifiedTypeName name="com.aec.model.Product"/>
     <fullyQualifiedTypeName name="com.aec.service.UserService"/>
     <fullyQualifiedTypeName name="com.aec.model.UserDtls"/>
+    <fullyQualifiedTypeName name="com.aec.model.Product"/>
+    <fullyQualifiedTypeName name="com.aec.model.Cart"/>
 </qualifiedTypeNameHistroy>

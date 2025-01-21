@@ -52,6 +52,7 @@ public class OrderServiceImpl implements OrderService {
 
 			order.setProduct(cart.getProduct());
 			order.setPrice(cart.getProduct().getDiscountPrice());
+			order.setTotalPrice((double)Math.round(cart.getProduct().getDiscountPrice()*cart.getQuantity()+350));
 
 			order.setQuantity(cart.getQuantity());
 			order.setUser(cart.getUser());

@@ -34,6 +34,8 @@ public class ProductOrder {
 	private Product product;
 
 	private Double price;
+	
+	private Double totalPrice;
 
 	private Integer quantity;
 
