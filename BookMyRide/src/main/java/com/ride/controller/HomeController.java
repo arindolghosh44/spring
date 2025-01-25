@@ -1,12 +1,43 @@
 package com.ride.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.ride.service.UserService;
+import com.ride.util.CommonUtil;
+import com.ride.model.UserDtls;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
 	
-	@GetMapping("/login")
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private CommonUtil commonUtil;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	
+	@GetMapping("/signin")
 	public String login() {
 		return "login";
 	}
@@ -22,77 +53,38 @@ public class HomeController {
 		return "index";
 	}
 	
-	
-	@GetMapping("/addcar")
-	public String addcar() {
-		return "addcar";
-	}
-	
-	@GetMapping("/adminhome")
-	public String adminhome() {
-		return "adminhome";
-	}
-	
-	
-	@GetMapping("/advancedsearch")
-	public String advanced() {
-		return "advancedsearch";
-	}
-	
-	@GetMapping("/car_res_search")
-	public String advanced1() {
-		return "car_res_search";
-	}
-	
-	
-	
-	@GetMapping("/carstatus")
-	public String carstatus() {
-		return "carstatus";
-	}
-	
-	
+	@PostMapping("/saveUser")
+	public String saveUser(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session)
+			throws IOException {
 
-	@GetMapping("/customerhome")
-	public String customerhome() {
-		return "customerhome";
-	}
-	
-	
-	@GetMapping("/customer_res_search")
-	public String customer_res_search() {
-		return "customer_res_search";
-	}
-	
-	
-	@GetMapping("/office_home")
-	public String office_home() {
-		return "office_home";
-	}
-	
+		Boolean existsEmail = userService.existsEmail(user.getEmail());
 
-	@GetMapping("/office_signup")
-	public String office_signup() {
-		return "office_signup";
-	}
-	
-	
-	@GetMapping("/payment_report_search")
-	public String office() {
-		return "payment_report_search";
-	}
-	
-	@GetMapping("/search")
-	public String office2() {
-		return "search";
-	}
-	
-	
+		if (existsEmail) {
+			session.setAttribute("errorMsg", "Email already exist");
+		} else {
+			String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
+			user.setProfileImage(imageName);
+			UserDtls saveUser = userService.saveUser(user);
 
-	@GetMapping("/reserve")
-	public String office23() {
-		return "reserve";
+			if (!ObjectUtils.isEmpty(saveUser)) {
+				if (!file.isEmpty()) {
+					File saveFile = new ClassPathResource("static/img").getFile();
+
+					Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
+							+ file.getOriginalFilename());
+
+//					System.out.println(path);
+					Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+				}
+				session.setAttribute("succMsg", "Register successfully");
+			} else {
+				session.setAttribute("errorMsg", "something wrong on server");
+			}
+		}
+
+		return "redirect:/register";
 	}
+	
 	
 	
 	
