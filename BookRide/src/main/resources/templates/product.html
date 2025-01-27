@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookMyRide - Search Products</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #d1f7e8; /* Light greenish background */
+      color: #333;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #0f9d58, #34a853); /* Green gradient */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .navbar-brand {
+      color: #fff;
+      font-weight: bold;
+      font-size: 2rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .navbar-brand img {
+      height: 35px;
+      margin-left: 10px;
+    }
+
+    .navbar-brand:hover {
+      transform: rotate(-5deg);
+    }
+
+    .nav-link {
+      color: #fff;
+      font-weight: 600;
+      margin-right: 15px;
+      font-size: 1.1rem;
+      transition: color 0.4s, transform 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #FFD700;
+      transform: scale(1.1);
+    }
+
+    .search-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      animation: floatUp 1.5s ease-out infinite alternate;
+    }
+
+    .search-bar {
+      margin: 20px auto;
+      max-width: 600px;
+    }
+
+    .floating-category-bar {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background: #0f9d58; /* Dark green */
+      color: #fff;
+      padding: 15px;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 3px 0 7px rgba(0, 0, 0, 0.2);
+      z-index: 3;
+      animation: floatLeft 2s ease-out infinite alternate;
+    }
+
+    .floating-category-bar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .floating-category-bar li {
+      margin: 15px 0;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .floating-category-bar li:hover {
+      color: #FFD700;
+      font-size: 1.3rem;
+      transform: translateX(5px);
+    }
+
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      filter: brightness(0.7);
+    }
+
+    .card {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 15px;
+      animation: floatCard 3s ease-out infinite alternate;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      color: #0f9d58; /* Green color for titles */
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .card-text {
+      color: #34a853; /* Lighter green text for descriptions */
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .search-message {
+      margin-top: 20px;
+      font-style: italic;
+      color: #2e8b57; /* Greenish tone */
+      font-size: 1.2rem;
+    }
+
+    .search-bar input {
+      border-radius: 25px;
+      padding: 15px;
+      font-size: 1.2rem;
+      border: 2px solid #0f9d58; /* Darker green border */
+      transition: border-color 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      border-color: #FFD700; /* Golden border when focused */
+      outline: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translate(-50%, -50%);
+      }
+      100% {
+        transform: translate(-50%, -60%);
+      }
+    }
+
+    @keyframes floatLeft {
+      0% {
+        transform: translateY(-50%) rotate(3deg);
+      }
+      100% {
+        transform: translateY(-50%) rotate(-3deg);
+      }
+    }
+
+    @keyframes floatCard {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <video class="video-background" autoplay muted loop>
+    <source src="https://cdn.pixabay.com/vimeo/376965169/car-44590.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">BookMyRide <img src="./car.png" alt="Car"></a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>
+          <li class="nav-item"><a class="nav-link" href="/signin">Sign in</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="floating-category-bar">
+    <ul>
+      <li>Luxury Cars</li>
+      <li>Sports Cars</li>
+      <li>SUVs</li>
+      <li>Electric Cars</li>
+      <li>Family Cars</li>
+    </ul>
+  </div>
+
+  <div class="search-container">
+    <h1 class="text-center my-4 text-white">Search Products</h1>
+    <div class="search-bar text-center">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search for products...">
+    </div>
+
+    <div class="row mt-4" id="productGrid">
+      <div class="col-md-3 mb-4 product-item" data-name="Luxury Car">
+        <div class="card">
+          <img src="https://source.unsplash.com/200x140/?car" class="card-img-top" alt="Luxury Car">
+          <div class="card-body text-center">
+            <h5 class="card-title">Luxury Car</h5>
+            <p class="card-text">Experience the comfort of luxury.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4 product-item" data-name="Sport Car">
+        <div class="card">
+          <img src="https://source.unsplash.com/200x140/?sports-car" class="card-img-top" alt="Sport Car">
+          <div class="card-body text-center">
+            <h5 class="card-title">Sport Car</h5>
+            <p class="card-text">Unleash the power of speed.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4 product-item" data-name="SUV">
+        <div class="card">
+          <img src="https://source.unsplash.com/200x140/?suv" class="card-img-top" alt="SUV">
+          <div class="card-body text-center">
+            <h5 class="card-title">SUV</h5>
+            <p class="card-text">Perfect for family trips.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4 product-item" data-name="Electric Car">
+        <div class="card">
+          <img src="https://source.unsplash.com/200x140/?electric-car" class="card-img-top" alt="Electric Car">
+          <div class="card-body text-center">
+            <h5 class="card-title">Electric Car</h5>
+            <p class="card-text">Go green with electric vehicles.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center search-message text-white" id="searchMessage">Showing all products.</p>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const productItems = document.querySelectorAll('.product-item');
+    const searchMessage = document.getElementById('searchMessage');
+
+    searchInput.addEventListener('input', function () {
+      const filter = searchInput.value.toLowerCase();
+      let visibleCount = 0;
+
+      productItems.forEach(item => {
+        const productName = item.getAttribute('data-name').toLowerCase();
+
+        if (productName.includes(filter)) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (visibleCount === 0) {
+        searchMessage.textContent = 'No products match your search.';
+      } else {
+        searchMessage.textContent = `Showing ${visibleCount} product(s).`;
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+
+</html>

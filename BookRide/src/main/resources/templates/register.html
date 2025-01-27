@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BookMyRide</title>
+    <title>BookMyRide - Register</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- FontAwesome for Icons -->
@@ -16,7 +16,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: #f5f5f5;
+            background-color: #d1e7dd; /* Light greenish background */
             overflow: hidden;
         }
 
@@ -63,10 +63,10 @@
 
         /* Center the registration form */
         .card {
-            background: #ffffff;
-            color: #333;
+            background: #388e3c; /* Green gradient background */
+            color: #fff;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px; /* Reduced width */
             position: absolute;
@@ -75,6 +75,18 @@
             transform: translate(-50%, -30%);
             z-index: 999; /* Ensures the card floats above the video */
             height: 550px; /* Reduced height */
+            animation: float 2s ease-in-out infinite alternate;
+        }
+
+        /* Animation for floating effect */
+        @keyframes float {
+            0% {
+                transform: translate(-50%, -30%) scale(1);
+            }
+
+            100% {
+                transform: translate(-50%, -35%) scale(1.05);
+            }
         }
 
         .card-header {
@@ -117,19 +129,39 @@
             height: 80%; /* Reduced height of the body */
             overflow-y: auto; /* To handle form overflow */
         }
+
+        /* Placeholder text color */
+        .form-control::placeholder {
+            color: #e8f5e9; /* Light green color for the placeholder */
+        }
+
+        .card-body input,
+        .card-body button {
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card-footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        .card-footer a:hover {
+            color: #ffdd33;
+        }
     </style>
 </head>
 
 <body>
     <!-- Full-Screen Background Video -->
-   <div class="video-container">
-    <video autoplay loop muted>
-        <!-- Replace with your own video URL -->
-        <source src="https://example.com/path/to/your/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="video-overlay">Technical Register - Join Us Now!</div>
-</div>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">Technical Register - Join Us Now!</div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -140,14 +172,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">
-                            <i class="fas fa-home"></i> Home
-                        </a>
+                        <a class="nav-link active" href="/"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/signin">
-                            <i class="fas fa-sign-in-alt"></i> Sign In
-                        </a>
+                        <a class="nav-link" href="/signin"><i class="fas fa-sign-in-alt"></i> Sign In</a>
                     </li>
                 </ul>
             </div>

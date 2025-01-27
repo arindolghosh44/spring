@@ -80,6 +80,11 @@
       object-fit: cover;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-inner img:hover {
+      transform: translateY(-10px);
     }
 
     .feature-box {
@@ -90,7 +95,7 @@
       border-radius: 15px;
       color: #f9fafb;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .feature-box:hover {
@@ -102,6 +107,15 @@
       margin-top: 20px;
       color: #10b981;
       font-size: 1.5rem;
+    }
+
+    .category-card {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .category-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     #footer {
@@ -178,10 +192,8 @@
       </div>
     </div>
   </section>
-  
-  
 
-		<!-- Start Category Module -->
+	<!-- Start Category Module -->
 
 		<div class="container">
 			<div class="row">
@@ -285,7 +297,6 @@
 		<!-- End Latest product -->
 
 
-  
 
   <div id="cta" class="container mt-5">
     <h2 class="display-5 text-center mb-4">Ratings</h2>
