@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BookMyRide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+     <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Full-Screen Background Video */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #f5f5f5;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #4CAF50; /* Green color */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white !important;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            color: #ffcc00 !important; /* Hover effect */
+        }
+
+        .navbar-toggler {
+            border-color: white;
+        }
+
+        .navbar-toggler-icon {
+            background-color: white;
+        }
+
+        /* Center the login form */
+        .card {
+            background: #ffffff;
+            color: #333;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            position: absolute;
+            top: 30%; /* Adjusted to give more space between navbar and form */
+            left: 50%;
+            transform: translate(-50%, -30%);
+            z-index: 999;
+        }
+
+        .card-header {
+            background-color: #388e3c; /* Darker green */
+            color: #fff;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .card-footer {
+            background-color: #388e3c;
+            color: #fff;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .btn-light {
+            background-color: #388e3c;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-light:hover {
+            background-color: #2e7d32;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            text-align: center;
+            font-size: 24px;
+            z-index: 10;
+        }
+
+        .card-body {
+            padding: 20px 30px; /* Reduced padding */
+            height: 80%; /* Reduced height of the body */
+            overflow-y: auto; /* To handle form overflow */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Full-Screen Background Video -->
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">Login to BookMyRide</div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BookMyRide</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">
+                          <i class="fas fa-home"></i>  Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">
+                           <i class="fas fa-sign-in-alt"></i>signup
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Card -->
+    <div class="card shadow-lg">
+        <div class="card-header text-center">
+            <p class="fs-4">Login</p>
+            <div th:if="${param.error}" class="alert alert-danger text-center">
+                <th:block th:if="${session.SPRING_SECURITY_LAST_EXCEPTION!=null}">
+                    [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
+                </th:block>
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success text-center">
+                Logout Successfully
+            </div>
+        </div>
+
+        <div class="card-body bg-light p-4">
+            <form action="/login" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input class="form-control" name="username" type="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" name="password" type="password" required>
+                </div>
+
+                <button type="submit" class="btn btn-light w-100">Login</button>
+            </form>
+        </div>
+
+        <div class="card-footer text-center">
+            <a href="/forgot-password" class="text-warning">Forgot password?</a><br>
+            Don't have an account? <a href="/register" class="text-warning">Create One</a>
+        </div>
+    </div>
+ <footer id="footer">
+    <div class="container">
+      <a href="https://www.linkedin.com/in/debashis-kar-089490259/"><i class="fab fa-linkedin"></i></a>
+      <p>&copy; 2024 All rights reserved | Developed by Arindol and Debashis</p>
+    </div>
+  </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
