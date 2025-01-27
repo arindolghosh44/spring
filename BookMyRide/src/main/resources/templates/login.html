@@ -35,8 +35,8 @@
 
 	<div class="center ">
 		<h1 class="display-6 myheader black">Sign in</h1>
-		
-		<div th:if="${param.error}"
+
+		 	<div th:if="${param.error}"
 														class="alert alert-danger text-center">
 
 														<th:block
@@ -50,8 +50,22 @@
 
 													<div th:if="${param.logout}" class="alert alert-success text-center">
 														Logout Sucessfully</div>
-		
-			<form action="/login" method="post">
+
+
+		<th:block th:if="${session.succMsg}">
+
+			<p class="text-success text-striped fw-bold">[[${session.succMsg}]]</p>
+			<th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+		</th:block>
+
+		<th:block th:if="${session.errorMsg}">
+
+			<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+			<!-- In case of bean the first later is small -->
+			<th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+		</th:block>
+
+		<form action="/login" method="post">
 			<div class="row mb-3 ">
 				<div class="col ">
 					<input type="email" class="form-control myinput b" id="inputEmail3"
