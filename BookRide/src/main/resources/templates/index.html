@@ -2,198 +2,291 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BookMyRide</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f3f4f6;
-      color: #333;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BookMyRide</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+	crossorigin="anonymous">
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;500&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+body {
+	font-family: 'Montserrat', sans-serif;
+	background-color: #f3f4f6;
+	color: #333;
+}
 
-    .navbar {
-      background: linear-gradient(90deg, #1e3a8a, #2563eb);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+.navbar {
+	background: linear-gradient(90deg, #1e3a8a, #2563eb);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-    .navbar-brand {
-      color: #fff;
-      font-weight: bold;
-      font-size: 1.7rem;
-    }
+.navbar-brand {
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.7rem;
+}
 
-    .navbar-brand img {
-      height: 35px;
-      margin-left: 10px;
-    }
+.navbar-brand img {
+	height: 35px;
+	margin-left: 10px;
+}
 
-    .nav-link {
-      color: #e0e7ff;
-      font-weight: 500;
-      margin-right: 15px;
-      transition: color 0.3s;
-    }
+.nav-link {
+	color: #e0e7ff;
+	font-weight: 500;
+	margin-right: 15px;
+	transition: color 0.3s;
+}
 
-    .nav-link:hover {
-      color: #34d399;
-    }
+.nav-link:hover {
+	color: #34d399;
+}
 
-    #title {
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/1600x900/?luxury-car');
-      background-size: cover;
-      color: #fff;
-      padding: 120px 0;
-      text-align: center;
-      box-shadow: inset 0 -5px 20px rgba(0, 0, 0, 0.5);
-    }
+#title {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7),
+		rgba(0, 0, 0, 0.7)),
+		url('https://source.unsplash.com/1600x900/?luxury-car');
+	background-size: cover;
+	color: #fff;
+	padding: 120px 0;
+	text-align: center;
+	box-shadow: inset 0 -5px 20px rgba(0, 0, 0, 0.5);
+}
 
-    #title img {
-      margin-top: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
+#title img {
+	margin-top: 30px;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
 
-    .btn-success {
-      background: linear-gradient(90deg, #10b981, #34d399);
-      border: none;
-      font-size: 1.2rem;
-      padding: 10px 20px;
-      border-radius: 50px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.btn-success {
+	background: linear-gradient(90deg, #10b981, #34d399);
+	border: none;
+	font-size: 1.2rem;
+	padding: 10px 20px;
+	border-radius: 50px;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .btn-success:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-    }
+.btn-success:hover {
+	transform: scale(1.05);
+	box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
 
-    #cta {
-      margin-top: 50px;
-    }
+#cta {
+	margin-top: 50px;
+}
 
-    .carousel-inner img {
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.5s ease;
-    }
+.carousel-inner img {
+	max-height: 400px;
+	object-fit: cover;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+	transition: transform 0.5s ease;
+}
 
-    .carousel-inner img:hover {
-      transform: translateY(-10px);
-    }
+.carousel-inner img:hover {
+	transform: translateY(-10px);
+}
 
-    .feature-box {
-      text-align: center;
-      margin-top: 50px;
-      padding: 30px;
-      background: linear-gradient(90deg, #1e3a8a, #2563eb);
-      border-radius: 15px;
-      color: #f9fafb;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.feature-box {
+	text-align: center;
+	margin-top: 50px;
+	padding: 30px;
+	background: linear-gradient(90deg, #1e3a8a, #2563eb);
+	border-radius: 15px;
+	color: #f9fafb;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .feature-box:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    }
+.feature-box:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
 
-    .feature-box h3 {
-      margin-top: 20px;
-      color: #10b981;
-      font-size: 1.5rem;
-    }
+.feature-box h3 {
+	margin-top: 20px;
+	color: #10b981;
+	font-size: 1.5rem;
+}
 
-    .category-card {
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
+.category-card {
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
 
-    .category-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+.category-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
 
-    #footer {
-      background: #1e293b;
-      color: #e0e7ff;
-      padding: 30px 20px;
-      text-align: center;
-      margin-top: 50px;
-      border-top: 5px solid #10b981;
-    }
+#footer {
+	background: #1e293b;
+	color: #e0e7ff;
+	padding: 30px 20px;
+	text-align: center;
+	margin-top: 50px;
+	border-top: 5px solid #10b981;
+}
 
-    #footer a i {
-      color: #10b981;
-      font-size: 1.8rem;
-      margin: 0 10px;
-      transition: color 0.3s;
-    }
+#footer a i {
+	color: #10b981;
+	font-size: 1.8rem;
+	margin: 0 10px;
+	transition: color 0.3s;
+}
 
-    #footer a i:hover {
-      color: #34d399;
-    }
-  </style>
+#footer a i:hover {
+	color: #34d399;
+}
+</style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">BookMyRide <img src="./car.png" alt="Car"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/register"><i class="fas fa-user-plus"></i>Sign up</a></li>
-          <li class="nav-item"><a class="nav-link" href="/signin"><i class="fas fa-sign-in-alt"></i>Sign in</a></li>
-          <li class="nav-item"><a class="nav-link" href="#cta"><i class="fas fa-star"></i>Ratings</a></li>
-          <li class="nav-item"><a class="nav-link" href="#features"><i class="fas fa-cogs"></i>Features</a></li>
-          <li class="nav-item"><a class="nav-link" href="#footer"><i class="fas fa-envelope"></i>Contact us</a></li>
-          <li class="nav-item"><a class="nav-link" href="./office_signup.html"><i class="fas fa-handshake"></i>Become our partner</a></li>
-          <li class="nav-item"><a class="nav-link" href="./adminhome.html"><i class="fas fa-user-shield"></i>Admin</a></li>
-        </ul>
+	<nav class="navbar navbar-expand-lg">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">BookMyRide <img src="img/download.jpeg"
+				alt="Car"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="#"><i
+							class="fas fa-home"></i> Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/products"><i
+							class="fas fa-box-open"></i> Products</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-th"></i> Categories
+					</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="#">Sedan</a></li>
+							<li><a class="dropdown-item" href="#">SUV</a></li>
+							<li><a class="dropdown-item" href="#">Luxury</a></li>
+						</ul></li>
+				</ul>
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" href="/register"><i
+							class="fas fa-user-plus"></i> Sign up</a></li>
+					<li class="nav-item"><a class="nav-link" href="/signin"><i
+							class="fas fa-sign-in-alt"></i> Sign in</a></li>
+					<li class="nav-item"><a class="nav-link" href="#cta"><i
+							class="fas fa-star"></i> Ratings</a></li>
+					<li class="nav-item"><a class="nav-link" href="#features"><i
+							class="fas fa-cogs"></i> Features</a></li>
+					<li class="nav-item"><a class="nav-link" href="#footer"><i
+							class="fas fa-envelope"></i> Contact us</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section id="title">
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-lg-6">
+					<h1 class="display-4">Best cars for the best journey.</h1>
+					<img
+						src="https://media4.giphy.com/media/yascXb49BUSiJM45sj/200w.webp?cid=ecf05e472ntykz4y5demcwfcux5tjntpw131cvj0o8valog6&rid=200w.webp&ct=s"
+						alt="Car" class="img-fluid mt-4">
+				</div>
+				<div class="col-lg-6">
+					<form method="post" action="/signup-landing">
+						<h3 class="display-6">Start your journey!</h3>
+						<div class="mb-3">
+							<input type="email" class="form-control" id="inputEmail3"
+								placeholder="E-Mail" name="email" required>
+						</div>
+						<button type="button" class="btn btn-success btn-lg"
+							id="reserveButton" disabled>Reserve a Car</button>
+						<script>
+							document
+									.getElementById('inputEmail3')
+									.addEventListener(
+											'input',
+											function() {
+												const emailInput = document
+														.getElementById('inputEmail3');
+												const reserveButton = document
+														.getElementById('reserveButton');
+												const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+												reserveButton.disabled = !emailPattern
+														.test(emailInput.value);
+											});
+
+							document
+									.getElementById('reserveButton')
+									.addEventListener(
+											'click',
+											function() {
+												window.location.href = 'customer_home.html';
+											});
+						</script>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+<!-- carsoule -->
+	<div id="cta" class="container mt-5">
+  <h2 class="display-5 text-center mb-4">Ratings</h2>
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner">
+      <!-- First Item -->
+      <div class="carousel-item active text-center">
+        <img src="img/DS1912.jpg" class="d-block mx-auto" alt="Employee">
+        <p class="mt-3">BookMyRide offers seamless booking and reliable transportation.</p>
+        <p>⭐⭐⭐⭐⭐</p>
+      </div>
+      <!-- Second Item -->
+      <div class="carousel-item text-center">
+        <img src="img/th (8).jfif" class="d-block mx-auto" alt="Employee">
+        <p class="mt-3">With BookMyRide, journey begins with effortless booking.</p>
+        <p>⭐⭐⭐⭐</p>
+      </div>
+      <!-- Third Item -->
+      <div class="carousel-item text-center">
+        <img src="img/download.jpeg" class="d-block mx-auto" alt="Employee">
+        <p class="mt-3">Experience convenience with BookMyRide's booking process.</p>
+        <p>⭐⭐⭐⭐⭐</p>
+      </div>
+      <!-- Fourth Item -->
+      <div class="carousel-item text-center">
+        <img src="img/download (1).jpeg" class="d-block mx-auto" alt="Employee">
+        <p class="mt-3">BookMyRide makes every journey smooth and hassle-free.</p>
+        <p>⭐⭐⭐⭐⭐</p>
       </div>
     </div>
-  </nav>
 
-  <section id="title">
-    <div class="container">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-lg-6">
-          <h1 class="display-4">Best cars for the best journey.</h1>
-          <img src="https://media4.giphy.com/media/yascXb49BUSiJM45sj/200w.webp?cid=ecf05e472ntykz4y5demcwfcux5tjntpw131cvj0o8valog6&rid=200w.webp&ct=s" alt="Car" class="img-fluid mt-4">
-        </div>
-        <div class="col-lg-6">
-          <form method="post" action="/signup-landing">
-            <h3 class="display-6">Start your journey!</h3>
-            <div class="mb-3">
-              <input type="email" class="form-control" id="inputEmail3" placeholder="E-Mail" name="email" required>
-            </div>
-            <button type="button" class="btn btn-success btn-lg" id="reserveButton" disabled>Reserve a Car</button>
-            <script>
-              document.getElementById('inputEmail3').addEventListener('input', function () {
-                const emailInput = document.getElementById('inputEmail3');
-                const reserveButton = document.getElementById('reserveButton');
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                reserveButton.disabled = !emailPattern.test(emailInput.value);
-              });
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
 
-              document.getElementById('reserveButton').addEventListener('click', function () {
-                window.location.href = 'customer_home.html';
-              });
-            </script>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 
-	<!-- Start Category Module -->
+
+		<!-- Start Category Module -->
 
 		<div class="container">
 			<div class="row">
@@ -298,73 +391,56 @@
 
 
 
-  <div id="cta" class="container mt-5">
-    <h2 class="display-5 text-center mb-4">Ratings</h2>
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active text-center">
-          <img src="./look-there_329181-11701.jpg" class="d-block mx-auto" alt="Customer">
-          <p class="mt-3">BookMyRide offers seamless booking and reliable transportation.</p>
-          <p>⭐⭐⭐⭐⭐</p>
-        </div>
-        <div class="carousel-item text-center">
-          <img src="./WhatsApp Image 2024-05-21 at 12.00.40 AM.jpeg" class="d-block mx-auto" alt="Customer">
-          <p class="mt-3">With BookMyRide, journey begins with effortless booking.</p>
-          <p>⭐⭐⭐⭐</p>
-        </div>
-        <div class="carousel-item text-center">
-          <img src="./WhatsApp Image 2024-05-21 at 12.02.26 AM.jpeg" class="d-block mx-auto" alt="Customer">
-          <p class="mt-3">Experience convenience with BookMyRide's booking process.</p>
-          <p>⭐⭐⭐⭐⭐</p>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
 
-  <section id="features" class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="feature-box">
-            <i class="fa-solid fa-keyboard fa-3x"></i>
-            <h3>Book Now, Pay Later</h3>
-            <p>You don't have to pay at the time of reservation. You get to choose when to pay.</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="feature-box">
-            <i class="fa-solid fa-gears fa-3x"></i>
-            <h3>0% Commission</h3>
-            <p>You only pay for the car you get. No commission, no interest, no extra fees.</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="feature-box">
-            <i class="fa-solid fa-cubes fa-3x"></i>
-            <h3>Insurance Options</h3>
-            <p>We offer various insurance options for customers, including liability and accident insurance.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+		<section id="features" class="py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="feature-box">
+							<i class="fas fa-car-side fa-3x"></i>
+							<h3>Variety of Cars</h3>
+							<p>Choose from a wide selection of cars that fit your needs,
+								whether it's a sedan, SUV, or luxury vehicle.</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="feature-box">
+							<i class="fas fa-map-marker-alt fa-3x"></i>
+							<h3>Location-Based Service</h3>
+							<p>Book your ride wherever you are. We offer services across
+								multiple cities and locations to ensure convenience.</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="feature-box">
+							<i class="fas fa-credit-card fa-3x"></i>
+							<h3>Easy Payment</h3>
+							<p>Secure, hassle-free payment options with multiple choices
+								including card, wallet, and cash.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <footer id="footer">
-    <div class="container">
-      <a href="https://www.linkedin.com/in/debashis-kar-089490259/"><i class="fab fa-linkedin"></i></a>
-      <p>&copy; 2024 All rights reserved | Developed by Arindol and Debashis</p>
-    </div>
-  </footer>
+		<footer id="footer">
+			<p>© 2025 BookMyRide. All Rights Reserved.</p>
+			<div>
+				<a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a> <a
+					href="#" target="_blank"><i class="fab fa-twitter"></i></a> <a
+					href="#" target="_blank"><i class="fab fa-instagram"></i></a> <a
+					href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+		</footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+			integrity="sha384-oBqDVmMz4fnFO9gybB4Zg7z6L6mjw6B5mtrIWqbtqLfY7z3VY6p2cOp7o4fzy4dgg"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+			integrity="sha384-pzjw8f+ua7Kw1TIq0Jfak6a8NqDgI6Ed5JeEmBdJS1e3k03n3jz8msJl5ntS4OB0"
+			crossorigin="anonymous"></script>
 </body>
 
 </html>

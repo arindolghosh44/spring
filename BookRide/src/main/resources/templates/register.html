@@ -132,7 +132,7 @@
 
         /* Placeholder text color */
         .form-control::placeholder {
-            color: #e8f5e9; /* Light green color for the placeholder */
+            color: #2e2e2e; /* Dark color for the placeholder */
         }
 
         .card-body input,
@@ -189,16 +189,6 @@
         </div>
 
         <div class="card-body bg-light">
-            <th:block th:if="${session.succMsg}">
-                <p class="text-success fw-bold">[[${session.succMsg}]]</p>
-                <th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
-            </th:block>
-
-            <th:block th:if="${session.errorMsg}">
-                <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-                <th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
-            </th:block>
-
             <form action="/saveUser" enctype="multipart/form-data" method="post">
                 <div class="mb-3">
                     <input type="text" class="form-control" placeholder="First Name" name="firstName" maxlength="32" required>
@@ -226,6 +216,10 @@
 
                 <div class="mb-3">
                     <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control" placeholder="Credit Card CVV" name="credit_card_cvv" maxlength="3" minlength="3" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="date" class="form-control" placeholder="Credit Card Expiry Date" name="credit_card_expiry" required>
                 </div>
 
                 <div class="mb-3">
