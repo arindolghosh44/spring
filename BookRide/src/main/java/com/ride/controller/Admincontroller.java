@@ -14,5 +14,21 @@ public class Admincontroller {
 		
 		return "admin/index";
 	}
+	
+	
+	@GetMapping("/loadAddProduct")
+	public String loadAddProduct() {
+		
+		return "admin/add_new_car";
+	}
+
+ 
+	
+	@GetMapping("/category")
+	public String category() {
+		
+		return "admin/category";
+	}
+
 
 }
