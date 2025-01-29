@@ -2,264 +2,324 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BookMyRide - Register</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <!-- FontAwesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
-        /* Full-Screen Background Video */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #d1e7dd; /* Light greenish background */
-            overflow: hidden;
-        }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BookMyRide - Register</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+	crossorigin="anonymous">
+<!-- FontAwesome for Icons -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+/* Full-Screen Background Video */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #d1e7dd; /* Light greenish background */
+    overflow: hidden;
+}
 
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2; /* Lower z-index so the video stays in the background */
-        }
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Lower z-index so the video stays in the background */
+}
 
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        /* Navbar styles */
-        .navbar {
-            background-color: #4CAF50; /* Green color */
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000; /* Ensures the navbar stays on top of the video */
-        }
+/* Navbar styles */
+.navbar {
+    background-color: #4CAF50; /* Green color */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Ensures the navbar stays on top of the video */
+}
 
-        .navbar a {
-            color: white !important;
-            font-size: 18px;
-        }
+.navbar a {
+    color: white !important;
+    font-size: 18px;
+}
 
-        .navbar a:hover {
-            color: #ffcc00 !important; /* Hover effect */
-        }
+.navbar a:hover {
+    color: #ffcc00 !important; /* Hover effect */
+}
 
-        .navbar-toggler {
-            border-color: white;
-        }
+.navbar-toggler {
+    border-color: white;
+}
 
-        .navbar-toggler-icon {
-            background-color: white;
-        }
+.navbar-toggler-icon {
+    background-color: white;
+}
 
-        /* Center the registration form */
-        .card {
-            background: #388e3c; /* Green gradient background */
-            color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px; /* Reduced width */
-            position: absolute;
-            top: 30%; /* Adjusted to give more space between navbar and form */
-            left: 50%;
-            transform: translate(-50%, -30%);
-            z-index: 999; /* Ensures the card floats above the video */
-            height: 500px; /* Reduced height */
-            animation: float 2s ease-in-out infinite alternate;
-        }
+/* Center the registration form */
+.card {
+    background: #388e3c; /* Green gradient background */
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Reduced width */
+    position: absolute;
+    top: 30%; /* Adjusted to give more space between navbar and form */
+    left: 50%;
+    transform: translate(-50%, -30%);
+    z-index: 999; /* Ensures the card floats above the video */
+    height: 500px; /* Reduced height */
+    animation: float 2s ease-in-out infinite alternate;
+}
 
-        /* Animation for floating effect */
-        @keyframes float {
-            0% {
-                transform: translate(-50%, -30%) scale(1);
-            }
+/* Animation for floating effect */
+@keyframes float {
+    0% {
+        transform: translate(-50%, -30%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -35%) scale(1.05);
+    }
+}
 
-            100% {
-                transform: translate(-50%, -35%) scale(1.05);
-            }
-        }
+.card-header {
+    background-color: #388e3c; /* Darker green */
+    color: #fff;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
 
-        .card-header {
-            background-color: #388e3c; /* Darker green */
-            color: #fff;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
+.card-footer {
+    background-color: #388e3c;
+    color: #fff;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
 
-        .card-footer {
-            background-color: #388e3c;
-            color: #fff;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-        }
+.btn-light {
+    background-color: #388e3c;
+    color: #fff;
+    border: none;
+}
 
-        .btn-light {
-            background-color: #388e3c;
-            color: #fff;
-            border: none;
-        }
+.btn-light:hover {
+    background-color: #2e7d32;
+}
 
-        .btn-light:hover {
-            background-color: #2e7d32;
-        }
+.video-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+    z-index: 10;
+}
 
-        .video-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            text-align: center;
-            font-size: 24px;
-            z-index: 10;
-        }
+.card-body {
+    padding: 20px 30px; /* Reduced padding */
+    height: 80%; /* Reduced height of the body */
+    overflow-y: auto; /* To handle form overflow */
+}
 
-        .card-body {
-            padding: 20px 30px; /* Reduced padding */
-            height: 80%; /* Reduced height of the body */
-            overflow-y: auto; /* To handle form overflow */
-        }
+/* Placeholder text color */
+.form-control::placeholder {
+    color: #2e2e2e; /* Dark color for the placeholder */
+}
 
-        /* Placeholder text color */
-        .form-control::placeholder {
-            color: #2e2e2e; /* Dark color for the placeholder */
-        }
+.card-body input, 
+.card-body button {
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
 
-        .card-body input,
-        .card-body button {
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+.card-footer a {
+    color: #ffcc00;
+    text-decoration: none;
+}
 
-        .card-footer a {
-            color: #ffcc00;
-            text-decoration: none;
-        }
+.card-footer a:hover {
+    color: #ffdd33;
+}
 
-        .card-footer a:hover {
-            color: #ffdd33;
-        }
-    </style>
+</style>
 </head>
 
 <body>
-    <!-- Full-Screen Background Video -->
-    <div class="video-container">
-        <video autoplay loop muted>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="video-overlay">Technical Register - Join Us Now!</div>
-    </div>
+	<!-- Full-Screen Background Video -->
+	<div class="video-container">
+		<video autoplay loop muted>
+			<source src="https://www.w3schools.com/html/mov_bbb.mp4"
+				type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
+		<div class="video-overlay">Technical Register - Join Us Now!</div>
+	</div>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/admin/">BookMyRide</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/admin/"><i class="fas fa-home"></i> Home</a>
-                    </li>
-                   
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/admin/">BookMyRide</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link active" href="/admin/"><i
+							class="fas fa-home"></i> Home</a></li>
 
-    <!-- Registration Card -->
-    <div class="card shadow-lg mt-5">
-        <div class="card-header text-center">
-            <h1 class="fs-4">add a new car</h1>
-        </div>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-        <div class="card-body bg-light">
-            <form action="/saveUser" enctype="multipart/form-data" method="post">
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Plate Id" name="firstName" maxlength="32" required>
-                </div>
-
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Model" name="lastName" maxlength="32" required>
-                </div>
-
-                <div class="mb-3">
-                    <input id="email" type="email" class="form-control" placeholder="make" name="email" maxlength="64" required>
-                </div>
-
-                <div class="mb-3">
-                    <input id="phone" type="date" class="form-control" placeholder="year" name="phoneNumber" minlength="11" maxlength="11" required>
-                </div>
-                <div class="mb-3">
+	<!-- Registration Card -->
+	<div class="card shadow-lg mt-5">
+		<div class="card-header text-center">
+			<h1 class="fs-4">add a new car</h1>
+		</div>
 
 
-												 <select class="form-control" name="category">
+		<th:block th:if="${session.succMsg}">
 
-													<option >----select----</option>
+			<p class="text-warning text-striped fw-bold">[[${session.succMsg}]]</p>
+			<th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+		</th:block>
 
-													<option th:each="c:${categories}">[[${c.name}]]</option>
+		<th:block th:if="${session.errorMsg}">
+
+			<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+			<!-- In case of bean the first later is small -->
+			<th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+		</th:block>
+
+		<div class="card-body bg-light">
+			<form action="/admin/saveProduct" enctype="multipart/form-data"
+				method="post">
+				<div class="mb-3">
+					<input type="text" class="form-control" placeholder="Plate Id"
+						name="plateId" maxlength="32" required>
+				</div>
+
+				<div class="mb-3">
+					<input type="text" class="form-control" placeholder="Model"
+						name="model" maxlength="32" required>
+				</div>
+
+				<div class="mb-3">
+					<input id="email" type="text" class="form-control"
+						placeholder="make" name="make" maxlength="64" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="phone">Year</label> <input id="phone" type="date"
+						class="form-control" name="year" required>
+				</div>
+				<div class="mb-3">
+
+
+					<select class="form-control" name="category">
+
+
+
+						<option th:each="c:${categories}">[[${c.name}]]</option>
 
 
 
 
 
-												</select>
+					</select>
 
 
-											</div>
-											
-											<div class="mb-3">
+				</div>
 
 
-												<label class="text-warning"> Status</label>
-												<div class="form-check">
-													<input class="form-check-input" type="radio"
-														name="isActive" id="exampleRadios1" value="true" checked>
-													<label class="form-check-label text-success" for="exampleRadios1">Active
-													</label>
-												</div>
-												<div class="form-check">
-													<input class="form-check-input" type="radio"
-														name="isActive" id="exampleRadios2" value="false">
-													<label class="form-check-label text-success" for="exampleRadios2">
-														Inactive</label>
-												</div>
 
-											</div>
-											
 
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="price/Day" name="holderName" maxlength="64" required>
-                </div>
+				<div class="mb-3 col">
 
-                <div class="mb-3">
-                    <input id="pass2" type="file" class="form-control" placeholder="add car photo" name="img" required>
-                </div>
 
-                <button id="submit-button" class="btn btn-light w-100">add</button>
-            </form>
-        </div>
+					 <input type="number" name="stock"
+						placeholder="stock" class="form-control">
 
-        <div class="card-footer text-center">
-             <a href="/admin/" class="text-warning">Go to admin dashboard</a>
-        </div>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+				</div>
+
+				<div class="mb-3">
+
+
+					<label class="text-warning"> Status</label>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="isActive"
+							id="exampleRadios1" value="true" checked> <label
+							class="form-check-label text-success" for="exampleRadios1">Active
+						</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="isActive"
+							id="exampleRadios2" value="false"> <label
+							class="form-check-label text-success" for="exampleRadios2">
+							Inactive</label>
+					</div>
+
+				</div>
+
+
+				<div class="mb-3">
+					<input type="text" class="form-control" placeholder="price/Day"
+						name="price" maxlength="64" required>
+				</div>
+
+				<div class="mb-3">
+					<input id="pass2" type="file" class="form-control"
+						placeholder="add car photo" name="img" required>
+				</div>
+
+				<button id="submit-button" class="btn btn-light w-100">add</button>
+			</form>
+		</div>
+
+		<div class="card-footer text-center">
+			<a href="/admin/" class="text-warning"> admin</a>
+		</div>
+		<div class="card-footer text-center">
+			<a href="/admin/car_status" class="text-warning">view Product</a>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dateInput = document.getElementById("phone");
+
+        // Get today's date and format it as yyyy-MM-dd
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0]; // "2025-01-16"
+        
+        dateInput.setAttribute("min", "2000-01-01"); // Example for min selectable date
+        dateInput.setAttribute("max", formattedDate); // Set max date as today's date
+    });
+</script>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
