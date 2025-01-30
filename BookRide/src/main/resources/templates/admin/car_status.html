@@ -135,7 +135,18 @@ th, td {
                             </form>
                         </div>
                     </div>
+<th:block th:if="${session.succMsg}">
 
+			<p class="text-primary text-striped fw-bold">[[${session.succMsg}]]</p>
+			<th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+		</th:block>
+
+		<th:block th:if="${session.errorMsg}">
+
+			<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+			<!-- In case of bean the first later is small -->
+			<th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+		</th:block>
                     <div class="card shadow-lg bg-light">
                         <div class="card-body text-center">
                             <table class="table table-bordered table-striped">
@@ -143,6 +154,7 @@ th, td {
                                     <tr>
                                         <th scope="col">Sl No</th>
                                         <th scope="col">Image</th>
+                                         <th scope="col">PlateId</th>
                                         <th scope="col">Model</th>
                                         <th scope="col">Make</th>
                                         <th scope="col">Year</th>
@@ -160,19 +172,22 @@ th, td {
                                         <th scope="row" th:text="${c.count}"></th>
                                         <td><img th:src="@{'/img/product_img/' + ${p.image}}"
                                             width="70px" height="70px"></td>
+                                             <td th:text="${p.plateId}"></td>
                                         <td th:text="${p.model}"></td>
                                         <td th:text="${p.make}"></td>
                                         <td th:text="${p.year}"></td>
                                         <td th:text="${p.category}"></td>
                                         <td><i class="fa-solid fa-indian-rupee-sign"></i><span th:text="${p.price}"></span></td>
-                                        <td th:text="${p.discount}"></td>
+                                        <td th:text="${p.discount}"><i class="fa-solid fa-percent"></i></td>
                                         <td><i class="fa-solid fa-indian-rupee-sign"></i><span th:text="${p.discountPrice}"></span></td>
                                         <td th:text="${p.isActive}"></td>
                                         <td th:text="${p.stock}"></td>
-                                        <td>
-                                            <a class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
-                                            <a class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> Delete</a>
-                                        </td>
+                                       <td><a th:href="@{'/admin/editProduct/'+${p.id}}"
+													class="btn btn-sm btn-primary"><i
+														class="fa-solid fa-pen-to-square"></i>Edit</a> <a
+													th:href="@{'/admin/deleteProduct/'+${p.id}}"
+													class="btn btn-sm btn-danger"><i
+														class="fa-solid fa-trash"></i> Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

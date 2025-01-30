@@ -220,20 +220,19 @@
 											</div>
 											<div class="mb-3 col">
 
-
-												 <input type="file" name="file"
-													class="form-control">
-
+  <input id="pass2" type="file" class="form-control" name="file" accept="image/*"
+                        onchange="previewImage(event)">
 
 											</div>
 
 
-											<div class="text-center">
-												<img
-													th:src="@{'/img/Category_image/'+${category.imageName}}"
-													width="100px" height="100px">
+										
+									
 
-											</div>
+                <div class="mt-1 mb-1 text-center">
+                    <img id="image-preview" th:src="@{'/img/Category_image/'+${category.imageName}}" src="/img/Category_image/default.jpg"
+                        width="100px" height="100px" alt="Car Image Preview">
+                </div>
 
 											<button class="btn btn-primary col-md-12 mt-2">Update</button>
 
@@ -253,6 +252,17 @@
             <p>&copy; 2024 All rights reserved | Developed by Arindol and Debashis</p>
         </div>
     </footer>
+    
+    <script>  
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const preview = document.getElementById('image-preview');
+            preview.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    </script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

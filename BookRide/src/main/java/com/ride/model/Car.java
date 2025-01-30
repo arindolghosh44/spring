@@ -33,8 +33,8 @@ public class Car {
 	@Column(length = 500)
 	private String make;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date year;
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String year;
 
 	private String category;
 

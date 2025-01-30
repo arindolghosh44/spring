@@ -69,7 +69,11 @@ public class CarServiceImpl implements CarService{
 		dbProduct.setPlateId(product.getPlateId());
 		dbProduct.setModel(product.getModel());
 		dbProduct.setMake(product.getMake());
-		dbProduct.setYear(product.getYear());
+		
+		String db = product.getYear().toString();
+		String yearDate = db.substring(0, 10);  // Extract "yyyy-MM-dd"
+		dbProduct.setYear(yearDate);  // Directly set the extracted date
+
 		dbProduct.setCategory(product.getCategory());
 		dbProduct.setPrice(product.getPrice());
 		dbProduct.setStock(product.getStock());

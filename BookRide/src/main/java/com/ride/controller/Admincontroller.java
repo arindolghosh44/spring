@@ -191,7 +191,7 @@ public class Admincontroller {
 			System.out.println(path);
 			Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-			session.setAttribute("succMsg", "Product Saved Success");
+			session.setAttribute("succMsg", "Car Saved Success");
 		} else {
 			session.setAttribute("errorMsg", "something wrong on server");
 		}
@@ -217,7 +217,44 @@ public class Admincontroller {
 	}
 	
 	
+	@GetMapping("/deleteProduct/{id}")
+	public String deleteProduct(@PathVariable int id, HttpSession session) {
+		Boolean deleteProduct = carService.deleteProduct(id);
+		if (deleteProduct) {
+			session.setAttribute("succMsg", "Car delete successfully");
+		} else {
+			session.setAttribute("errorMsg", "Something wrong on server");
+		}
+		return "redirect:/admin/car_status";
+	}
+
+
 	
+	@GetMapping("/editProduct/{id}")
+	public String editProduct(@PathVariable int id, Model m) {
+		m.addAttribute("product", carService.getProductById(id));
+		m.addAttribute("categories", categoryService.getAllCategory());
+		return "admin/edit_product";
+	}
 
+	@PostMapping("/updateProduct")
+	public String updateProduct(@ModelAttribute Car product, @RequestParam("img") MultipartFile image,
+			HttpSession session, Model m) {
 
+		if (product.getDiscount() < 0 || product.getDiscount() > 100) {
+			session.setAttribute("errorMsg", "invalid Discount");
+		}
+
+		else {
+
+			Car updateProduct = carService.updateProduct(product, image);
+			if (!ObjectUtils.isEmpty(updateProduct)) {
+				session.setAttribute("succMsg", "Product update successfully");
+			} else {
+				session.setAttribute("errorMsg", "Something wrong on server");
+			}
+		}
+
+		return "redirect:/admin/editProduct/" + product.getId();
+	}
 }
