@@ -36,7 +36,7 @@ public class UserDtls {
 	private String credit_card_no;
 	
 	
-	
+	private String expiryDate;
 	
 	
 	private String credit_card_cvv;

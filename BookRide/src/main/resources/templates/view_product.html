@@ -10,7 +10,7 @@
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #f3f4f7;
+      background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
       color: #333;
       margin: 0;
       padding: 0;
@@ -18,7 +18,7 @@
     }
 
     .navbar {
-      background: linear-gradient(90deg, #FF5F6D, #FFC371); /* Sunset gradient */
+      background: linear-gradient(90deg, #FF5F6D, #FFC371);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       position: sticky;
       top: 0;
@@ -55,69 +55,82 @@
       align-items: center;
       gap: 30px;
       margin-top: 100px;
-      flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+      flex-wrap: wrap;
     }
 
     .card {
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
-      background: #fff;
+      background: linear-gradient(135deg, #FF9A8B, #FF6A88, #FF99AC);
+      color: white;
       width: 100%;
-      max-width: 22rem;  /* Increased width */
-      height: 400px;     /* Increased height */
+      max-width: 24rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 500px;
     }
-    
-   
+
     .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      transform: scale(1.07);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     }
 
     .card-title {
-      color: #FF5F6D;
-      font-size: 1.5rem;
+      color: #FFD700;
+      font-size: 1.8rem;
       font-weight: bold;
+      margin-bottom: 0.5rem;
     }
 
-    .card-text {
-      color: #FFC371;
+    .card-text:nth-child(2) {
+      color: #FDD835;
       font-size: 1rem;
-      margin-top: 10px;
     }
-    
-    
-     .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Vertically center content */
-    align-items: center; /* Horizontally center content */
-    height: 100%;
-    text-align: center;
-  }
+
+    .card-text:nth-child(3) {
+      color: #81C784;
+      font-size: 1rem;
+    }
+
+    .card-text:nth-child(4) {
+      color: #64B5F6;
+      font-size: 1rem;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding: 25px;
+      overflow-y: auto;
+    }
+
+    .card-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .card-body::-webkit-scrollbar-thumb {
+      background: #FFD700;
+      border-radius: 4px;
+    }
 
     .product-img {
-      max-height: 250px;  /* Increased image height */
-      object-fit: cover;
+      height: 250px;
       width: 100%;
-    }
-    
-    
-
-    .add-to-cart-btn {
-      background-color: #FF5F6D;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      border: none;
-      transition: background-color 0.3s ease;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 15px;
     }
 
-    .add-to-cart-btn:hover {
-      background-color: #FFC371;
-      cursor: pointer;
+    .badge {
+      font-size: 1rem;
+      padding: 8px 12px;
+      border-radius: 12px;
     }
 
     .floating-cart-btn {
@@ -141,22 +154,16 @@
       background-color: #FFC371;
     }
 
-    .floating-cart-btn i {
-      margin-top: -2px;
-    }
-
     @keyframes float {
       0% {
         transform: translateY(0);
       }
-
       100% {
         transform: translateY(-15px);
       }
     }
   </style>
 </head>
-
 <body>
 
   <nav class="navbar navbar-expand-lg">
@@ -171,23 +178,43 @@
       </div>
     </div>
   </nav>
+  
+  
+  
+   
 
   <div class="product-grid">
     <div class="card">
-      <img src="static/img/DS1912.jpg" class="card-img-top product-img" alt="Luxury Car">
+      <img th:src="@{'/img/product_img/'+${product.image}}" class="card-img-top product-img" alt="Luxury Car">
       <div class="card-body">
-        <h5 class="card-title">Luxury Car</h5>
-        <p class="card-text">Experience the utmost luxury with comfort and style.</p>
-         <p class="card-text">Experience the utmost luxury with comfort and style.</p>
-          <p class="card-text">Experience the utmost luxury with comfort and style.</p>
-           
-        <button class="add-to-cart-btn">Add to Cart</button>
+        <h5 class="card-title">[[${product.model}]]</h5>
+        <p class="card-text">Make: [[${product.make}]]</p>
+        <p class="card-text">Year: [[${product.year}]]</p>
+        <p class="card-text">Category: [[${product.category}]]</p>
+        <p>
+          <span class="fw-bold text-success">Product Details:</span><br class="text-warning">
+          Status:
+          <th:block th:if="${product.stock>0}">
+            <span class="badge bg-success">Available</span>
+          </th:block>
+          <th:block th:unless="${product.stock>0}">
+            <span class="badge bg-warning">Out of Stock</span>
+          </th:block>
+        </p>
+        <p class="fs-5 fw-bold text-primary">
+          Price: <i class="fas fa-rupee-sign text-primary"></i>
+          [[${product.discountPrice}]]
+          <span class="fs-6 text-decoration-line-through text-danger">[[${product.price}]]</span>
+          <span class="fs-6 text-success">[[${product.discount}]]% off</span>
+        </p>
       </div>
     </div>
-
   </div>
-
-  <!-- Floating Cart Button -->
+ 
+ 
+  
+ 
+ 
   <div class="floating-cart-btn">
     <i class="fas fa-shopping-cart"></i>
   </div>

@@ -187,6 +187,21 @@
         <div class="card-header text-center">
             <h1 class="fs-4">Sign Up</h1>
         </div>
+        
+        <th:block th:if="${session.succMsg}">
+
+														<p class="text-warning text-striped fw-bold">[[${session.succMsg}]]</p>
+														<th:block
+															th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+													</th:block>
+
+													<th:block th:if="${session.errorMsg}">
+
+														<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+														<!-- In case of bean the first later is small -->
+														<th:block
+															th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+													</th:block>
 
         <div class="card-body bg-light">
             <form action="/saveUser" enctype="multipart/form-data" method="post">
@@ -219,7 +234,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <input type="date" class="form-control" placeholder="Credit Card Expiry Date" name="credit_card_expiry" required>
+                    <input type="date" id="phone" class="form-control" placeholder="Credit Card Expiry Date" name="expiryDate" required>
                 </div>
 
                 <div class="mb-3">
@@ -238,6 +253,18 @@
             Have an account? <a href="/signin" class="text-warning">Login</a>
         </div>
     </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dateInput = document.getElementById("phone");
+
+        // Get today's date and format it as yyyy-MM-dd
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0]; // "2025-01-16"
+        
+        dateInput.setAttribute("min", "2000-01-01"); // Example for min selectable date
+        dateInput.setAttribute("max", formattedDate); // Set max date as today's date
+    });
+</script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

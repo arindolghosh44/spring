@@ -188,6 +188,7 @@
       <div class="card-body">
         <p class="fs-3 text-center">Products</p>
         <div class="row">
+       <th:block th:if="${productsSize >0}">
           <div class="col-md-3" th:each="p:${products}">
             <div class="card mt-4">
               <div class="card-body text-center shadow-lg bg-warning decoration-none">
@@ -202,6 +203,14 @@
               </div>
             </div>
           </div>
+          
+          </th:block>
+          
+           <th:block th:unless="${productsSize >0}">
+  
+  <p class="fs-f4 text-center mt-4 text-danger">Product Not available</p>
+  
+  </th:block>
         </div>
       </div>
     </div>
