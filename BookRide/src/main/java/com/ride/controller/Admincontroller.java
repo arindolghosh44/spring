@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ride.model.Car;
 import com.ride.model.Category;
+import com.ride.model.UserDtls;
 import com.ride.service.CarService;
 import com.ride.service.CategoryService;
+import com.ride.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -40,6 +43,10 @@ public class Admincontroller {
 	
 	@Autowired
 	private CarService carService;
+	
+	
+	@Autowired
+	private UserService userService;
 
 	
 	
@@ -47,6 +54,21 @@ public class Admincontroller {
 	public String index() {
 		
 		return "admin/index";
+	}
+	
+	@ModelAttribute
+	public void getUserDetails(Principal p, Model m) {
+		if (p != null) {
+			String email = p.getName();
+			UserDtls userDtls = userService.getUserByEmail(email);
+			m.addAttribute("user", userDtls);
+
+			/*Integer countCart = cartService.getCountCart(userDtls.getId());
+			m.addAttribute("countCart", countCart);*/
+		}
+
+		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
+		m.addAttribute("categorys", allActiveCategory);
 	}
 	
 	
