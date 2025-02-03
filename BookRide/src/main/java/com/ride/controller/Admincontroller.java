@@ -25,9 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ride.model.Car;
 import com.ride.model.Category;
+import com.ride.model.Feedback;
 import com.ride.model.UserDtls;
 import com.ride.service.CarService;
 import com.ride.service.CategoryService;
+import com.ride.service.FeedbackService;
 import com.ride.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -55,6 +57,29 @@ public class Admincontroller {
 		
 		return "admin/index";
 	}
+	
+
+	@Autowired
+	private FeedbackService feedbackService;
+	
+	
+	@PostMapping("/saveFeedback")
+	public String saveFeedback(@ModelAttribute Feedback feedback,HttpSession session) throws IOException{
+		
+	Feedback feedback1=feedbackService.saveProduct(feedback);
+	
+	if(feedback1!=null) {
+		session.setAttribute("succMsg", "Your feedback saved successfully");
+	}
+	else {
+		session.setAttribute("errorMsg", "something wrong on server");
+	}
+	
+	
+	return "feedback";
+		
+	}
+	
 	
 	@ModelAttribute
 	public void getUserDetails(Principal p, Model m) {

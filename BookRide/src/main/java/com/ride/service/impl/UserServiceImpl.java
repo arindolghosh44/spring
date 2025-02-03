@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
 		String db = user.getExpiryDate().toString();
 		String yearDate = db.substring(0, 10);  // Extract "yyyy-MM-dd"
 		user.setExpiryDate(yearDate);  // Directly set the extracted date
+		
+		String cardNo=passwordEncoder.encode(user.getCredit_card_no());
+		user.setCredit_card_no(cardNo);
+		String cvv=passwordEncoder.encode(user.getCredit_card_cvv());
+		user.setCredit_card_cvv(cvv);
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
 		UserDtls saveUser = userRepository.save(user);

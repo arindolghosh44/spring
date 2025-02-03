@@ -290,29 +290,11 @@ body {
 	<div id="cta" class="container mt-5">
   <h2 class="display-5 text-center mb-4">Ratings</h2>
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-    <div class="carousel-inner">
+    <div class="carousel-inner"  th:each="u:${users}">
       <!-- First Item -->
       <div class="carousel-item active text-center">
-        <img src="img/DS1912.jpg" class="d-block mx-auto" alt="Employee">
+        <img th:src="@{'/img/profile_img/'+${u.profileImage}}" class="d-block mx-auto" alt="Employee">
         <p class="mt-3">BookMyRide offers seamless booking and reliable transportation.</p>
-        <p>⭐⭐⭐⭐⭐</p>
-      </div>
-      <!-- Second Item -->
-      <div class="carousel-item text-center">
-        <img src="img/th (8).jfif" class="d-block mx-auto" alt="Employee">
-        <p class="mt-3">With BookMyRide, journey begins with effortless booking.</p>
-        <p>⭐⭐⭐⭐</p>
-      </div>
-      <!-- Third Item -->
-      <div class="carousel-item text-center">
-        <img src="img/download.jpeg" class="d-block mx-auto" alt="Employee">
-        <p class="mt-3">Experience convenience with BookMyRide's booking process.</p>
-        <p>⭐⭐⭐⭐⭐</p>
-      </div>
-      <!-- Fourth Item -->
-      <div class="carousel-item text-center">
-        <img src="img/download (1).jpeg" class="d-block mx-auto" alt="Employee">
-        <p class="mt-3">BookMyRide makes every journey smooth and hassle-free.</p>
         <p>⭐⭐⭐⭐⭐</p>
       </div>
     </div>

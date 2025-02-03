@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.nio.file.StandardCopyOption"/>
-    <fullyQualifiedTypeName name="com.aec.repository.ProductRepository"/>
-    <fullyQualifiedTypeName name="com.aec.service.CategoryService"/>
-    <fullyQualifiedTypeName name="com.aec.service.ProductService"/>
     <fullyQualifiedTypeName name="java.util.Locale.Category"/>
     <fullyQualifiedTypeName name="com.aec.model.Category"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
@@ -15,7 +11,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="jakarta.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
-    <fullyQualifiedTypeName name="org.springframework.util.ObjectUtils"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="org.springframework.core.io.ClassPathResource"/>
     <fullyQualifiedTypeName name="java.nio.file.Paths"/>
@@ -52,12 +47,17 @@
     <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.ride.repository.CarRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.ride.service.CarService"/>
     <fullyQualifiedTypeName name="com.ride.model.Car"/>
     <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.ride.repository.Feedbackrepository"/>
+    <fullyQualifiedTypeName name="com.ride.service.FeedbackService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.util.ObjectUtils"/>
+    <fullyQualifiedTypeName name="com.ride.model.Feedback"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
 </qualifiedTypeNameHistroy>

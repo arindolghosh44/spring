@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ride.model.Category;
+import com.ride.model.Feedback;
 import com.ride.model.UserDtls;
 import com.ride.service.CategoryService;
+import com.ride.service.FeedbackService;
 import com.ride.service.UserService;
 import com.ride.util.CommonUtil;
 import com.ride.service.CarService;
@@ -61,6 +63,21 @@ public class Homecontroller {
 	}
 	
 	@ModelAttribute
+	public void carsouleProduct(Model m) {
+		
+		List<UserDtls> user=userService.getUsers("ROLE_USER");
+		
+		m.addAttribute("users", user);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	@ModelAttribute
 	public void getUserDetails(Principal p, Model m) {
 		if (p != null) {
 			String email = p.getName();
@@ -74,6 +91,27 @@ public class Homecontroller {
 		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
 		m.addAttribute("categorys", allActiveCategory);
 	}
+	
+	@PostMapping("/saveFeedback")
+	public String saveFeedback(@ModelAttribute Feedback feedback,HttpSession session) throws IOException{
+		
+	Feedback feedback1=feedbackService.saveProduct(feedback);
+	
+	if(feedback1!=null) {
+		session.setAttribute("succMsg", "Your feedback saved successfully");
+	}
+	else {
+		session.setAttribute("errorMsg", "something wrong on server");
+	}
+	
+	
+	return "feedback";
+		
+	}
+	
+
+	@Autowired
+	private FeedbackService feedbackService;
 	
 	@GetMapping("/signin")
 	public String login() {
