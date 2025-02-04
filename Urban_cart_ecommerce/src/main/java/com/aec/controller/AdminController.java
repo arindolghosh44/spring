@@ -306,6 +306,8 @@ public class AdminController {
 
 		return "redirect:/admin/editProduct/" + product.getId();
 	}
+	
+	
 
 	@ModelAttribute
 	public void getUserDetails(Principal p, Model m) {

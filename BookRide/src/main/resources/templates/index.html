@@ -289,15 +289,33 @@ body {
 <!-- carsoule -->
 	<div id="cta" class="container mt-5">
   <h2 class="display-5 text-center mb-4">Ratings</h2>
+
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-    <div class="carousel-inner"  th:each="u:${users}">
-      <!-- First Item -->
-      <div class="carousel-item active text-center">
-        <img th:src="@{'/img/profile_img/'+${u.profileImage}}" class="d-block mx-auto" alt="Employee">
-        <p class="mt-3">BookMyRide offers seamless booking and reliable transportation.</p>
-        <p>⭐⭐⭐⭐⭐</p>
+    <div class="carousel-inner">
+      <div th:each="f, iterStat : ${feedbacks}" 
+           class="carousel-item" 
+           th:classappend="${iterStat.index == 0} ? 'active'">
+        <div class="row text-center">
+          
+          <!-- Image Row -->
+          <div class="col-12 mb-3">
+            <img th:src="@{'/img/profile_img/' + ${users[iterStat.index].profileImage}}"
+                 class="rounded-circle mx-auto d-block"
+                 alt="User"
+                 style="width: 150px; height: 150px;">
+            <h5 class="mt-2 text-success">[[${users[iterStat.index].firstName}]] [[${users[iterStat.index].lastName}]]</h5>
+          </div>
+          
+          <!-- Feedback Description and Rating Row -->
+          <div class="col-12">
+            <p class="mt-3 text-warning">[[${f.description}]]</p>
+            <p class="text-primary">Rating: [[${f.rating}]] ⭐</p>
+          </div>
+
+        </div>
       </div>
     </div>
+
 
     <!-- Carousel Controls -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

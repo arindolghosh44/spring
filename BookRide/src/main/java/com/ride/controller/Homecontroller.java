@@ -51,6 +51,10 @@ public class Homecontroller {
 	
 	
 	@Autowired
+	private FeedbackService feedbackService;
+	
+	
+	@Autowired
 	private CommonUtil commonUtil;
 
 	@Autowired
@@ -69,13 +73,14 @@ public class Homecontroller {
 		
 		m.addAttribute("users", user);
 		
+List<Feedback> feedback=feedbackService.getFeedback();
+		
+		m.addAttribute("feedbacks", feedback);
+		
+		
 		
 	}
-	
-	
-	
-	
-	
+
 	
 	@ModelAttribute
 	public void getUserDetails(Principal p, Model m) {
@@ -110,8 +115,7 @@ public class Homecontroller {
 	}
 	
 
-	@Autowired
-	private FeedbackService feedbackService;
+	
 	
 	@GetMapping("/signin")
 	public String login() {

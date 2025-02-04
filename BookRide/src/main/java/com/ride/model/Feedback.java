@@ -4,11 +4,14 @@ package com.ride.model;
 
 
 
+import java.util.Optional;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,20 +30,17 @@ public class Feedback {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int f_id;
 	
-	private String email;
+	public String email;
 	
 	@Column(length = 500)
-	private String fullName;
+	public String fullName;
 	
 	
 	@Column(length = 500)
-	private String description;
+	public String description;
 	
-	private int rating;
+	public int rating;
 	
-	
-	@ManyToOne
-	private UserDtls user;
 	
 	
 	

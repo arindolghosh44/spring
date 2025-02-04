@@ -1,5 +1,7 @@
 package com.ride.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,12 @@ public class FeedbackServiceImpl implements FeedbackService{
 	public Feedback saveProduct(Feedback feedback) {
 		return feedbackrepository.save(feedback);
 	}
+
+	@Override
+	public List<Feedback> getFeedback() {
+		
+		return feedbackrepository.findAll();
+	}
+
 
 }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f8ff, #e0f7fa, #d1c4e9, #ffeb3b, #8bc34a, #9c27b0, #2196f3);
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        .card {
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #42a5f5, #5c6bc0);
+            color: white;
+            font-weight: bold;
+        }
+        table {
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        th {
+            background: linear-gradient(135deg, #0288d1, #81d4fa);
+            color: white;
+        }
+        tbody tr:hover {
+            background: #f0f4c3;
+        }
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #66bb6a, #9ccc65);
+            color: white;
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #ef5350, #e57373);
+            color: white;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #5c6bc0, #7986cb);
+            color: white;
+        }
+        .btn-back {
+            background: linear-gradient(135deg, #ff7043, #ffab91);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .btn-back:hover {
+            background: linear-gradient(135deg, #ff5722, #ff8a65);
+        }
+        .rainbow-text {
+            background: linear-gradient(135deg, #ff7043, #ffeb3b, #8bc34a, #2196f3, #9c27b0);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid mt-5">
+    <div class="card shadow-sm mx-5 mt-0 bg-body-tertiary rounded">
+        <div class="card-body">
+            <div class="container-fluid mt-5 p-5">
+                <div class="card">
+                    <a href="/admin/" class="btn btn-back"><i class="fas fa-arrow-left"></i> Home</a>
+                    <div class="card-header text-center">
+                        <p class="rainbow-text">User Details</p>
+                        <th:block th:if="${session.succMsg}">
+                            <p class="text-warning fw-bold">[[${session.succMsg}]]</p>
+                            <th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+                        </th:block>
+
+                        <th:block th:if="${session.errorMsg}">
+                            <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+                            <th:block th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+                        </th:block>
+                    </div>
+                    <div class="card-body bg-success text-center">
+                        <table class="table table-hover table-striped table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sl No</th>
+                                    <th scope="col">Profile</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Mobile No</th>
+                                    <th scope="col">Expiry Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-primary">
+                                <tr th:each="u,c:${users}">
+                                    <th scope="row">[[${c.count}]]</th>
+                                    <td>
+                                        <img th:src="@{'/img/profile_img/'+${u.profileImage}}" width="70px" height="70px" class="rounded-circle">
+                                    </td>
+                                    <td>[[${u.firstName+' '+u.lastName}]]</td>
+                                    <td>[[${u.email}]]</td>
+                                    <td>[[${u.phoneNumber}]]</td>
+                                    <td>[[${u.expiryDate}]]</td>
+                                    <td>[[${u.isEnable}]]</td>
+                                    <td>
+                                        <th:block th:if="${u.email == 'arindol@gmail.com'}">
+                                            <a href="#" class="btn btn-success btn-sm">Super Admin</a>
+                                        </th:block>
+
+                                        <th:block th:unless="${u.email == 'arindol@gmail.com'}">
+                                            <a th:href="@{'/admin/updateSts?status=true&id='+${u.id}}" class="btn btn-primary btn-sm">Active</a>
+                                            <a th:href="@{'/admin/updateSts?status=false&id='+${u.id}}" class="btn btn-danger btn-sm">Inactive</a>
+                                        </th:block>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

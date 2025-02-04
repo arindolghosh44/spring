@@ -2,8 +2,12 @@ package com.ride.model;
 
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -58,9 +62,6 @@ public class UserDtls {
 
 	private Date lockTime;
 	private String resetToken;
-	
-	
-	
 	
 	
 	

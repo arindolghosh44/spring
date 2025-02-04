@@ -8,18 +8,32 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.ride.model.UserDtls;
 import com.ride.repository.UserRepository;
 import com.ride.util.AppConstant;
 import com.ride.service.UserService;
+
+import com.ride.model.Feedback;
+
+import com.ride.model.UserDtls;
+import com.ride.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 @Service
 public class UserServiceImpl implements UserService {
 	
@@ -198,6 +212,9 @@ public class UserServiceImpl implements UserService {
 	public Boolean existsEmail(String email) {
 		return userRepository.existsByEmail(email);
 	}
+
+	
+	
 
 	
 
