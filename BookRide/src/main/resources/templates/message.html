@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Login Page</title>
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Container Styling */
+        .container {
+            margin-top: 70px;
+        }
+
+        .card {
+            background-color: #ffffffcc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        .bg-light {
+            background-color: #ffffff;
+            border-radius: 15px;
+        }
+
+        h3 {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* Styling for hover effects */
+        .card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s;
+        }
+
+        /* Responsive Layout */
+        @media only screen and (max-width: 768px) {
+            .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container-fluid mb-3">
+            <div class="row">
+                <div class="col-md-14">
+                    <div class="card shadow-sm p-3 bg-body-tertiary rounded">
+                        <div class="card-body">
+                            <div class="container mt-5 p-5 bg-light">
+                                <div class="row">
+                                    <div class="col-md-6 p-5 text-center offset-md-3">
+                                        <h3>[[${msg}]]</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
