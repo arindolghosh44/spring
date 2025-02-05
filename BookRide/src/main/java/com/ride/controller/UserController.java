@@ -1,6 +1,7 @@
 package com.ride.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.List;
 
@@ -19,7 +20,9 @@ import com.ride.model.UserDtls;
 import com.ride.service.CategoryService;
 import com.ride.service.FeedbackService;
 import com.ride.service.UserService;
+import com.ride.util.CommonUtil;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -29,6 +32,16 @@ public class UserController {
 	
 	@Autowired
 	private FeedbackService feedbackService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
+
+	@Autowired
+	private CommonUtil commonUtil;
 	
 	
 	@GetMapping("/reserve")
@@ -57,11 +70,7 @@ public class UserController {
 	
 	
 	
-	@Autowired
-	private UserService userService;
 	
-	@Autowired
-	private CategoryService categoryService;
 	
 	@ModelAttribute
 	public void getUserDetails(Principal p, Model m) {
@@ -87,6 +96,16 @@ public class UserController {
 	
 	if(feedback1!=null) {
 		session.setAttribute("succMsg", "Your feedback saved successfully");
+		
+		
+		 // Send email notification
+        try {
+            String recipientEmail = feedback.getEmail();
+            String emailContent = "Thank you, " + feedback.getFullName() + ", for your valuable feedback!";
+            commonUtil.sendMailWithCustomContent(recipientEmail, "Feedback Received", emailContent);
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            session.setAttribute("errorMsg", "Feedback saved but email failed to send.");
+        }
 	}
 	else {
 		session.setAttribute("errorMsg", "something wrong on server");
@@ -96,8 +115,6 @@ public class UserController {
 	return "feedback";
 		
 	}
-	
-	
 	
 	
 	

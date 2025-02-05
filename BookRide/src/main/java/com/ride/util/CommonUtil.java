@@ -61,5 +61,20 @@ public class CommonUtil {
 	}
 	
 	
+	public void sendMailWithCustomContent(String recipientEmail, String subject, String content) 
+            throws UnsupportedEncodingException, MessagingException {
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("t01666122@gmail.com", "Urban Cart");
+        helper.setTo(recipientEmail);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
+	
+	
 
 }

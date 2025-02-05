@@ -31,8 +31,14 @@ import com.ride.service.CarService;
 import com.ride.service.CategoryService;
 import com.ride.service.FeedbackService;
 import com.ride.service.UserService;
+import com.ride.util.CommonUtil;
 
 import jakarta.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+
+
+import jakarta.mail.MessagingException;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -52,6 +58,11 @@ public class Admincontroller {
 
 	
 	
+	 @Autowired
+	 private CommonUtil commonUtil;
+	 
+	 
+	
 	@GetMapping("/")
 	public String index() {
 		
@@ -70,6 +81,16 @@ public class Admincontroller {
 	
 	if(feedback1!=null) {
 		session.setAttribute("succMsg", "Your feedback saved successfully");
+		
+		
+		 // Send email notification
+        try {
+            String recipientEmail = feedback.getEmail();
+            String emailContent = "Thank you, " + feedback.getFullName() + ", for your valuable feedback!";
+            commonUtil.sendMailWithCustomContent(recipientEmail, "Feedback Received", emailContent);
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            session.setAttribute("errorMsg", "Feedback saved but email failed to send.");
+        }
 	}
 	else {
 		session.setAttribute("errorMsg", "something wrong on server");

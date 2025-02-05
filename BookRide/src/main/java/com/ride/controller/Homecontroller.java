@@ -8,12 +8,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,17 +74,20 @@ public class Homecontroller {
 	
 	@ModelAttribute
 	public void carsouleProduct(Model m) {
-		
-		List<UserDtls> user=userService.getUsers("ROLE_USER");
-		
-		m.addAttribute("users", user);
-		
-List<Feedback> feedback=feedbackService.getFeedback();
-		
-		m.addAttribute("feedbacks", feedback);
-		
-		
-		
+	    // Get list of users with role "ROLE_USER"
+	    List<UserDtls> users = userService.getUsers("ROLE_USER");
+	    m.addAttribute("users", users);
+
+	    // Get all feedback
+	    List<Feedback> feedbacks = feedbackService.getFeedback();
+	   
+	    
+	    // If feedback is empty, provide an empty list (just a safeguard)
+	    if (feedbacks == null) {
+	        feedbacks = Collections.emptyList();
+	    }
+	    
+	    m.addAttribute("feedbacks", feedbacks);
 	}
 
 	
@@ -108,6 +113,16 @@ List<Feedback> feedback=feedbackService.getFeedback();
 	
 	if(feedback1!=null) {
 		session.setAttribute("succMsg", "Your feedback saved successfully");
+		
+		
+		 // Send email notification
+        try {
+            String recipientEmail = feedback.getEmail();
+            String emailContent = "Thank you, " + feedback.getFullName() + ", for your valuable feedback!";
+            commonUtil.sendMailWithCustomContent(recipientEmail, "Feedback Received", emailContent);
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            session.setAttribute("errorMsg", "Feedback saved but email failed to send.");
+        }
 	}
 	else {
 		session.setAttribute("errorMsg", "something wrong on server");
@@ -117,7 +132,6 @@ List<Feedback> feedback=feedbackService.getFeedback();
 	return "feedback";
 		
 	}
-	
 
 	
 	
