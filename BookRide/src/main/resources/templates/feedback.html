@@ -115,14 +115,19 @@
     <h1>Feedback Form</h1>
     
     <th:block th:if="${session.succMsg}">
-    <p class="text-warning fw-bold">[[${session.succMsg}]]</p>
-    <th:block th:remove="all"></th:block>
-</th:block>
 
-<th:block th:if="${session.errorMsg}">
-    <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-    <th:block th:remove="all"></th:block>
-</th:block>
+														<p class="text-warning text-striped fw-bold">[[${session.succMsg}]]</p>
+														<th:block
+															th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+													</th:block>
+
+													<th:block th:if="${session.errorMsg}">
+
+														<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+														<!-- In case of bean the first later is small -->
+														<th:block
+															th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
+													</th:block>
 
    <form action="/saveFeedback"  method="post">
       <label for="name">Full Name:</label>
@@ -144,7 +149,7 @@
       <button type="submit">Submit Feedback</button>
 
       <a href="/" class="home-link">Home</a>
-
+<a href="/user/feedback" class="home-link">refresh</a>
       <p class="note">We appreciate your valuable feedback!</p>
     </form>
   </div>

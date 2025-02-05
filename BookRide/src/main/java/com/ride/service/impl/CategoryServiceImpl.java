@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ride.model.Category;
 import com.ride.repository.CategoryRepository;
 import com.ride.service.CategoryService;
+import com.ride.util.CommonUtil;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -19,7 +20,10 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	
+
+	 @Autowired
+	 private CommonUtil commonUtil;
+	 
 
 	@Override
 	public Category saveCategory(Category category) {
@@ -48,6 +52,8 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = categoryRepository.findById(id).orElse(null);
 
 		if (!ObjectUtils.isEmpty(category)) {
+			
+			 commonUtil.sendEmailToAllAdminsOnProductDeletion1(category);
 			categoryRepository.delete(category);
 			return true;
 		}

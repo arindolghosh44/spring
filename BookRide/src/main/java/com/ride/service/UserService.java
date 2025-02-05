@@ -41,8 +41,9 @@ public interface UserService {
 	
 	public Boolean existsEmail(String email);
 	
+	public UserDtls getUserById(Integer id);
 	
-	
+	List<UserDtls> getUsersByRole(String role);
 	
 	
 	

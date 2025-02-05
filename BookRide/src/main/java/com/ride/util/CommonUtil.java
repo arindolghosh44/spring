@@ -2,12 +2,15 @@ package com.ride.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import com.ride.model.Car;
+import com.ride.model.Category;
 import com.ride.model.UserDtls;
 import com.ride.service.UserService;
 
@@ -75,6 +78,135 @@ public class CommonUtil {
         mailSender.send(message);
     }
 	
+	public void sendEmailToAllAdmins(Car updatedProduct) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsersByRole("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "Product Updated: " + updatedProduct.getModel();
+	    String content = "<p>The following product has been updated:</p>"
+	            + "<p><strong>Model:</strong> " + updatedProduct.getModel() + "</p>"
+	            + "<p><strong>Category:</strong> " + updatedProduct.getCategory() + "</p>"
+	            + "<p><strong>Price:</strong> " + updatedProduct.getPrice() + "</p>"
+	            + "<p><strong>Discount Price:</strong> " + updatedProduct.getDiscountPrice() + "</p>";
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	
+	public void sendEmailToAllAdminsOnProductDeletion(Car deletedProduct) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsersByRole("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "Product Deleted: " + deletedProduct.getModel();
+	    String content = "<p>The following product has been deleted:</p>"
+	            + "<p><strong>Model:</strong> " + deletedProduct.getModel() + "</p>"
+	            + "<p><strong>Category:</strong> " + deletedProduct.getCategory() + "</p>"
+	            + "<p><strong>Price:</strong> " + deletedProduct.getPrice() + "</p>";
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	
+	public void sendEmailToAllAdminsOnNewProduct(Car newProduct) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsersByRole("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "New Product Added: " + newProduct.getModel();
+	    String content = "<p>A new product has been added:</p>"
+	            + "<p><strong>Model:</strong> " + newProduct.getModel() + "</p>"
+	            + "<p><strong>Category:</strong> " + newProduct.getCategory() + "</p>"
+	            + "<p><strong>Price:</strong> " + newProduct.getPrice() + "</p>"
+	            + "<p><strong>Discount Price:</strong> " + newProduct.getDiscountPrice() + "</p>";
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	
+	public void sendEmailToAllAdminsOnCategoryUpdate(Category updatedCategory) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsersByRole("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "Category Updated: " + updatedCategory.getName();
+	    String content = "<p>The following category has been updated:</p>"
+	            + "<p><strong>Category Name:</strong> " + updatedCategory.getName() + "</p>"
+	            + "<p><strong>Active Status:</strong> " + (updatedCategory.getIsActive() ? "Active" : "Inactive") + "</p>";
+	     
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	public void sendEmailToAllAdminsOnProductDeletion1(Category category) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsersByRole("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "Product Deleted: " + category.getName();
+	    String content = "<p>The following product has been deleted:</p>"
+	            + "<p><strong>Model:</strong> " + category.getIsActive() + "</p>";
+	          
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	public void sendEmailToAllAdminsOnNewCategory(Category newCategory) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsersByRole("ROLE_ADMIN");
+	    
+	    // List<UserDtls> admins = userService.getUsersByRole("ROLE_SUPERADMIN");
+
+	    // Create email subject and content
+	    String subject = "New Category Added: " + newCategory.getName();
+	    String content = "<p>A new category has been added:</p>"
+	            + "<p><strong>Name:</strong> " + newCategory.getName() + "</p>"
+	            + "<p><strong>Status:</strong> " + (newCategory.getIsActive() ? "Active" : "Inactive") + "</p>"
+	            + "<p><strong>Image:</strong> " + (newCategory.getImageName() != null ? newCategory.getImageName() : "No image") + "</p>";
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
 
 }

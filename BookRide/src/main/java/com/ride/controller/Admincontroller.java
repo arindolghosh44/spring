@@ -168,6 +168,8 @@ public class Admincontroller {
 
 				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
+				
+				 commonUtil.sendEmailToAllAdminsOnNewCategory(category);
 				session.setAttribute("succMsg", "Saved Successfully");
 
 			}
@@ -226,6 +228,8 @@ public class Admincontroller {
 				System.out.println(path);
 				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			}
+			commonUtil.sendEmailToAllAdminsOnCategoryUpdate(category);
+
 			session.setAttribute("succMsg", "category updated successfully");
 		}
 
@@ -341,7 +345,21 @@ public class Admincontroller {
 	public String updateUserAccountStatus(@RequestParam Boolean status, @RequestParam Integer id, HttpSession session) {
 		Boolean f = userService.updateAccountStatus(id, status);
 		if (f) {
-			session.setAttribute("succMsg", "Account Status Updated");
+			 // Fetch user details by id to get email
+	        UserDtls user = userService.getUserById(id);
+	        
+	        // Prepare the email content
+	        String subject = "Account Status Update";
+	        String content = status ? "<p>Your account has been activated.</p>" : "<p>Your account has been deactivated.</p>";
+	        
+	        try {
+	            // Send email to the user
+	            commonUtil.sendMailWithCustomContent(user.getEmail(), subject, content);
+	            session.setAttribute("succMsg", "Account Status Updated and email notification sent.");
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	            session.setAttribute("errorMsg", "Account Status Updated, but failed to send email notification.");
+	        }
 		} else {
 			session.setAttribute("errorMsg", "Something wrong on server");
 		}

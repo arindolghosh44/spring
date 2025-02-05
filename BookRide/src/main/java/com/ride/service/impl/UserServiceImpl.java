@@ -213,8 +213,21 @@ public class UserServiceImpl implements UserService {
 		return userRepository.existsByEmail(email);
 	}
 
+	@Override
+	public UserDtls getUserById(Integer id) {
+		// TODO Auto-generated method stub
+		 return userRepository.findById(id).orElse(null);
+	}
+
 	
+	@Override
+	public List<UserDtls> getUsersByRole(String role) {
+	    return userRepository.findByRole(role);  // Assuming userRepository has this method
+	}
+
+
 	
+	 
 
 	
 

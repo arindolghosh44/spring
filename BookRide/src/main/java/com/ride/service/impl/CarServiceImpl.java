@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ride.model.Car;
 import com.ride.repository.CarRepository;
 import com.ride.service.CarService;
+import com.ride.util.CommonUtil;
 
 @Service
 public class CarServiceImpl implements CarService{
@@ -26,9 +27,18 @@ public class CarServiceImpl implements CarService{
 	@Autowired
 	private CarRepository carRepository;
 	
+	 @Autowired
+	 private CommonUtil commonUtil;
+	
 	@Override
 	public Car saveProduct(Car product) {
-		return carRepository.save(product);
+		// Save the product
+	    Car savedProduct = carRepository.save(product);
+
+	    // Send email to all admins about the new product
+	    commonUtil.sendEmailToAllAdminsOnNewProduct(savedProduct);
+
+	    return savedProduct;
 	}
 
 	@Override
@@ -48,6 +58,7 @@ public class CarServiceImpl implements CarService{
 
 		if (!ObjectUtils.isEmpty(product)) {
 			carRepository.delete(product);
+			 commonUtil.sendEmailToAllAdminsOnProductDeletion(product);
 			return true;
 		}
 		return false;
@@ -103,6 +114,7 @@ public class CarServiceImpl implements CarService{
 					e.printStackTrace();
 				}
 			}
+			 commonUtil.sendEmailToAllAdmins(product);
 			return product;
 		}
 		return null;
