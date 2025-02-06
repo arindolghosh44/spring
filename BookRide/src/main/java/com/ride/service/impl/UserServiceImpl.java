@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,9 @@ public class UserServiceImpl implements UserService {
 		user.setCredit_card_cvv(cvv);
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
+		
+		
+		user.setConfirmationToken(UUID.randomUUID().toString());  
 		UserDtls saveUser = userRepository.save(user);
 		return saveUser;
 	}
@@ -226,7 +230,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	
+	@Override
+	public UserDtls getUserByConfirmationToken(String token) {
+	    return userRepository.findByConfirmationToken(token);
+	}
+
 	 
 
 	

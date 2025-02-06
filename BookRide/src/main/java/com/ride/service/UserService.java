@@ -45,6 +45,9 @@ public interface UserService {
 	
 	List<UserDtls> getUsersByRole(String role);
 	
+	public UserDtls getUserByConfirmationToken(String token);
+
+	
 	
 	
 }

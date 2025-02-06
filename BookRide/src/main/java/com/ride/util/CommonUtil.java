@@ -35,7 +35,7 @@ public class CommonUtil {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
-		helper.setFrom("t01666122@gmail.com", "Urban Cart");
+		helper.setFrom("t01666122@gmail.com", "BookMyRide");
 		helper.setTo(reciepentEmail);
 
 		String content = "<p>Hello,</p>" + "<p>You have requested to reset your password.</p>"
@@ -70,7 +70,7 @@ public class CommonUtil {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("t01666122@gmail.com", "Urban Cart");
+        helper.setFrom("t01666122@gmail.com", "BookMyRide");
         helper.setTo(recipientEmail);
         helper.setSubject(subject);
         helper.setText(content, true);
@@ -207,6 +207,36 @@ public class CommonUtil {
 	        }
 	    }
 	}
+
+	public Boolean sendMail1(String url, String recipientEmail) throws UnsupportedEncodingException, MessagingException {
+
+	    MimeMessage message = mailSender.createMimeMessage();
+	    MimeMessageHelper helper = new MimeMessageHelper(message);
+
+	    helper.setFrom("t01666122@gmail.com", "BookMyRide");
+	    helper.setTo(recipientEmail);
+
+	    String content = "<p>Hello,</p>" + 
+	                     "<p>You have successfully registered. To complete your registration, please click the link below to confirm your email:</p>" +
+	                     "<p><a href=\"" + url + "\">Confirm my email</a></p>";
+	    helper.setSubject("Email Confirmation for Registration");
+	    helper.setText(content, true);
+	    mailSender.send(message);
+
+	    return true;
+	}
+	
+	public void sendMailWithCustomContent1(String recipientEmail, String subject, String content) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("t01666122@gmail.com", "BookMyRide");
+        helper.setTo(recipientEmail);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
 
 
 }

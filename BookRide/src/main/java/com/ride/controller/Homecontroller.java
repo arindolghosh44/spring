@@ -191,8 +191,8 @@ public class Homecontroller {
 	}
 	
 	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session)
-			throws IOException {
+	public String saveUser(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session,HttpServletRequest request)
+			throws IOException , MessagingException{
 
 		Boolean existsEmail = userService.existsEmail(user.getEmail());
 
@@ -201,6 +201,11 @@ public class Homecontroller {
 		} else {
 			String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
 			user.setProfileImage(imageName);
+			
+			 // Generate a confirmation token
+            String confirmationToken = UUID.randomUUID().toString();
+            user.setConfirmationToken(confirmationToken);
+	       
 			UserDtls saveUser = userService.saveUser(user);
 
 			if (!ObjectUtils.isEmpty(saveUser)) {
@@ -213,7 +218,11 @@ public class Homecontroller {
 //					System.out.println(path);
 					Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 				}
-				session.setAttribute("succMsg", "Register successfully");
+				
+				// Send confirmation email
+	            String confirmationUrl = CommonUtil.generateUrl(request) + "/confirm?token=" + confirmationToken;
+	            commonUtil.sendMail1(confirmationUrl, user.getEmail());
+				session.setAttribute("succMsg", "Register email notification send");
 			} else {
 				session.setAttribute("errorMsg", "something wrong on server");
 			}
@@ -221,6 +230,36 @@ public class Homecontroller {
 
 		return "redirect:/register";
 	}
+	
+	@GetMapping("/confirm")
+	public String confirmRegistration(@RequestParam("token") String token, HttpSession session) {
+	    UserDtls user = userService.getUserByConfirmationToken(token);
+	    
+	    if (user != null) {
+	        // Enable the user's account and remove the confirmation token
+	        user.setIsEnable(true);
+	        user.setConfirmationToken(null); 
+	        userService.updateUser(user);
+
+	        // Send a final confirmation email to the user
+	        try {
+	            commonUtil.sendMailWithCustomContent1(user.getEmail(), "Registration Complete", 
+	                    "<p>Your registration is now complete!</p>");
+	        } catch (MessagingException | UnsupportedEncodingException e) {
+	            e.printStackTrace();
+	        }
+
+	        // Set success message in session
+	        session.setAttribute("succMsg", "Registration confirmed successfully.");
+	        
+	        // Redirect to sign-in page
+	        return "redirect:/signin"; 
+	    } 
+	    
+	    return "redirect:/signin"; 
+	    
+	}
+
 	
 	
 	//forgot password module
