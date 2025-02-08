@@ -29,4 +29,6 @@ public interface CarService {
 	public Page<Car> getAllProductsPagination(Integer pageNo, Integer pageSize);
 	
 	public Page<Car> searchActiveProductPagination(Integer pageNo, Integer pageSize, String category, String ch);
+
+	
 }

@@ -287,19 +287,20 @@ body {
 							<input type="email" class="form-control" id="inputEmail3"
 								placeholder="E-Mail" name="email" required>
 						</div>-->
-					
-		<th:block th:if="${user!=null}">					
-   <div>
+						
+		<th:block th:if="${user != null}">
+  <div>
     <button type="button" class="btn btn-light mybtn g black" id="reserveButton">Reserve a Car</button>
-</div>
+  </div>
+</th:block>
 
 <script>
-    document.getElementById('reserveButton').addEventListener('click', function() {
-        window.location.href = '/user/book';
-    });
+  document.querySelector('#reserveButton').addEventListener('click', function() {
+    // Ensure the redirection is to the correct /user/book path
+    window.location.href = '/user/book';  // Redirect to /user/book
+  });
 </script>
-</th:block>
-							
+					
 						<script>
 							document
 									.getElementById('inputEmail3')

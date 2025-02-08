@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Full-Screen Background Video */
+        /* Full-Screen Background */
         body, html {
             margin: 0;
             padding: 0;
@@ -18,67 +18,48 @@
             background-color: #d1e7dd; /* Light Green Background */
         }
 
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: not cover;
-        }
-
         /* Navbar styles */
-  /* Navbar styles */
- /* Navbar styles */
- .navbar {
-    background-color: #4CAF50; /* Green color */
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    padding: 0; /* Zero padding to minimize height */
-    height: 80px; /* Directly set the height for even more control */
-}
+        .navbar {
+            background-color: #4CAF50; /* Green color */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 0;
+            height: 80px; /* Control navbar height */
+        }
 
-.navbar a {
-    color: white !important;
-    font-size: 14px; /* Further reduced font size */
-    padding: 0 8px; /* Reduced padding inside navbar links to fit the smaller navbar */
-    line-height: 40px; /* Aligns text vertically in the smaller navbar */
-}
+        .navbar a {
+            color: white !important;
+            font-size: 18px; /* Adjusted font size for better readability */
+        }
 
-.navbar a:hover {
-    color: #ffcc00 !important;
-}
+        .navbar a:hover {
+            color: #ffcc00 !important; /* Hover effect: yellow color */
+        }
 
+        /* Navbar Toggler */
+        .navbar-toggler {
+            border-color: #4CAF50; /* Same green color */
+        }
 
+        .navbar-toggler-icon {
+            background-color: white; /* White icon for the toggler */
+        }
 
+        .navbar-nav .nav-link {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
 
         /* Text Centering */
         .text-center {
             text-align: center !important;
         }
 
-        /* Remove floating car cards */
-        .card-container {
-            display: none;
-        }
-
-        .card-body {
-            padding: 20px 30px;
-            height: 80%;
-            overflow-y: auto;
-        }
-
-        /* Updated layout for form and text */
+        /* Adjusted margin-top for the content */
         .container-fluid {
-            margin-top: 80px; /* Adjusted to avoid navbar overlap */
+            margin-top: 120px; /* Adjusted to avoid overlap with navbar */
         }
 
         h1, h2, h3 {
@@ -93,63 +74,55 @@
         /* Centering the Payment Option and Reserve Button */
         .form-check {
             display: flex;
-            justify-content: center; /* Centers horizontally */
-            align-items: center; /* Centers vertically */
+            justify-content: center;
+            align-items: center;
             margin-top: 20px;
         }
 
         #payNow, #reserve-btn {
-            margin-right: 10px; /* Space between checkbox and button */
+            margin-right: 10px;
         }
 
         /* Adjusting gap above and below the Show Available Cars button */
         #getAvailable {
             margin-top: 20px;
-            margin-bottom: 30px; /* Adds a bottom margin to create space */
+            margin-bottom: 30px;
+        }
+
+        /* Dropdown Styling to match the "Pickup Date" input but with reduced width */
+        .dropdown-select {
+            border-radius: 10px;
+            padding: 12px;
+            width: 25%; /* Reduced width to 1/4th of the container */
+            margin: 0 auto; /* Center the dropdown box */
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Full-Screen Background Video -->
-    <div class="video-container">
-        <video autoplay loop muted>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="video-overlay">Login to BookMyRide</div>
-    </div>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        <!-- Brand Name (Centered) -->
-        <a class="navbar-brand mx-auto" href="#" style="font-size: 24px; font-weight: bold;">BookMyRide</a>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Reserve a Car</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Log Out</a>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">BookMyRide</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-in-alt"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-
-    <div class="container-fluid" style="margin-top: 120px;"> <!-- Adjusted margin to avoid overlap with navbar -->
+    <!-- Main Content -->
+    <div class="container-fluid">
         <!-- Welcome Section -->
         <div class="row">
             <div class="col-12 text-center">
@@ -160,27 +133,9 @@
             </div>
         </div>
 
-        <h3 class="text-center" style="padding: 1.5rem 0; color: #fff;">Reserve a Car</h3>
+        <h3 class="text-center" style="padding: 1.5rem 0;">Reserve a Car</h3>
 
         <!-- Form Section -->
-        <div class="row specs" style="margin: 0;">
-            <select class="col m-5 form-select" id="modelSelect">
-                <option>Select Model</option>
-                <option value="model1">Model 1</option>
-                <option value="model2">Model 2</option>
-            </select>
-            <select class="col m-5 form-select" id="makeSelect">
-                <option>Select Make</option>
-                <option value="make1">Make 1</option>
-                <option value="make2">Make 2</option>
-            </select>
-            <select class="col m-5 form-select" id="locationSelect">
-                <option>Select Location</option>
-                <option value="loc1">Location 1</option>
-                <option value="loc2">Location 2</option>
-            </select>
-        </div>
-
         <div class="justify-content-center text-center">
             <label for="pickDate" class="display-6 date">Pickup Date</label>
             <input type="date" id="pickDate" name="start_date" required=""
@@ -188,18 +143,34 @@
             <label for="returnDate" class="display-6 date">Return Date:</label>
             <input type="date" id="returnDate" name="end_date" required=""
                 style="border-radius: 10px; padding: 12px;">
-            <div><button id="getAvailable" class="btn btn-outline-success mybtn g black reserve-btn1">Show Available Cars</button></div>
-        </div>
 
-        <!-- Payment Option and Reserve Button -->
-        <div class="form-check">
-            <input id="payNow" class="form-check-input h4" checked="true" type="checkbox" value="">
-            <label class="form-check-label h4" for="payNow">
-                Pay Now
-            </label>
-            <div><button id="reserve-btn" class="btn btn-success mybtn g white reserve-btn1">Reserve</button></div>
+            <!-- Second Row - Select Location -->
+           
+
+            <!-- Categories Dropdown using Thymeleaf -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <label for="categorySelect" class="display-6 date">Select Location</label>
+                    <select id="categorySelect" name="categorySelect" class="dropdown-select">
+                        <th:block th:each="c:${categorys}">
+                            <option th:value="${c.name}" th:text="${c.name}">Location Name</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Payment Option and Reserve Button -->
+            <div class="form-check">
+                <input id="payNow" class="form-check-input h4" checked="true" type="checkbox" value="">
+                <label class="form-check-label h4" for="payNow">
+                    Pay Now
+                </label>
+                <div><button id="reserve-btn" class="btn btn-success mybtn g white reserve-btn1">Reserve</button></div>
+            </div>
         </div>
     </div>
+    
+  
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

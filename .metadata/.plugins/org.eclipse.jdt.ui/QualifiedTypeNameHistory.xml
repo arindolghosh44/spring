@@ -57,7 +57,7 @@
     <fullyQualifiedTypeName name="org.springframework.security.core.Authentication"/>
     <fullyQualifiedTypeName name="com.ride.model.UserDtls"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="com.ride.model.Car"/>
     <fullyQualifiedTypeName name="com.ride.model.Category"/>
     <fullyQualifiedTypeName name="java.util.UUID"/>
+    <fullyQualifiedTypeName name="com.ride.model.Car"/>
 </qualifiedTypeNameHistroy>
