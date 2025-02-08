@@ -44,23 +44,11 @@ public class UserController {
 	private CommonUtil commonUtil;
 	
 	
-	@GetMapping("/reserve")
+	@GetMapping("/book")
 	public String office23() {
-		return "reserve";
+		return "book";
 	}
 	
-	
-	@GetMapping("/office_signup")
-	public String office_signup() {
-		return "office_signup";
-	}
-	
-	
-
-	@GetMapping("/customerhome")
-	public String customerhome() {
-		return "customerhome";
-	}
 	
 	
 	@GetMapping("/feedback")

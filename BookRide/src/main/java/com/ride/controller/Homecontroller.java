@@ -72,6 +72,9 @@ public class Homecontroller {
 		return "index";
 	}
 	
+	
+	
+	
 	@ModelAttribute
 	public void carsouleProduct(Model m) {
 	    // Get list of users with role "ROLE_USER"

@@ -11,19 +11,19 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #c8e6c9, #bbdefb);
+      background: linear-gradient(135deg, #fce4ec, #d1c4e9);
       color: #333;
       overflow-x: hidden;
       margin: 0;
-      padding-top: 80px;
+      padding-top: 80px; /* Keep padding for content below navbar */
     }
 
     .navbar {
-      background: linear-gradient(90deg, #4caf50, #0288d1);
+      background: linear-gradient(90deg, #7b1fa2, #d81b60);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      position: sticky;
-      top: 0;
-      z-index: 999;
+      position: sticky; /* Make navbar sticky */
+      top: 0; /* Fix it to the top */
+      z-index: 999; /* Ensure it's above other content */
     }
 
     .navbar-brand {
@@ -40,49 +40,12 @@
       font-size: 1.1rem;
     }
 
-    .nav-link:hover {
-      color: #ffcc80;
-      transform: scale(1.1);
-      transition: color 0.4s, transform 0.3s;
-    }
-
-    .floating-category-bar {
-      position: fixed;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      background: #4caf50;
-      color: #fff;
-      padding: 15px;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 3px 0 7px rgba(0, 0, 0, 0.2);
-      z-index: 3;
-    }
-
-    .floating-category-bar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .floating-category-bar li {
-      margin: 15px 0;
-      cursor: pointer;
-      font-size: 1.2rem;
-      font-weight: 500;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    .floating-category-bar li:hover {
-      color: #ffab40;
-      transform: translateX(5px);
-    }
-
     .search-container {
       text-align: center;
       padding: 40px 0;
-      background: linear-gradient(135deg, #ffeb3b, #ff9800);
+      background: linear-gradient(135deg, #ffccbc, #ff80ab);
       color: #fff;
-      border-radius: 10px;
+      border-radius: 20px;
       margin-bottom: 40px;
     }
 
@@ -95,11 +58,11 @@
       border-radius: 25px;
       padding: 15px;
       font-size: 1.2rem;
-      border: 2px solid #ff5722;
+      border: 2px solid #ff4081;
     }
 
     .search-bar input:focus {
-      border-color: #ff9800;
+      border-color: #f50057;
       outline: none;
     }
 
@@ -108,7 +71,7 @@
       transition: transform 0.3s, box-shadow 0.3s;
       border-radius: 15px;
       overflow: hidden;
-      background: linear-gradient(135deg, #bbdefb, #ffcc80);
+      background: linear-gradient(135deg, #c5e1a5, #81c784);
     }
 
     .card:hover {
@@ -123,36 +86,36 @@
 
     .card-body {
       padding: 15px;
-      background-color: #e8f5e9;
+      background-color: #f1f8e9;
     }
 
     .card-title {
-      color: #0288d1;
+      color: #00796b;
       font-size: 1.4rem;
       font-weight: bold;
     }
 
     .card-text {
-      color: #6d4c41;
+      color: #5d4037;
       font-size: 1rem;
       margin-top: 10px;
     }
 
     .btn-primary {
-      background-color: #0288d1;
-      border-color: #0288d1;
+      background-color: #00796b;
+      border-color: #00796b;
       font-size: 1rem;
       padding: 10px 15px;
     }
 
     .btn-primary:hover {
-      background-color: #0277bd;
+      background-color: #004d40;
     }
 
     .search-message {
       margin-top: 20px;
       font-style: italic;
-      color: #0288d1;
+      color: #00796b;
       font-size: 1.2rem;
     }
   </style>
@@ -164,28 +127,20 @@
       <a class="navbar-brand" href="/">BookMyRide <img src="img" alt="Car"></a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-        <th:block th:if="${user==null}">
-          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>
-          <li class="nav-item"><a class="nav-link" href="/signin">Sign in</a></li>
-          
+          <th:block th:if="${user==null}">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>
+            <li class="nav-item"><a class="nav-link" href="/signin">Sign in</a></li>
           </th:block>
-          
-           <th:block th:if="${user!=null}">
-          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-         <li class="nav-item"><a class="nav-link" href="#"><i
-							class="fas fa-user-plus"></i>[[${user.firstName}]]</a></li>
+
+          <th:block th:if="${user!=null}">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-plus"></i>[[${user.firstName}]]</a></li>
           </th:block>
         </ul>
       </div>
     </div>
   </nav>
-
-  <div class="floating-category-bar">
-    <p class="fs-4 text-center text-warning">Category</p>
-    <a href="/products" th:classappend="${paramValue==''} ? 'active':''" class="list-group-item list-group-item-action" aria-current="true"> All </a>
-    <a th:each="c:${categories}" th:href="@{'/products?category='+${c.name}}" th:classappend="${paramValue == c.name} ? 'active':''" class="list-group-item list-group-item-action">[[${c.name}]]</a>
-  </div>
 
   <div class="search-container">
     <h1 class="text-center my-4">Search Products</h1>
@@ -197,29 +152,26 @@
       <div class="card-body">
         <p class="fs-3 text-center">Products</p>
         <div class="row">
-       <th:block th:if="${productsSize >0}">
-          <div class="col-md-3" th:each="p:${products}">
-            <div class="card mt-4">
-              <div class="card-body text-center shadow-lg bg-warning decoration-none">
-                <img alt="" th:src="@{'/img/product_img/'+${p.image}}" width="100%" height="150px">
-                <p class="fs-5 text-center">[[${p.model}]]</p>
-                <div class="row text-center">
-                  <p class="fs-6 fw-bold">
-                    <span>&#8377; [[${p.discountPrice}]]</span> <br> <span class="text-decoration-line-through text-secondary">&#8377; [[${p.price}]]</span> <span class="fs-6 text-success">[[${p.discount}]]% off </span>
-                  </p>
-                  <a th:href="@{'/product/'+${p.id}}" class="btn btn-primary col-md-6 offset-md-3">View Details</a>
+          <th:block th:if="${productsSize >0}">
+            <div class="col-md-3" th:each="p:${products}">
+              <div class="card mt-4">
+                <div class="card-body text-center shadow-lg bg-warning decoration-none">
+                  <img alt="" th:src="@{'/img/product_img/'+${p.image}}" width="100%" height="150px">
+                  <p class="fs-5 text-center">[[${p.model}]]</p>
+                  <div class="row text-center">
+                    <p class="fs-6 fw-bold">
+                      <span>&#8377; [[${p.discountPrice}]]</span> <br> <span class="text-decoration-line-through text-secondary">&#8377; [[${p.price}]]</span> <span class="fs-6 text-success">[[${p.discount}]]% off </span>
+                    </p>
+                    <a th:href="@{'/product/'+${p.id}}" class="btn btn-primary col-md-6 offset-md-3">View Details</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          
           </th:block>
-          
-           <th:block th:unless="${productsSize >0}">
-  
-  <p class="fs-f4 text-center mt-4 text-danger">Product Not available</p>
-  
-  </th:block>
+
+          <th:block th:unless="${productsSize >0}">
+            <p class="fs-f4 text-center mt-4 text-danger">Product Not available</p>
+          </th:block>
         </div>
       </div>
     </div>
