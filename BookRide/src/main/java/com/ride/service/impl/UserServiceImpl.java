@@ -23,10 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ride.model.UserDtls;
 import com.ride.repository.UserRepository;
 import com.ride.util.AppConstant;
+
+import jakarta.transaction.Transactional;
+
 import com.ride.service.UserService;
 
 import com.ride.model.Feedback;
-
+import com.ride.model.Reserved;
 import com.ride.model.UserDtls;
 import com.ride.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,8 +238,7 @@ public class UserServiceImpl implements UserService {
 	    return userRepository.findByConfirmationToken(token);
 	}
 
-	 
-
+	
 	
 
 }

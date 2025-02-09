@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+
 import com.ride.model.UserDtls;
 
 public interface UserRepository extends JpaRepository<UserDtls, Integer>{
@@ -19,5 +20,9 @@ public interface UserRepository extends JpaRepository<UserDtls, Integer>{
 	
 	UserDtls findByConfirmationToken(String token);
 
+	
+
+	
+	
 	
 }

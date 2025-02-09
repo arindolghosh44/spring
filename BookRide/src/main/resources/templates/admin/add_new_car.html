@@ -228,9 +228,13 @@ body, html {
 				</div>
 
 				<div class="mb-3">
-					<label for="phone" >year</label> <input id="phone" type="date"
-						class="form-control" name="year" required>
-				</div>
+    <label for="year">Year</label> 
+    <input type="text" id="year" class="form-control" name="year" required
+           onfocus="(this.type='date')" 
+           onblur="if(!this.value) this.type='text'" 
+           placeholder="Select Year">
+</div>
+
 				<div class="mb-3">
 
 

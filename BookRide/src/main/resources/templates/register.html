@@ -237,9 +237,13 @@
                     <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control" placeholder="Credit Card CVV" name="credit_card_cvv" maxlength="3" minlength="3" required>
                 </div>
 
-                <div class="mb-3">
-                    <input type="date" id="phone" class="form-control" placeholder="Credit Card Expiry Date" name="expiryDate" required>
-                </div>
+            <div class="mb-3">
+    <input type="text" id="expiry-date" class="form-control" name="expiryDate" required
+           onfocus="(this.type='date')" 
+           onblur="if(!this.value) this.type='text'" 
+           placeholder="Credit Card Expiry Date">
+</div>
+
 
                 <div class="mb-3">
                     <input id="pass1" type="password" class="form-control" placeholder="Password" name="password" required>

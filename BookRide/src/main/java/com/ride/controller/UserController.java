@@ -1,11 +1,19 @@
 package com.ride.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +24,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ride.model.Car;
 import com.ride.model.Category;
 import com.ride.model.Feedback;
+import com.ride.model.Reserved;
 import com.ride.model.UserDtls;
+import com.ride.repository.ReserveRepository;
 import com.ride.service.CarService;
 import com.ride.service.CategoryService;
 import com.ride.service.FeedbackService;
+import com.ride.service.ReservedService;
 import com.ride.service.UserService;
 import com.ride.util.CommonUtil;
 
 import io.micrometer.common.util.StringUtils;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -54,15 +68,22 @@ public class UserController {
 	@Autowired
 	private CommonUtil commonUtil;
 	
+	
+	@Autowired
+	private ReservedService reservedService;
+	
 
 
 	
 
-	@GetMapping("/book")
-	public String office2() {
-	  
-	    return "book";  // This should resolve to 'book.html' in the templates directory
+	@GetMapping("/book/{id}")
+	public String getProductById(@PathVariable("id") Integer id, Model model) {
+	    Car product = productService.getProductById(id);
+	    model.addAttribute("product", product);
+	    return "book"; // This should resolve to 'book.html' in templates
 	}
+
+	
 
 	
 	
@@ -122,26 +143,20 @@ public class UserController {
 	
 	
 	
+	@PostMapping("/saveReserved")
+    public String saveUser(@ModelAttribute Reserved reserved, HttpSession session) {
+        try {
+            Reserved savedReserved = reservedService.saveReservation(reserved);
+            session.setAttribute("succMsg", "Reservation Completed");
+        } catch (Exception e) {
+            session.setAttribute("errorMsg", "Something went wrong: " + e.getMessage());
+        }
+        return "redirect:/user/book/"+reserved.getId();
+    }
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

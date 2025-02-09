@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ride.model.Reserved;
 import com.ride.model.UserDtls;
 
 
