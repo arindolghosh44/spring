@@ -32,6 +32,7 @@ import com.ride.model.Category;
 import com.ride.model.Feedback;
 import com.ride.model.Reserved;
 import com.ride.model.UserDtls;
+import com.ride.repository.CarRepository;
 import com.ride.repository.ReserveRepository;
 import com.ride.service.CarService;
 import com.ride.service.CategoryService;
@@ -60,6 +61,8 @@ public class UserController {
 	private CategoryService categoryService;
 	
 	
+	@Autowired
+	private CarRepository carRepository;
 
 	@Autowired
 	private CarService productService;
@@ -76,12 +79,6 @@ public class UserController {
 
 	
 
-	@GetMapping("/book/{id}")
-	public String getProductById(@PathVariable("id") Integer id, Model model) {
-	    Car product = productService.getProductById(id);
-	    model.addAttribute("product", product);
-	    return "book"; // This should resolve to 'book.html' in templates
-	}
 
 	
 
@@ -141,22 +138,51 @@ public class UserController {
 	}
 	
 	
-	
-	
-	@PostMapping("/saveReserved")
-    public String saveUser(@ModelAttribute Reserved reserved, HttpSession session) {
-        try {
-            Reserved savedReserved = reservedService.saveReservation(reserved);
-            session.setAttribute("succMsg", "Reservation Completed");
-        } catch (Exception e) {
-            session.setAttribute("errorMsg", "Something went wrong: " + e.getMessage());
+	@GetMapping("/book")
+    public String bookCar(@RequestParam("carId") Integer carId, Model model) {
+        Car car = productService.getProductById(carId);
+        if (car == null) {
+            return "redirect:/error";
         }
-        return "redirect:/user/book/"+reserved.getId();
+        model.addAttribute("car", car);
+        return "book"; // This should match the actual name of your Thymeleaf template (book.html)
     }
-	
-	
-	
 
-	
+
+	    @PostMapping("/saveReserved")
+	    public String saveReservation(@RequestParam("carId") Integer carId, 
+	                                  @RequestParam("pickupDate") String pickupDate,
+	                                  @RequestParam("returnDate") String returnDate,
+	                                  @RequestParam(value = "payNow", required = false, defaultValue = "false") Boolean payNow,
+	                                  HttpSession session, 
+	                                  Principal principal) {
+
+	        // Get logged-in user's email from Spring Security
+	        String email = principal.getName();
+	        UserDtls user = userService.getUserByEmail(email);
+
+	        if (user == null) {
+	            session.setAttribute("errorMsg", "User not found. Please log in.");
+	            return "redirect:/login";
+	        }
+
+	        // Fetch car from the database
+	        Car car = productService.getProductById(carId);
+	        if (car == null || !car.getIsActive() || car.getStock() <= 0) {
+	            session.setAttribute("errorMsg", "Car is unavailable for reservation.");
+	            return "redirect:/user/book";
+	        }
+
+	        // Call service to save reservation
+	        Reserved savedReserved = reservedService.saveReservation(user, car, payNow, pickupDate, returnDate);
+
+	        if (savedReserved != null && savedReserved.getId() > 0) {
+	            session.setAttribute("succMsg", "Reservation Completed!");
+	        } else {
+	            session.setAttribute("errorMsg", "Reservation Failed! Please try again.");
+	        }
+
+	        return "redirect:/user/book";
+	    }
 
 }

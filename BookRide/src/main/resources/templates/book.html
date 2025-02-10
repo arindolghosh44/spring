@@ -2,192 +2,48 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BookMyRide - Reserved</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <!-- FontAwesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookMyRide - Reserve a Car</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Full-Screen Background Video */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #d1e7dd; /* Light greenish background */
-            overflow: hidden;
+        body {
+            background: linear-gradient(to right, #4caf50, #2e7d32);
+            color: white;
+            font-family: 'Arial', sans-serif;
         }
 
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2; /* Lower z-index so the video stays in the background */
-        }
-
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Navbar styles */
-        .navbar {
-            background-color: #4CAF50; /* Green color */
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000; /* Ensures the navbar stays on top of the video */
-        }
-
-        .navbar a {
-            color: white !important;
-            font-size: 18px;
-        }
-
-        .navbar a:hover {
-            color: #ffcc00 !important; /* Hover effect */
-        }
-
-        .navbar-toggler {
-            border-color: white;
-        }
-
-        .navbar-toggler-icon {
-            background-color: white;
-        }
-
-        /* Center the registration form */
-        .card {
-            background: #388e3c; /* Green gradient background */
-            color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px; /* Reduced width */
-            position: absolute;
-            top: 30%; /* Adjusted to give more space between navbar and form */
-            left: 50%;
-            transform: translate(-50%, -30%);
-            z-index: 999; /* Ensures the card floats above the video */
-            height: 550px; /* Reduced height */
-            animation: float 2s ease-in-out infinite alternate;
-        }
-
-        /* Animation for floating effect */
-        @keyframes float {
-            0% {
-                transform: translate(-50%, -30%) scale(1);
-            }
-
-            100% {
-                transform: translate(-50%, -35%) scale(1.05);
-            }
-        }
-
-        .card-header {
-            background-color: #388e3c; /* Darker green */
-            color: #fff;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
-
-        .card-footer {
-            background-color: #388e3c;
-            color: #fff;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-        }
-
-        .btn-light {
-            background-color: #388e3c;
-            color: #fff;
-            border: none;
-        }
-
-        .btn-light:hover {
-            background-color: #2e7d32;
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            text-align: center;
-            font-size: 24px;
-            z-index: 10;
-        }
-
-        .card-body {
-            padding: 20px 30px; /* Reduced padding */
-            height: 80%; /* Reduced height of the body */
-            overflow-y: auto; /* To handle form overflow */
-        }
-
-        /* Placeholder text color */
-        .form-control::placeholder {
-            color: #2e2e2e; /* Dark color for the placeholder */
-        }
-
-        .card-body input,
-        .card-body button {
+        .container {
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-top: 50px;
         }
 
-        .card-footer a {
-            color: #ffcc00;
-            text-decoration: none;
+        .btn-custom {
+            background: #8bc34a;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 25px;
+            transition: 0.3s;
         }
 
-        .card-footer a:hover {
-            color: #ffdd33;
+        .btn-custom:hover {
+            background: #388e3c;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <!-- Full-Screen Background Video -->
-    <div class="video-container">
-        <video autoplay loop muted>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="video-overlay">Technical Register - Join Us Now!</div>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">BookMyRide</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/"><i class="fas fa-home"></i> Home</a>
-                    </li>
-                    
-                    
-                      
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Registration Card -->
-    <div class="card shadow-lg mt-5">
-        <div class="card-header text-center">
-            <h1 class="fs-4">Reserved</h1>
-        </div>
+    <div class="container text-center">
+        <h2 class="mb-4">Reserve a Car</h2>
         
+        
+
         <th:block th:if="${session.succMsg}">
 
 														<p class="text-warning text-striped fw-bold">[[${session.succMsg}]]</p>
@@ -203,98 +59,39 @@
 															th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
 													</th:block>
 
-        <div class="card-body bg-light">
-          <form action="/user/saveReserved"  method="post">
-    <input type="hidden" name="id" th:value="${product.id}">
-    
-    <div class="mb-3">
-        <input type="text" class="form-control" th:value="${product.plateId}" name="plateId" maxlength="32" readonly>
+    <form action="/user/saveReserved" method="post">
+        <input type="hidden" name="carId" th:value="${car.id}">
+
+    <div class="mb-3 text-start">
+        <label for="pickDate" class="form-label">Pickup Date</label>
+        <input type="date" id="pickDate" name="pickupDate" class="form-control" required>
     </div>
 
-    <div class="mb-3">
-        <input type="text" class="form-control" th:value="${product.model}" name="model" maxlength="32" readonly>
+    <div class="mb-3 text-start">
+        <label for="returnDate" class="form-label">Return Date</label>
+        <input type="date" id="returnDate" name="returnDate" class="form-control" required>
     </div>
 
-    <div class="mb-3">
-        <input type="text" class="form-control" th:value="${product.make}" name="make" maxlength="64" readonly>
+    <div class="form-check mb-3 text-start">
+        <input type="checkbox" id="payNow" name="payNow" class="form-check-input">
+        <label for="payNow" class="form-check-label">Pay Now</label>
     </div>
 
-    <div class="mb-3">
-        <input type="date" th:value="${product.year}" class="form-control" name="year" readonly>
-    </div>
-
-    <div class="mb-3">
-        <input type="text" class="form-control" th:value="${product.category}" name="category" readonly>
-    </div>
-
-    <div class="mb-3">
-        <input type="number" name="stock" th:value="${product.stock}" class="form-control" readonly>
-    </div>
-
-    <div class="mb-3">
-        <label class="text-warning">Status</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" th:checked="${product.isActive == true}" name="isActive" value="true" disabled>
-            <label class="form-check-label text-success">Active</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" th:checked="${product.isActive == false}" name="isActive" value="false" disabled>
-            <label class="form-check-label text-danger">Inactive</label>
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <input type="text" class="form-control" th:value="${product.price}" name="price" maxlength="64" readonly>
-    </div>
-
-    <div class="mb-3">
-        <input type="text" class="form-control" th:value="${product.discount}" name="discount" readonly>
-    </div>
-
-    <div class="mb-3">
-        <input type="text" class="form-control" th:value="${product.discountPrice}" name="discountPrice" readonly>
-    </div>
-    
-  <div class="mb-3">
-    <input type="text" id="pickup-date" class="form-control" name="pickupDate" required 
-           onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'" placeholder="Pickup Date">
-</div>
-
-<div class="mb-3">
-    <input type="text" id="return-date" class="form-control" name="returnDate" required 
-           onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'" placeholder="Return Date">
-</div>
-
-
-    <div class="mb-3 text-center">
-        <img th:src="@{'/img/product_img/' + ${product.image}}" src="/img/product_img/default.jpg" width="200px" height="200px" alt="Product Image">
-    </div>
-    
-     <button id="submit-button" class="btn btn-light w-100">Reserved</button>
+    <button type="submit" class="btn btn-custom w-100">Reserve</button>
 </form>
 
-        </div>
 
-        <div class="card-footer text-center">
-          
-        </div>
+
     </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const dateInput = document.getElementById("phone");
 
-        // Get today's date and format it as yyyy-MM-dd
-        const today = new Date();
-        const formattedDate = today.toISOString().split('T')[0]; // "2025-01-16"
-        
-        dateInput.setAttribute("min", "2000-01-01"); // Example for min selectable date
-        dateInput.setAttribute("max", formattedDate); // Set max date as today's date
-    });
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const today = new Date().toISOString().split("T")[0];
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
+            document.getElementById("pickDate").setAttribute("min", today);
+            document.getElementById("returnDate").setAttribute("min", today);
+        });
+    </script>
 </body>
 
 </html>

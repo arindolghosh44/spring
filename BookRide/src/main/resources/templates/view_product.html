@@ -208,7 +208,8 @@
           <span class="fs-6 text-success">[[${product.discount}]]% off</span>
         </p>
       <th:block th:if="${product.stock > 0}">
-    <a th:href="@{/user/book/{id}(id=${product.id})}" class="btn btn-success">Reserved</a>
+    <a th:href="@{/user/book(carId=${product.id})}" class="btn btn-primary">reserved Now</a>
+
 </th:block>
 
 
