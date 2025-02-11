@@ -170,7 +170,7 @@ public class Homecontroller {
 		}
 
 		List<Car> products1 = page.getContent();
-		m.addAttribute("products", products1);
+		m.addAttribute("car", products1);
 		m.addAttribute("productsSize", products1.size());
 
 		m.addAttribute("pageNo", page.getNumber());
@@ -185,11 +185,11 @@ public class Homecontroller {
 
 	
 	
-	@GetMapping("/product/{id}")
+	@GetMapping("/car/{id}")
 	public String product(@PathVariable int id, Model m) {
 		Car productById = productService.getProductById(id);
 		// for adding something in ui or web page html
-		m.addAttribute("product", productById);
+		m.addAttribute("car", productById);
 		return "view_product";
 	}
 	

@@ -1,12 +1,10 @@
 package com.ride.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -14,26 +12,25 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "reserved")
 public class Reserved {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Integer id;
 
-	    @OneToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false)
-	    private Car car;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	    @OneToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-	    private UserDtls user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false)
+    private Car car;
 
-	    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
-	    private Boolean payNow;
-    
-    
-	    private String pickupDate;
-	    
-	    
-	    private String returnDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private UserDtls user;
 
-    
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean payNow;
+    @Column(name = "pickup_date", nullable = false)
+    private LocalDate pickupDate;
+
+    @Column(name = "return_date", nullable = false)
+    private LocalDate returnDate;
+
 }

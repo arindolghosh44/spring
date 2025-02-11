@@ -185,35 +185,35 @@
 
   <div class="product-grid">
     <div class="card">
-      <img th:src="@{'/img/product_img/'+${product.image}}" class="card-img-top product-img" alt="Luxury Car">
+      <img th:src="@{'/img/product_img/'+${car.image}}" class="card-img-top product-img" alt="Luxury Car">
       <div class="card-body">
-        <h5 class="card-title">[[${product.model}]]</h5>
-        <p class="card-text">Make: [[${product.make}]]</p>
-        <p class="card-text">Year: [[${product.year}]]</p>
-        <p class="card-text">Location: [[${product.category}]]</p>
+        <h5 class="card-title">[[${car.model}]]</h5>
+        <p class="card-text">Make: [[${car.make}]]</p>
+        <p class="card-text">Year: [[${car.year}]]</p>
+        <p class="card-text">Location: [[${car.category}]]</p>
         <p>
           <span class="fw-bold text-success">Product Details:</span><br class="text-warning">
           Status:
-          <th:block th:if="${product.stock>0}">
+          <th:block th:if="${car.stock>0}">
             <span class="badge bg-success">Available</span>
           </th:block>
-          <th:block th:unless="${product.stock>0}">
+          <th:block th:unless="${car.stock>0}">
             <span class="badge bg-warning">Out of Stock</span>
           </th:block>
         </p>
         <p class="fs-5 fw-bold text-primary">
           Price: <i class="fas fa-rupee-sign text-primary"></i>
-          [[${product.discountPrice}]]
-          <span class="fs-6 text-decoration-line-through text-danger">[[${product.price}]]</span>
-          <span class="fs-6 text-success">[[${product.discount}]]% off</span>
+          [[${car.discountPrice}]]
+          <span class="fs-6 text-decoration-line-through text-danger">[[${car.price}]]</span>
+          <span class="fs-6 text-success">[[${car.discount}]]% off</span>
         </p>
-      <th:block th:if="${product.stock > 0}">
-    <a th:href="@{/user/book(carId=${product.id})}" class="btn btn-primary">reserved Now</a>
+      <th:block th:if="${car.stock > 0}">
+    <a th:href="@{/user/book(carId=${car.id})}" class="btn btn-primary">reserved Now</a>
 
 </th:block>
 
 
-             <th:block th:if="${product.stock<0}">
+             <th:block th:if="${car.stock<0}">
           <button class="btn btn-danger">pending list</button>
           
           </th:block>

@@ -1,23 +1,10 @@
 package com.ride.model;
 
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 
 @Getter
 @Setter
@@ -25,49 +12,29 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class UserDtls {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 
-	private String firstName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	private String lastName;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private String holderName;
+    private String creditCardNo;
+    private String expiryDate;
+    private String creditCardCvv;
+    private String password;
+    private String role;
+    private String profileImage;
+    private Boolean isEnable;
+    private Boolean accountNonLocked;
+    private Integer failedAttempt;
+    private Date lockTime;
+    private String resetToken;
+    private String confirmationToken;
 
-	private String email;
-	
-	private String phoneNumber;
-
-	private String holderName;
-	
-	private String credit_card_no;
-	
-	
-	private String expiryDate;
-	
-	
-	private String credit_card_cvv;
-
-	private String password;
-
-	private String role;
-	
-	private String profileImage;
-	
-	private Boolean isEnable;
-	
-	
-	private Boolean accountNonLocked;
-
-	private Integer failedAttempt;
-
-	private Date lockTime;
-	private String resetToken;
-	
-	private String confirmationToken;
-	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Reserved reserved;
-	
-	
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reserved> reservations; // Fixed relationship
 }

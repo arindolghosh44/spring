@@ -59,8 +59,11 @@
 															th:text="${@commonServiceImple.removeSessionMsg()}"></th:block>
 													</th:block>
 
-    <form action="/user/saveReserved" method="post">
-        <input type="hidden" name="carId" th:value="${car.id}">
+  <form action="/user/saveReserved" method="post">
+    <!-- Debugging: Display Car ID -->
+    <p>Car ID (Debugging): <span th:text="${car.id}"></span></p>
+
+    <input type="hidden" name="carId" th:value="${car.id}">
 
     <div class="mb-3 text-start">
         <label for="pickDate" class="form-label">Pickup Date</label>
@@ -79,7 +82,6 @@
 
     <button type="submit" class="btn btn-custom w-100">Reserve</button>
 </form>
-
 
 
     </div>

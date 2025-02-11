@@ -139,50 +139,59 @@ public class UserController {
 	
 	
 	@GetMapping("/book")
-    public String bookCar(@RequestParam("carId") Integer carId, Model model) {
-        Car car = productService.getProductById(carId);
-        if (car == null) {
-            return "redirect:/error";
-        }
-        model.addAttribute("car", car);
-        return "book"; // This should match the actual name of your Thymeleaf template (book.html)
-    }
+	public String bookCar(@RequestParam(value = "carId", required = false) Integer carId, Model model, HttpSession session) {
+	    if (carId == null) {
+	        session.setAttribute("errorMsg", "Invalid car selection.");
+	        return "redirect:/cars"; // Redirect to car listing page instead of error
+	    }
 
-
-	    @PostMapping("/saveReserved")
-	    public String saveReservation(@RequestParam("carId") Integer carId, 
-	                                  @RequestParam("pickupDate") String pickupDate,
-	                                  @RequestParam("returnDate") String returnDate,
-	                                  @RequestParam(value = "payNow", required = false, defaultValue = "false") Boolean payNow,
-	                                  HttpSession session, 
-	                                  Principal principal) {
-
-	        // Get logged-in user's email from Spring Security
-	        String email = principal.getName();
-	        UserDtls user = userService.getUserByEmail(email);
-
-	        if (user == null) {
-	            session.setAttribute("errorMsg", "User not found. Please log in.");
-	            return "redirect:/login";
-	        }
-
-	        // Fetch car from the database
-	        Car car = productService.getProductById(carId);
-	        if (car == null || !car.getIsActive() || car.getStock() <= 0) {
-	            session.setAttribute("errorMsg", "Car is unavailable for reservation.");
-	            return "redirect:/user/book";
-	        }
-
-	        // Call service to save reservation
-	        Reserved savedReserved = reservedService.saveReservation(user, car, payNow, pickupDate, returnDate);
-
-	        if (savedReserved != null && savedReserved.getId() > 0) {
-	            session.setAttribute("succMsg", "Reservation Completed!");
-	        } else {
-	            session.setAttribute("errorMsg", "Reservation Failed! Please try again.");
-	        }
-
+	    Car car = productService.getProductById(carId);
+	    if (car == null) {
+	        session.setAttribute("errorMsg", "Car not found.");
 	        return "redirect:/user/book";
 	    }
+
+	    model.addAttribute("car", car); // Ensure this is added
+	    return "book";
+	}
+
+
+	
+	@PostMapping("/saveReserved")
+	public String saveReservation(@RequestParam("carId") Integer carId,
+	                              @RequestParam("pickupDate") String pickupDate,
+	                              @RequestParam("returnDate") String returnDate,
+	                              @RequestParam(value = "payNow", required = false, defaultValue = "false") Boolean payNow,
+	                              HttpSession session,
+	                              Principal principal) {
+	    if (carId == null) {
+	        session.setAttribute("errorMsg", "Car selection is required.");
+	        return "redirect:/user/book"; // Redirect to car selection
+	    }
+
+	    String email = principal.getName();
+	    UserDtls user = userService.getUserByEmail(email);
+
+	    if (user == null) {
+	        session.setAttribute("errorMsg", "User not found. Please log in.");
+	        return "redirect:/login";
+	    }
+
+	    Car car = productService.getProductById(carId);
+	    if (car == null || !car.getIsActive() || car.getStock() <= 0) {
+	        session.setAttribute("errorMsg", "Car is unavailable.");
+	        return "redirect:/user/book";
+	    }
+
+	    Reserved savedReserved = reservedService.saveReservation(user, car, payNow, pickupDate, returnDate);
+
+	    if (savedReserved != null && savedReserved.getId() > 0) {
+	        session.setAttribute("succMsg", "Reservation successful!");
+	    } else {
+	        session.setAttribute("errorMsg", "Reservation failed. Try again.");
+	    }
+
+	    return "redirect:/user/book";
+	}
 
 }
