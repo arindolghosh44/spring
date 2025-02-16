@@ -141,9 +141,8 @@ public class AdminController {
 
 				
 				 // Send Email Notification to Admins
-				// commonUtil.sendEmailToAllAdminsOnNewCategory(saveCategory );
-				// ✅ Send Email & WhatsApp Notification
-		            commonUtil.sendNotificationsToAdmins(saveCategory);
+				 commonUtil.sendEmailToAllAdminsOnNewCategory(saveCategory );
+				
 				session.setAttribute("succMsg", "Saved Successfully");
 				
 				
@@ -204,6 +203,7 @@ public class AdminController {
 				System.out.println(path);
 				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			}
+			commonUtil.sendEmailToAllAdminsOnCategoryUpdate(category);
 			session.setAttribute("succMsg", "category updated successfully");
 		}
 
@@ -345,15 +345,35 @@ public class AdminController {
 	}
 
 	@GetMapping("/updateSts")
-	public String updateUserAccountStatus(@RequestParam Boolean status, @RequestParam Integer id,@RequestParam Integer type, HttpSession session) {
-		Boolean f = userService.updateAccountStatus(id, status);
-		if (f) {
-			session.setAttribute("succMsg", "Account Status Updated");
-		} else {
-			session.setAttribute("errorMsg", "Something wrong on server");
-		}
-		return "redirect:/admin/users?type="+type;
+	public String updateUserAccountStatus(@RequestParam Boolean status, @RequestParam Integer id, 
+	                                      @RequestParam Integer type, HttpSession session) {
+	    Boolean updateSuccess = userService.updateAccountStatus(id, status);
+
+	    UserDtls user = userService.getUserById(id);
+	    if (user != null) {
+	        String email = user.getEmail();
+	        String statusMessage = status ? "activated" : "deactivated";
+	        String subject = "Account Status Updated";
+	        String content = "<p>Hello " + user.getName() + ",</p>"
+	                + "<p>Your account has been <b>" + statusMessage + "</b> by the administrator.</p>"
+	                + "<p>If you have any questions, please contact support.</p>";
+
+	        try {
+	            commonUtil.sendMailupdate(subject, email, content);
+	        } catch (Exception e) {
+	            session.setAttribute("errorMsg", "Error sending email notification.");
+	        }
+	    }
+
+	    if (updateSuccess) {
+	        session.setAttribute("succMsg", "Account Status Updated");
+	    } else {
+	        session.setAttribute("errorMsg", "Something went wrong on the server.");
+	    }
+
+	    return "redirect:/admin/users?type=" + type;
 	}
+
 
 	@GetMapping("/orders")
 	public String getAllOrders(Model m,@RequestParam(name = "pageNo", defaultValue = "0") Integer pageNo,

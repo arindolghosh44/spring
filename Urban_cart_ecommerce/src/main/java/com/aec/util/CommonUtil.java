@@ -11,11 +11,11 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.aec.model.Category;
+import com.aec.model.Product;
 import com.aec.model.ProductOrder;
 import com.aec.model.UserDtls;
 import com.aec.service.UserService;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
+
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,22 +26,7 @@ public class CommonUtil {
 	
 	@Autowired
 	private JavaMailSender mailSender;
-	
-	
-	//for whatspp sending
-	
-	
-	
-	 @Value("${twilio.account.sid}")
-	    private String accountSid;
-
-	    @Value("${twilio.auth.token}")
-	    private String authToken;
-
-	    @Value("${twilio.whatsapp.number}")
-	    private String twilioWhatsAppNumber;
-
-	
+		
 	
 	@Autowired
 	private UserService userService;
@@ -62,6 +47,20 @@ public class CommonUtil {
 		mailSender.send(message);
 		return true;
 	}
+	
+	
+	 public Boolean sendMailupdate(String subject, String recipientEmail, String content) throws MessagingException, UnsupportedEncodingException {
+	        MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+	        helper.setFrom("t01666122@gmail.com", "Urban Cart");
+	        helper.setTo(recipientEmail);
+	        helper.setSubject(subject);
+	        helper.setText(content, true);
+
+	        mailSender.send(message);
+	        return true;
+	    }
 	
 	public static String generateUrl(HttpServletRequest request) {
 
@@ -153,52 +152,110 @@ public class CommonUtil {
 	    }
 	}
 	
-	 // ✅ SEND EMAIL + WHATSAPP MESSAGE TO ADMINS
-    public void sendNotificationsToAdmins(Category newCategory) {
-        List<UserDtls> admins = userService.getUsers("ROLE_ADMIN");
+	public void sendEmailToAllAdminsOnCategoryDeletion(Category category) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsers("ROLE_ADMIN");
 
-        String subject = "New Category Added: " + newCategory.getName();
-        String content = "<p>A new category has been added:</p>"
-                + "<p><strong>Name:</strong> " + newCategory.getName() + "</p>"
-                + "<p><strong>Status:</strong> " + (newCategory.getIsActive() ? "Active" : "Inactive") + "</p>"
-                + "<p><strong>Image:</strong> " + (newCategory.getImageName() != null ? newCategory.getImageName() : "No image") + "</p>";
+	    // Create email subject and content
+	    String subject = "Product Deleted: " + category.getName();
+	    String content = "<p>The following product has been deleted:</p>"
+	            + "<p><strong>Model:</strong> " + category.getIsActive() + "</p>";
+	          
 
-        String whatsappMessage = "📢 New Category Added! ✅\n"
-                + "📌 *Name:* " + newCategory.getName() + "\n"
-                + "📌 *Status:* " + (newCategory.getIsActive() ? "Active" : "Inactive") + "\n"
-                + "📌 *Image:* " + (newCategory.getImageName() != null ? newCategory.getImageName() : "No image") + "\n"
-                + "➡️ Check Admin Panel for details.";
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	public void sendEmailToAllAdminsOnCategoryUpdate(Category updatedCategory) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsers("ROLE_ADMIN");
 
-        for (UserDtls admin : admins) {
-            try {
-                // SEND EMAIL
-                sendMailWithCustomContent(admin.getEmail(), subject, content);
-                System.out.println("Email sent to: " + admin.getEmail());
+	    // Create email subject and content
+	    String subject = "Category Updated: " + updatedCategory.getName();
+	    String content = "<p>The following category has been updated:</p>"
+	            + "<p><strong>Category Name:</strong> " + updatedCategory.getName() + "</p>"
+	            + "<p><strong>Active Status:</strong> " + (updatedCategory.getIsActive() ? "Active" : "Inactive") + "</p>";
+	     
 
-                // SEND WHATSAPP MESSAGE
-                sendWhatsAppNotification(admin.getMobileNumber(), whatsappMessage);
-            } catch (Exception e) {
-                System.err.println("Failed to notify admin: " + admin.getEmail() + " - " + e.getMessage());
-            }
-        }
-    }
-
-    // ✅ SEND WHATSAPP NOTIFICATION
-    public void sendWhatsAppNotification(String adminPhoneNumber, String message) {
-        try {
-            Twilio.init(accountSid, authToken);
-
-            Message.creator(
-                    new com.twilio.type.PhoneNumber("whatsapp:" + adminPhoneNumber), // Recipient WhatsApp
-                    new com.twilio.type.PhoneNumber("whatsapp:" + twilioWhatsAppNumber), // Twilio WhatsApp
-                    message
-            ).create();
-
-            System.out.println("WhatsApp Notification sent to: " + adminPhoneNumber);
-        } catch (Exception e) {
-            System.err.println("Failed to send WhatsApp notification to " + adminPhoneNumber + ": " + e.getMessage());
-        }
-    }
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	
+	
+	public void sendEmailToAllAdminsOnNewProduct(Product newProduct) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsers("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "New Product Added: " + newProduct.getTitle();
+	    String content = "<p>A new product has been added:</p>"
+	            + "<p><strong>Model:</strong> " + newProduct.getDescription() + "</p>"
+	            + "<p><strong>Category:</strong> " + newProduct.getCategory() + "</p>"
+	            + "<p><strong>Price:</strong> " + newProduct.getPrice() + "</p>"
+	            + "<p><strong>Discount Price:</strong> " + newProduct.getDiscountPrice() + "</p>";
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	
+	
+	public void sendEmailToAllAdminsOnProductDeletion(Product deletedProduct) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsers("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "Product Deleted: " + deletedProduct.getTitle();
+	    String content = "<p>The following product has been deleted:</p>"
+	            + "<p><strong>Model:</strong> " + deletedProduct.getDescription() + "</p>"
+	            + "<p><strong>Category:</strong> " + deletedProduct.getCategory() + "</p>"
+	            + "<p><strong>Price:</strong> " + deletedProduct.getPrice() + "</p>";
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	public void sendEmailToAllAdminsUpdateProduct(Product updatedProduct) {
+	    // Fetch all users with ROLE_ADMIN
+	    List<UserDtls> admins = userService.getUsers("ROLE_ADMIN");
+
+	    // Create email subject and content
+	    String subject = "Product Updated: " + updatedProduct.getTitle();
+	    String content = "<p>The following product has been updated:</p>"
+	            + "<p><strong>Model:</strong> " + updatedProduct.getDescription() + "</p>"
+	            + "<p><strong>Category:</strong> " + updatedProduct.getCategory() + "</p>"
+	            + "<p><strong>Price:</strong> " + updatedProduct.getPrice() + "</p>"
+	            + "<p><strong>Discount Price:</strong> " + updatedProduct.getDiscountPrice() + "</p>";
+
+	    // Send email to each admin
+	    for (UserDtls admin : admins) {
+	        try {
+	            sendMailWithCustomContent(admin.getEmail(), subject, content);
+	        } catch (UnsupportedEncodingException | MessagingException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	
 }

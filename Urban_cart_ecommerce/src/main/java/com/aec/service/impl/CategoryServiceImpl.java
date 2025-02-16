@@ -65,6 +65,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = categoryRepository.findById(id).orElse(null);
 
 		if (!ObjectUtils.isEmpty(category)) {
+			 commonUtil.sendEmailToAllAdminsOnCategoryDeletion(category);
 			categoryRepository.delete(category);
 			return true;
 		}

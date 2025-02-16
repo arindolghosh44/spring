@@ -18,16 +18,25 @@ import org.springframework.web.multipart.MultipartFile;
 import com.aec.model.Product;
 import com.aec.repository.ProductRepository;
 import com.aec.service.ProductService;
+import com.aec.util.CommonUtil;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	
+	 @Autowired
+	 private CommonUtil commonUtil;
 
 	@Override
 	public Product saveProduct(Product product) {
-		return productRepository.save(product);
+		
+		Product savedProduct=productRepository.save(product);
+		  // Send email to all admins about the new product
+	    commonUtil.sendEmailToAllAdminsOnNewProduct(savedProduct);
+		return savedProduct;
 	}
 
 	@Override
@@ -46,6 +55,7 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findById(id).orElse(null);
 
 		if (!ObjectUtils.isEmpty(product)) {
+			 commonUtil.sendEmailToAllAdminsOnProductDeletion(product);
 			productRepository.delete(product);
 			return true;
 		}
@@ -96,6 +106,7 @@ public class ProductServiceImpl implements ProductService {
 					e.printStackTrace();
 				}
 			}
+			 commonUtil.sendEmailToAllAdminsUpdateProduct(product);
 			return product;
 		}
 		return null;

@@ -197,6 +197,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	
+	@Override
+	public UserDtls getUserById(Integer id) {
+	    return userRepository.findById(id).orElse(null);
+	}
 
 
 }
