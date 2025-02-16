@@ -201,6 +201,11 @@ public class UserServiceImpl implements UserService {
 	public UserDtls getUserById(Integer id) {
 	    return userRepository.findById(id).orElse(null);
 	}
+	
+	public UserDtls getUserByVerificationToken(String token) {
+	    return userRepository.findByVerificationToken(token);
+	}
+
 
 
 }

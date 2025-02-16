@@ -119,11 +119,11 @@ public class UserController {
 		return "/user/cart";
 	}
 	
-	@GetMapping("/cartQuantityUpdate")
+	/*@GetMapping("/cartQuantityUpdate")
 	public String updateCartQuantity(@RequestParam String sy, @RequestParam Integer cid) {
 		cartService.updateQuantity(sy, cid);
 		return "redirect:/user/cart";
-	}
+	}*/
 
 	
 	private UserDtls getLoggedInUserDetails(Principal p) {
@@ -211,68 +211,82 @@ public class UserController {
 	
 	
 	@PostMapping("/update-profile")
-	public String updateProfile(@ModelAttribute UserDtls user, @RequestParam MultipartFile img, HttpSession session) {
-		UserDtls updateUserProfile = userService.updateUserProfile(user, img);
-		if (ObjectUtils.isEmpty(updateUserProfile)) {
-			session.setAttribute("errorMsg", "Profile not updated");
-		} else {
-			session.setAttribute("succMsg", "Profile Updated");
-		}
-		return "redirect:/user/profile";
+	public String updateProfile(@ModelAttribute UserDtls user, 
+	                            @RequestParam MultipartFile img, 
+	                            HttpSession session) {
+	    
+	    UserDtls updatedUser = userService.updateUserProfile(user, img);
+	    
+	    if (ObjectUtils.isEmpty(updatedUser)) {
+	        session.setAttribute("errorMsg", "Profile not updated");
+	    } else {
+	        session.setAttribute("succMsg", "Profile Updated");
+
+	        // Send email notification
+	        String email = updatedUser.getEmail();
+	        String subject = "Profile Updated Successfully!";
+	        String content = "<p>Hello " + updatedUser.getName() + ",</p>" +
+	                         "<p>Your profile has been updated successfully.</p>" +
+	                         "<p>If you did not make this change, please contact support immediately.</p>";
+
+	        try {
+	            commonUtil.sendMailadminsave(subject, content, email);
+	        } catch (Exception e) {
+	            session.setAttribute("errorMsg", "Profile updated but email notification failed.");
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    return "redirect:/user/profile";
 	}
 
 	@PostMapping("/change-password")
-	public String changePassword(@RequestParam String newPassword, @RequestParam String currentPassword, Principal p,
-			HttpSession session) {
-		UserDtls loggedInUserDetails = getLoggedInUserDetails(p);
+	public String changePassword(@RequestParam String newPassword, 
+	                             @RequestParam String currentPassword, 
+	                             Principal p, 
+	                             HttpSession session) {
+	    
+	    UserDtls loggedInUserDetails = getLoggedInUserDetails(p);
 
-		boolean matches = passwordEncoder.matches(currentPassword, loggedInUserDetails.getPassword());
+	    boolean matches = passwordEncoder.matches(currentPassword, loggedInUserDetails.getPassword());
 
-		if (matches) {
-			String encodePassword = passwordEncoder.encode(newPassword);
-			loggedInUserDetails.setPassword(encodePassword);
-			UserDtls updateUser = userService.updateUser(loggedInUserDetails);
-			if (ObjectUtils.isEmpty(updateUser)) {
-				session.setAttribute("errorMsg", "Password not updated !! Error in server");
-			} else {
-				session.setAttribute("succMsg", "Password Updated sucessfully");
-			}
-		} else {
-			session.setAttribute("errorMsg", "Current Password incorrect");
-		}
+	    if (matches) {
+	        String encodePassword = passwordEncoder.encode(newPassword);
+	        loggedInUserDetails.setPassword(encodePassword);
+	        UserDtls updatedUser = userService.updateUser(loggedInUserDetails);
 
-		return "redirect:/user/profile";
+	        if (ObjectUtils.isEmpty(updatedUser)) {
+	            session.setAttribute("errorMsg", "Password not updated! Error in server.");
+	        } else {
+	            session.setAttribute("succMsg", "Password Updated successfully!");
+
+	            // Send email notification
+	            String email = updatedUser.getEmail();
+	            String subject = "Password Changed Successfully!";
+	            String content = "<p>Hello " + updatedUser.getName() + ",</p>" +
+	                             "<p>Your password has been changed successfully.</p>" +
+	                             "<p>If you did not request this change, please contact support immediately.</p>";
+
+	            try {
+	                commonUtil.sendMailadminsave(subject, content, email);
+	            } catch (Exception e) {
+	                session.setAttribute("errorMsg", "Password updated, but email notification failed.");
+	                e.printStackTrace();
+	            }
+	        }
+	    } else {
+	        session.setAttribute("errorMsg", "Current Password incorrect.");
+	    }
+
+	    return "redirect:/user/profile";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("/cartQuantityUpdate")
+	public String updateCartQuantity(@RequestParam String sy, @RequestParam Integer cid, HttpSession session) {
+	    cartService.updateQuantity(sy, cid, session);
+	    return "redirect:/user/cart";
+	}
+
 	
 	
 	

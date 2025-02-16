@@ -57,5 +57,10 @@ public class UserDtls {
 
 	private Date lockTime;
 	private String resetToken;
+	
+	
+private boolean verified;
+    
+    private String verificationToken;
 
 }

@@ -43,6 +43,8 @@ public interface UserService {
 	
 	
 	public UserDtls getUserById(Integer id);
+	
+	public UserDtls getUserByVerificationToken(String token);
 
 	
 

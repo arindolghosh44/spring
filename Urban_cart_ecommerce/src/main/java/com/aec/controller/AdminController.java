@@ -486,32 +486,46 @@ public class AdminController {
 	public String loadAdminAdd() {
 		return "/admin/add_admin";
 	}
-
 	@PostMapping("/save-admin")
-	public String saveAdmin(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session)
-			throws IOException {
+	public String saveAdmin(@ModelAttribute UserDtls user, 
+	                        @RequestParam("img") MultipartFile file, 
+	                        HttpSession session) throws IOException {
 
-		String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
-		user.setProfileImage(imageName);
-		UserDtls saveUser = userService.saveAdmin(user);
+	    String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
+	    user.setProfileImage(imageName);
+	    UserDtls saveUser = userService.saveAdmin(user);
 
-		if (!ObjectUtils.isEmpty(saveUser)) {
-			if (!file.isEmpty()) {
-				File saveFile = new ClassPathResource("static/img").getFile();
+	    if (!ObjectUtils.isEmpty(saveUser)) {
+	        // Save profile image
+	        if (!file.isEmpty()) {
+	            File saveFile = new ClassPathResource("static/img").getFile();
+	            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
+	                    + file.getOriginalFilename());
+	            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+	        }
 
-				Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
-						+ file.getOriginalFilename());
+	        // Send email notification
+	        String email = saveUser.getEmail();  // Assuming UserDtls has an email field
+	        String subject = "Welcome to Urban Cart!";
+	        String content = "<p>Hello " + saveUser.getName() + ",</p>" +
+	                         "<p>Your admin account has been created successfully.</p>" +
+	                         "<p>You can now log in and manage the system.</p>";
 
+	        try {
+	            commonUtil.sendMailadminsave(subject, content, email);
+	            session.setAttribute("succMsg", "Register successfully & Email Sent");
+	        } catch (Exception e) {
+	            session.setAttribute("errorMsg", "Admin saved but email failed to send.");
+	            e.printStackTrace();
+	        }
+	    } else {
+	        session.setAttribute("errorMsg", "Something went wrong on the server.");
+	    }
 
-				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-			}
-			session.setAttribute("succMsg", "Register successfully");
-		} else {
-			session.setAttribute("errorMsg", "something wrong on server");
-		}
-
-		return "redirect:/admin/add-admin";
+	    return "redirect:/admin/add-admin";
 	}
+
+
 
 	@GetMapping("/profile")
 	public String profile() {
@@ -519,41 +533,76 @@ public class AdminController {
 	}
 
 	@PostMapping("/update-profile")
-	public String updateProfile(@ModelAttribute UserDtls user, @RequestParam MultipartFile img, HttpSession session) {
-		UserDtls updateUserProfile = userService.updateUserProfile(user, img);
-		if (ObjectUtils.isEmpty(updateUserProfile)) {
-			session.setAttribute("errorMsg", "Profile not updated");
-		} else {
-			session.setAttribute("succMsg", "Profile Updated");
-		}
-		return "redirect:/admin/profile";
+	public String updateProfile(@ModelAttribute UserDtls user, 
+	                            @RequestParam MultipartFile img, 
+	                            HttpSession session) {
+
+	    UserDtls updateUserProfile = userService.updateUserProfile(user, img);
+
+	    if (ObjectUtils.isEmpty(updateUserProfile)) {
+	        session.setAttribute("errorMsg", "Profile not updated");
+	    } else {
+	        // Send email notification
+	        String email = updateUserProfile.getEmail();  // Assuming UserDtls has an email field
+	        String subject = "Profile Updated Successfully!";
+	        String content = "<p>Hello " + updateUserProfile.getName() + ",</p>" +
+	                         "<p>Your profile has been successfully updated.</p>" +
+	                         "<p>If you did not make this change, please contact support immediately.</p>";
+
+	        try {
+	            commonUtil.sendMailadminsave(subject, content, email);
+	            session.setAttribute("succMsg", "Profile Updated & Email Sent");
+	        } catch (Exception e) {
+	            session.setAttribute("errorMsg", "Profile updated but email notification failed.");
+	            e.printStackTrace();
+	        }
+	    }
+	    return "redirect:/admin/profile";
 	}
+
 
 	@PostMapping("/change-password")
-	public String changePassword(@RequestParam String newPassword, @RequestParam String currentPassword, Principal p,
-			HttpSession session) {
-		UserDtls loggedInUserDetails = commonUtil.getLoggedInUserDetails(p);
+	public String changePassword(@RequestParam String newPassword, 
+	                             @RequestParam String currentPassword, 
+	                             Principal p, HttpSession session) {
+	    
+	    UserDtls loggedInUserDetails = commonUtil.getLoggedInUserDetails(p);
+	    
+	    boolean matches = passwordEncoder.matches(currentPassword, loggedInUserDetails.getPassword());
 
-		boolean matches = passwordEncoder.matches(currentPassword, loggedInUserDetails.getPassword());
+	    if (matches) {
+	        // Encrypt new password
+	        String encodePassword = passwordEncoder.encode(newPassword);
+	        loggedInUserDetails.setPassword(encodePassword);
+	        UserDtls updateUser = userService.updateUser(loggedInUserDetails);
 
-		if (matches) {
-			String encodePassword = passwordEncoder.encode(newPassword);
-			loggedInUserDetails.setPassword(encodePassword);
-			UserDtls updateUser = userService.updateUser(loggedInUserDetails);
-			if (ObjectUtils.isEmpty(updateUser)) {
-				session.setAttribute("errorMsg", "Password not updated !! Error in server");
-			} else {
-				session.setAttribute("succMsg", "Password Updated sucessfully");
-			}
-		} else {
-			session.setAttribute("errorMsg", "Current Password incorrect");
-		}
+	        if (ObjectUtils.isEmpty(updateUser)) {
+	            session.setAttribute("errorMsg", "Password not updated !! Error in server");
+	        } else {
+	            session.setAttribute("succMsg", "Password Updated Successfully");
 
-		return "redirect:/admin/profile";
+	            // Send email notification
+	            String email = updateUser.getEmail();  // Assuming UserDtls has an email field
+	            String subject = "Password Changed Successfully!";
+	            String content = "<p>Hello " + updateUser.getName() + ",</p>" +
+	                             "<p>Your password has been successfully changed.</p>" +
+	                             "<p>If you did not make this change, please contact support immediately.</p>";
+
+	            try {
+	                commonUtil.sendMailadminsave(subject, content, email);
+	                session.setAttribute("succMsg", "Password Updated & Email Sent");
+	            } catch (Exception e) {
+	                session.setAttribute("errorMsg", "Password updated but email notification failed.");
+	                e.printStackTrace();
+	            }
+	        }
+	    } else {
+	        session.setAttribute("errorMsg", "Current Password Incorrect");
+	    }
+
+	    return "redirect:/admin/profile";
 	}
 
-	
-	
 	
 	
 	

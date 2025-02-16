@@ -258,4 +258,20 @@ public class CommonUtil {
 	    }
 	}
 	
+	public Boolean sendMailadminsave(String subject, String content, String recipientEmail) 
+	        throws UnsupportedEncodingException, MessagingException {
+
+	    MimeMessage message = mailSender.createMimeMessage();
+	    MimeMessageHelper helper = new MimeMessageHelper(message);
+
+	    helper.setFrom("t01666122@gmail.com", "Urban Cart");
+	    helper.setTo(recipientEmail);
+	    helper.setSubject(subject);
+	    helper.setText(content, true);
+
+	    mailSender.send(message);
+	    return true;
+	}
+
+	
 }

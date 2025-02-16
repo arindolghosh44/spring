@@ -145,7 +145,7 @@ public class HomeController {
 		return "view_product";
 	}
 
-	@PostMapping("/saveUser")
+	/*@PostMapping("/saveUser")
 	public String saveUser(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session)
 			throws IOException {
 
@@ -175,7 +175,74 @@ public class HomeController {
 		}
 
 		return "redirect:/register";
+	}*/
+	
+	
+	@PostMapping("/saveUser")
+	public String saveUser(@ModelAttribute UserDtls user, 
+	                       @RequestParam("img") MultipartFile file, 
+	                       HttpSession session, 
+	                       HttpServletRequest request) throws IOException, UnsupportedEncodingException, MessagingException {
+
+	    Boolean existsEmail = userService.existsEmail(user.getEmail());
+
+	    if (existsEmail) {
+	        session.setAttribute("errorMsg", "Email already exists");
+	    } else {
+	        String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
+	        user.setProfileImage(imageName);
+
+	        // Generate a unique verification token
+	        String verificationToken = UUID.randomUUID().toString();
+	        user.setVerificationToken(verificationToken);
+	        user.setVerified(false); // Mark user as unverified initially
+
+	        UserDtls savedUser = userService.saveUser(user);
+
+	        if (!ObjectUtils.isEmpty(savedUser)) {
+	            // Save profile image
+	            if (!file.isEmpty()) {
+	                File saveFile = new ClassPathResource("static/img").getFile();
+	                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
+	                        + file.getOriginalFilename());
+	                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+	            }
+
+	            // Generate verification link
+	            String verifyUrl = CommonUtil.generateUrl(request) + "/verify-account?token=" + verificationToken;
+
+	            // Send email notification
+	            String subject = "Verify Your Account - Urban Cart";
+	            String content = "<p>Hello " + savedUser.getName() + ",</p>" +
+	                             "<p>Thank you for registering. Please click the link below to verify your account:</p>" +
+	                             "<p><a href=\"" + verifyUrl + "\">Verify My Account</a></p>";
+
+	            commonUtil.sendMailadminsave(subject, content, savedUser.getEmail());
+
+	            session.setAttribute("succMsg", "Register successfully. Please check your email for verification.");
+	        } else {
+	            session.setAttribute("errorMsg", "Something went wrong on the server.");
+	        }
+	    }
+	    return "redirect:/register";
 	}
+
+	
+	@GetMapping("/verify-account")
+	public String verifyAccount(@RequestParam String token, Model model) {
+	    UserDtls user = userService.getUserByVerificationToken(token);
+
+	    if (user == null) {
+	        model.addAttribute("msg", "Invalid or expired verification link!");
+	    } else {
+	        user.setVerified(true); // Mark as verified
+	        user.setVerificationToken(null); // Clear the token
+	        userService.updateUser(user);
+	        model.addAttribute("msg", "Your account has been successfully verified!");
+	    }
+	    return "message"; // Redirect to the message page
+	}
+
 	// forgot password
 
 	@GetMapping("/forgot-password")
