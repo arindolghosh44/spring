@@ -3,6 +3,7 @@ package com.aec.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.aec.model.UserDtls;
 
@@ -15,5 +16,7 @@ public interface UserRepository extends JpaRepository<UserDtls, Integer> {
 	
 	
 	public Boolean existsByEmail(String email);
+	
+	
 
 }

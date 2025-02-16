@@ -30,4 +30,7 @@ public interface CategoryService {
 	
 	public Page<Category> getAllCategorPagination(Integer pageNo,Integer pageSize);
 	
+	
+
+	
 }

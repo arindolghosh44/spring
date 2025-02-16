@@ -139,7 +139,14 @@ public class AdminController {
 
 				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
+				
+				 // Send Email Notification to Admins
+				// commonUtil.sendEmailToAllAdminsOnNewCategory(saveCategory );
+				// ✅ Send Email & WhatsApp Notification
+		            commonUtil.sendNotificationsToAdmins(saveCategory);
 				session.setAttribute("succMsg", "Saved Successfully");
+				
+				
 
 			}
 

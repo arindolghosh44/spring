@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetails"/>
-    <fullyQualifiedTypeName name="com.aec.repository.UserRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
-    <fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <fullyQualifiedTypeName name="org.springframework.security.crypto.password.PasswordEncoder"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
-    <fullyQualifiedTypeName name="java.security.Principal"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="com.aec.util.AppConstant"/>
     <fullyQualifiedTypeName name="com.aec.service.CartService"/>
@@ -15,10 +8,8 @@
     <fullyQualifiedTypeName name="com.aec.service.OrderService"/>
     <fullyQualifiedTypeName name="com.aec.util.OrderStatus"/>
     <fullyQualifiedTypeName name="com.aec.model.ProductOrder"/>
-    <fullyQualifiedTypeName name="com.aec.util.CommonUtil"/>
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
     <fullyQualifiedTypeName name="com.aec.service.UserService"/>
-    <fullyQualifiedTypeName name="com.aec.model.UserDtls"/>
     <fullyQualifiedTypeName name="com.aec.model.Product"/>
     <fullyQualifiedTypeName name="com.aec.model.Cart"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
@@ -60,4 +51,13 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="jakarta.persistence.OneToOne"/>
     <fullyQualifiedTypeName name="com.ride.model.UserDtls"/>
+    <fullyQualifiedTypeName name="org.springframework.mail.javamail.JavaMailSender"/>
+    <fullyQualifiedTypeName name="com.aec.repository.UserRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="jakarta.mail.internet.MimeMessage"/>
+    <fullyQualifiedTypeName name="org.springframework.mail.javamail.MimeMessageHelper"/>
+    <fullyQualifiedTypeName name="com.aec.util.CommonUtil"/>
+    <fullyQualifiedTypeName name="com.aec.model.UserDtls"/>
+    <fullyQualifiedTypeName name="lombok.Value"/>
+    <fullyQualifiedTypeName name="com.twilio.Twilio"/>
 </qualifiedTypeNameHistroy>
