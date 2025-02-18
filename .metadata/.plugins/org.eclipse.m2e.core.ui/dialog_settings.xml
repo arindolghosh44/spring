@@ -56,35 +56,10 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
-			<item value="com.arindol.SpringCore"/>
-			<item value="com.arindol.securityDemo"/>
-			<item value="com.arindol"/>
-			<item value="server1"/>
-			<item value="Springqjq.qkq"/>
-			<item value="Spring_MVC"/>
-			<item value="Spring_core.s"/>
-			<item value="First_spring_App"/>
 		</list>
 		<list key="groupId">
-			<item value="com.arindol"/>
-			<item value="server1"/>
-			<item value="Springqjq"/>
-			<item value="Spring_MVC"/>
-			<item value="Spring_core"/>
-			<item value="First_spring_App"/>
 		</list>
 		<list key="artifactId">
-			<item value="SpringCore"/>
-			<item value="securityDemo"/>
-			<item value="HibernateDemo"/>
-			<item value="JDBCDEMO"/>
-			<item value="TestMaven1"/>
-			<item value="TestMaven"/>
-			<item value="server2"/>
-			<item value="qkq"/>
-			<item value="Spring_MVC"/>
-			<item value="s"/>
-			<item value="First_spring_App"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
