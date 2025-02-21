@@ -410,9 +410,119 @@ body {
     border-radius: 10px;
 }
 
+/*product.html*/
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: black;
+}
+
+/* Background Gradient */
+.bg-gradient {
+    background: linear-gradient(45deg, red, purple, blue, green);
+}
+
+/* Search Bar */
+.search-bar {
+    background: rgba(0, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 10px;
+    backdrop-filter: blur(5px);
+}
+.btn-glow {
+    background: yellow;
+    color: black;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+}
+.btn-glow:hover {
+    background: lime;
+    transform: scale(1.1);
+}
+
+/* ======= CATEGORY SECTION ======= */
+.category-card {
+    border-radius: 12px;
+    background: linear-gradient(135deg, navy, teal);
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
+    transition: 0.3s ease-in-out;
+}
+
+/* Category Header */
+.category-card p {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, fuchsia, lime);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 0, 255, 0.7);
+}
+
+/* Category Links */
+.category-link {
+    color: white;
+    font-weight: 500;
+    padding: 10px;
+    transition: 0.3s;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+}
+
+/* Hover & Active Effects */
+.category-link:hover {
+    background: maroon;
+    color: yellow;
+    box-shadow: 0px 0px 10px rgba(255, 255, 0, 0.7);
+    transform: scale(1.05);
+}
+.active-category {
+    background: lime;
+    color: black;
+    font-weight: bold;
+    border: 2px solid yellow;
+    box-shadow: 0px 0px 10px rgba(255, 255, 0, 0.7);
+}
+
+/* ======= PRODUCT SECTION ======= */
+.product-container {
+    background: linear-gradient(45deg, green, yellow, red, blue);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Product Cards */
+.product-card {
+    background: navy;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+}
+.product-card:hover {
+    transform: scale(1.05);
+}
+.product-img {
+    border-radius: 12px;
+}
+
+/* ======= PAGINATION ======= */
+.pagination .page-item .page-link {
+    border-radius: 50px;
+    margin: 3px;
+    background: fuchsia;
+    color: white;
+}
+.pagination .page-item.active .page-link {
+    background: silver;
+    color: black;
+    border: none;
+}
 
 
 
 
+/* view product.html*/
 
 
