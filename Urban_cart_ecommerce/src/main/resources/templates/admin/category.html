@@ -9,13 +9,18 @@
 	<section>
 
 
-		<div class="container" style="margin-top: 70px">
+		<div class="container-fluid"
+			style="margin-top: 70px; background: linear-gradient(135deg, #2E8B57, #A7D129); padding: 50px; border-radius: 15px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);">
 
 
-			<div class="card shadow-sm p-0 m-5 mt-0 bg-body-tertiary rounded">
+
+			<div class="card shadow-lg p-4 rounded"
+				style="background: linear-gradient(135deg, #FFD700, #2E8B57, #FF4500, #1E90FF); color: white;">
 
 
-				<div class="card-body">
+				<div class="card-body"
+					style="background: linear-gradient(135deg, #2E8B57, #A7D129); color: green;">
+
 
 
 					<div class="container p-5 ">
@@ -26,7 +31,8 @@
 
 								<div class="card bg-info shadow-lg  p-0 m-5 mt-0">
 
-									<div class="card-header text-center fs-4 bg-primary">
+									<div class="card-header text-center fs-4 "
+										style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
 										<p class="text-center fs-4">Add Category</p>
 
 										<th:block th:if="${session.succMsg}">
@@ -43,7 +49,8 @@
 										</th:block>
 
 									</div>
-									<div class="card-body bg-info">
+									<div class="card-body"
+										style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
 
 
 										<form action="/admin/saveCategory" method="post"
@@ -173,15 +180,18 @@
 								<div class="card shadow-lg">
 
 
-									<div class="card-header text-center fs-4 bg-primary">
+									<div class="card-header text-center fs-4 "
+										style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
 
 										View Category</div>
 
 									<div class="card-body bg-info text-center">
 
 										<table
-											class="table table-info table-striped table-bordered border-primary">
-											<thead>
+											class="table table-info table-striped table-bordered border-primary"
+											style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
+											<thead
+												style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
 												<tr>
 													<th scope="col">Sl.No</th>
 													<th scope="col">Category</th>
@@ -190,7 +200,8 @@
 													<th scope="col">Action</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody
+												style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
 												<tr th:each="cat,c:${categorys}">
 													<th scope="row">[[${c.count}]]</th>
 													<td>[[${cat.name}]]</td>
@@ -213,37 +224,37 @@
 										<!-- Start Pagination -->
 
 
-												<div class="row">
-								<div class="col-md-4">Total Category :
-									[[${totalElements}]]</div>
-								<div class="col-md-6">
+										<div class="row">
+											<div class="col-md-4">Total Category :
+												[[${totalElements}]]</div>
+											<div class="col-md-6">
 
-									<nav aria-label="Page navigation example">
-										<ul class="pagination">
-											<li class="page-item"
-												th:classappend="${isFirst} ? 'disabled':''"><a
-												class="page-link"
-												th:href="@{'/admin/category?pageNo='+${pageNo-1}}"
-												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-											</a></li>
+												<nav aria-label="Page navigation example">
+													<ul class="pagination">
+														<li class="page-item"
+															th:classappend="${isFirst} ? 'disabled':''"><a
+															class="page-link"
+															th:href="@{'/admin/category?pageNo='+${pageNo-1}}"
+															aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+														</a></li>
 
-											<li th:each="i:${#numbers.sequence(1,totalPages)}"
-												class="page-item"
-												th:classappend="${pageNo+1==i}?'active':''" ]]><a
-												class="page-link"
-												th:href="@{'/admin/category?pageNo='+${i-1}}">[[${i}]]</a></li>
+														<li th:each="i:${#numbers.sequence(1,totalPages)}"
+															class="page-item"
+															th:classappend="${pageNo+1==i}?'active':''" ]]><a
+															class="page-link"
+															th:href="@{'/admin/category?pageNo='+${i-1}}">[[${i}]]</a></li>
 
-											<li class="page-item"
-												th:classappend="${isLast} ? 'disabled':''"><a
-												class="page-link"
-												th:href="@{'/admin/category?pageNo='+${pageNo+1}}"
-												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-											</a></li>
-										</ul>
-									</nav>
-								</div>
+														<li class="page-item"
+															th:classappend="${isLast} ? 'disabled':''"><a
+															class="page-link"
+															th:href="@{'/admin/category?pageNo='+${pageNo+1}}"
+															aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+														</a></li>
+													</ul>
+												</nav>
+											</div>
 
-							</div>
+										</div>
 
 
 

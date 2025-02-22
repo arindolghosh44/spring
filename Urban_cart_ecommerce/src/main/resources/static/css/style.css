@@ -325,11 +325,7 @@ body {
 }
 
 
-/* General Styling */
-body {
-    background: linear-gradient(to right, #6dd5ed, #2193b0);
-    font-family: Arial, sans-serif;
-}
+
 
 /* Card Styling */
 .register-card {
@@ -413,7 +409,7 @@ body {
     height: 100%;
 }
 
-.carousel-item1 img {
+.carousel-item img {
     height: 700px; /* Adjust height to match form */
     object-fit: cover;
     border-radius: 10px;

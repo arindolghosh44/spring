@@ -9,13 +9,18 @@
 	<section>
 
 
-		<div class="container" style="margin-top: 70px">
+		<div class="container-fluid"
+			style="margin-top: 70px; background: linear-gradient(135deg, #2E8B57, #A7D129); padding: 50px; border-radius: 15px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);">
 
 
-			<div class="card shadow-sm p-0 m-5 mt-0 bg-body-tertiary rounded">
+
+			<div class="card shadow-lg p-4 rounded"
+				style="background: linear-gradient(135deg, #FFD700, #2E8B57, #FF4500, #1E90FF); color: white;">
 
 
-				<div class="card-body">
+				<div class="card-body"
+					style="background: linear-gradient(135deg, #2E8B57, #A7D129); color: green;">
+
 
 
 					<div class="container-fluid p-5 ">
@@ -26,7 +31,8 @@
 
 								<div class="card bg-info shadow-lg  p-0 m-5 mt-0">
 
-									<div class="card-header text-center fs-4 bg-primary">
+									<div class="card-header text-center fs-4 "
+										style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
 										<p class="text-center fs-4">Edit Product</p>
 
 										<th:block th:if="${session.succMsg}">
@@ -49,7 +55,8 @@
 
 
 									</div>
-									<div class="card-body bg-info">
+									<div class="card-body"
+										style="background: linear-gradient(135deg, #D8F3DC, #A7D129); color: #1E3A34; padding: 20px; border-radius: 10px; font-size: 18px; font-weight: bold; transition: background 0.3s ease-in-out;">
 
 
 										<form action="/admin/updateProduct" method="post"
@@ -117,8 +124,9 @@
 
 
 													<label for="discount">Discount</label> <input type="text"
-														th:value="${product.discount}" id="discount" name="discount"
-														class="form-control"  oninput="updateDiscountedPrice()">
+														th:value="${product.discount}" id="discount"
+														name="discount" class="form-control"
+														oninput="updateDiscountedPrice()">
 
 												</div>
 
@@ -126,8 +134,9 @@
 
 
 													<label> Discounted Price</label> <input type="text"
-														readonly th:value="${product.discountPrice}" 
-														class="form-control" id="discountPrice" name="discountPrice" >
+														readonly th:value="${product.discountPrice}"
+														class="form-control" id="discountPrice"
+														name="discountPrice">
 
 
 												</div>
@@ -143,14 +152,16 @@
 												<label> Status</label>
 												<div class="form-check">
 													<input class="form-check-input" type="radio"
-												th:checked="${product.isActive==true}"	name="isActive" id="exampleRadios1" value="true" checked>
-													<label class="form-check-label" for="exampleRadios1">Active
+														th:checked="${product.isActive==true}" name="isActive"
+														id="exampleRadios1" value="true" checked> <label
+														class="form-check-label" for="exampleRadios1">Active
 													</label>
 												</div>
 												<div class="form-check">
 													<input class="form-check-input" type="radio"
-												th:checked="${product.isActive==false}"	name="isActive" id="exampleRadios2" value="false">
-													<label class="form-check-label" for="exampleRadios2">
+														th:checked="${product.isActive==false}" name="isActive"
+														id="exampleRadios2" value="false"> <label
+														class="form-check-label" for="exampleRadios2">
 														Inactive</label>
 												</div>
 
@@ -288,19 +299,22 @@
 
 
 		</div>
-			<script>
-    function updateDiscountedPrice() {
-        // Fetch the original price dynamically from the "price" input field
-        const originalPrice = parseFloat(document.getElementById('price').value) || 0;
-        const discount = parseFloat(document.getElementById('discount').value) || 0;
+		<script>
+			function updateDiscountedPrice() {
+				// Fetch the original price dynamically from the "price" input field
+				const originalPrice = parseFloat(document
+						.getElementById('price').value) || 0;
+				const discount = parseFloat(document.getElementById('discount').value) || 0;
 
-        // Calculate the discounted price
-        const discountedPrice = originalPrice - (originalPrice * (discount / 100));
+				// Calculate the discounted price
+				const discountedPrice = originalPrice
+						- (originalPrice * (discount / 100));
 
-        // Update the Discounted Price field
-        document.getElementById('discountPrice').value = discountedPrice.toFixed(2);
-    }
-</script>
+				// Update the Discounted Price field
+				document.getElementById('discountPrice').value = discountedPrice
+						.toFixed(2);
+			}
+		</script>
 
 	</section>
 </body>

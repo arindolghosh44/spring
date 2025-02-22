@@ -35,6 +35,8 @@ import com.aec.service.CategoryService;
 import com.aec.service.ProductService;
 import com.aec.service.UserService;
 import com.aec.util.CommonUtil;
+import com.aec.model.Feedback;
+import com.aec.service.FeedbackService;
 
 import io.micrometer.common.util.StringUtils;
 import jakarta.mail.MessagingException;
@@ -321,6 +323,42 @@ public class HomeController {
 		m.addAttribute("categories", categories);
 		return "product";
 
+	}
+	
+	
+	
+	
+	//for feedback
+	
+	@Autowired
+	private FeedbackService feedbackService;
+	
+	
+	@PostMapping("/saveFeedback")
+	public String saveFeedback(@ModelAttribute Feedback feedback,HttpSession session) throws IOException{
+		
+	Feedback feedback1=feedbackService.saveProduct(feedback);
+	
+	if(feedback1!=null) {
+		session.setAttribute("succMsg", "Your feedback saved successfully");
+		
+		
+		 // Send email notification
+        try {
+            String recipientEmail = feedback.getEmail();
+            String emailContent = "Thank you, " + feedback.getFullName() + ", for your valuable feedback!";
+            commonUtil.sendMailWithCustomContent(recipientEmail, "Feedback Received", emailContent);
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            session.setAttribute("errorMsg", "Feedback saved but email failed to send.");
+        }
+	}
+	else {
+		session.setAttribute("errorMsg", "something wrong on server");
+	}
+	
+	
+	return "feedback";
+		
 	}
 
 }

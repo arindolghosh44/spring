@@ -73,7 +73,10 @@ public class UserController {
 		return "user/home";
 	}
 	
-	
+	@GetMapping("/feedback")
+	public String feedback() {
+		return "feedback";
+	}
 	
 	@ModelAttribute
 	public void getUserDetails(Principal p, Model m) {
