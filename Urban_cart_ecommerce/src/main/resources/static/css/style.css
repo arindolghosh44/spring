@@ -57,11 +57,20 @@
 
 
 
+/* Animated Gradient Background */
 body {
-    background: linear-gradient(to right, #ff758c, #ff7eb3, #ffa585);
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
     font-family: 'Poppins', sans-serif;
 }
 
+/* Gradient Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 .container {
     margin-top: 70px;
 }
@@ -410,7 +419,12 @@ body {
     border-radius: 10px;
 }
 
+/*//////////////////////////*/
+
 /*product.html*/
+
+
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: black;
@@ -462,7 +476,7 @@ body {
 
 /* Category Links */
 .category-link {
-    color: white;
+   color: yellow !important; /* Force yellow text */
     font-weight: 500;
     padding: 10px;
     transition: 0.3s;
@@ -503,7 +517,11 @@ body {
 .product-card:hover {
     transform: scale(1.05);
 }
+/* Product Card Image - Ensure uniform size */
 .product-img {
+    width: 100%; /* Ensure images take full width of the card */
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Maintain aspect ratio while filling the box */
     border-radius: 12px;
 }
 
@@ -523,6 +541,6 @@ body {
 
 
 
-/* view product.html*/
+/* index.html*/
 
 
