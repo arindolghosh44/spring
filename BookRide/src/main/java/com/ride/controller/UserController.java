@@ -140,19 +140,27 @@ public class UserController {
 	
 	@GetMapping("/book")
 	public String bookCar(@RequestParam(value = "carId", required = false) Integer carId, Model model, HttpSession session) {
+	    // Validate car selection
 	    if (carId == null) {
-	        session.setAttribute("errorMsg", "Invalid car selection.");
-	        return "redirect:/cars"; // Redirect to car listing page instead of error
+	        session.setAttribute("errorMsg", "Please select a car first.");
+	        return "redirect:/cars"; // Redirect to car listing
 	    }
 
-	    Car car = productService.getProductById(carId);
-	    if (car == null) {
+	    // Fetch the selected car
+	    Car selectedCar = productService.getProductById(carId);
+	    if (selectedCar == null) {
 	        session.setAttribute("errorMsg", "Car not found.");
-	        return "redirect:/user/book";
+	        return "redirect:/cars";
 	    }
 
-	    model.addAttribute("car", car); // Ensure this is added
-	    return "book";
+	    // Fetch all available cars for the dropdown
+	 //   List<Car> availableCars = productService.getAllAvailableCars(); // Ensure this method exists
+
+	    // Pass both the selected car and car list to the model
+	    model.addAttribute("car", selectedCar);
+	  //  model.addAttribute("cars", availableCars);
+
+	    return "book"; // Thymeleaf template
 	}
 
 
@@ -164,27 +172,31 @@ public class UserController {
 	                              @RequestParam(value = "payNow", required = false, defaultValue = "false") Boolean payNow,
 	                              HttpSession session,
 	                              Principal principal) {
-	    if (carId == null) {
+	    // Ensure a car is selected
+	    if (carId == null || carId == 0) {
 	        session.setAttribute("errorMsg", "Car selection is required.");
 	        return "redirect:/user/book"; // Redirect to car selection
 	    }
 
+	    // Get the logged-in user
 	    String email = principal.getName();
 	    UserDtls user = userService.getUserByEmail(email);
-
 	    if (user == null) {
 	        session.setAttribute("errorMsg", "User not found. Please log in.");
 	        return "redirect:/login";
 	    }
 
+	    // Fetch car details
 	    Car car = productService.getProductById(carId);
 	    if (car == null || !car.getIsActive() || car.getStock() <= 0) {
 	        session.setAttribute("errorMsg", "Car is unavailable.");
 	        return "redirect:/user/book";
 	    }
 
+	    // Save the reservation
 	    Reserved savedReserved = reservedService.saveReservation(user, car, payNow, pickupDate, returnDate);
 
+	    // Success or failure message
 	    if (savedReserved != null && savedReserved.getId() > 0) {
 	        session.setAttribute("succMsg", "Reservation successful!");
 	    } else {
@@ -193,5 +205,6 @@ public class UserController {
 
 	    return "redirect:/user/book";
 	}
+
 
 }

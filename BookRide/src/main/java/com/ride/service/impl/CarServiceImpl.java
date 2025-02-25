@@ -177,7 +177,10 @@ public class CarServiceImpl implements CarService{
 		return pageProduct;
 	}
 
-	
+	public List<Car> getAllAvailableCars() {
+	    return carRepository.findByIsActiveTrueAndStockGreaterThan(0);
+	}
+
 	
 	
 

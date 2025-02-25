@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -25,12 +26,14 @@ public class Reserved {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private UserDtls user;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+   
     private Boolean payNow;
-    @Column(name = "pickup_date", nullable = false)
-    private LocalDate pickupDate;
+    
+    
+   
+    private Date pickupDate;
 
-    @Column(name = "return_date", nullable = false)
-    private LocalDate returnDate;
+   
+    private Date returnDate;
 
 }

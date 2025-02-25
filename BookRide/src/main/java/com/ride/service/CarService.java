@@ -30,5 +30,5 @@ public interface CarService {
 	
 	public Page<Car> searchActiveProductPagination(Integer pageNo, Integer pageSize, String category, String ch);
 
-	
+	public List<Car> getAllAvailableCars();
 }

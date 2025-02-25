@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <h2>Customer List</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Item</th>
+        </tr>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.item != null ? customer.item.name : 'No Item'}"></td>
+        </tr>
+    </table>
+
+    <h3>Add New Customer</h3>
+    <form action="/customers" method="post">
+        <label>Name: <input type="text" name="name" required></label><br>
+        <label>Email: <input type="email" name="email" required></label><br>
+        
+        <!-- Dropdown for selecting an item -->
+        <label>Item: 
+            <select name="itemId">
+                <option value="">Select Item</option>
+                <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select>
+        </label><br>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

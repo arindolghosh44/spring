@@ -61,9 +61,7 @@
 
   <form action="/user/saveReserved" method="post">
     <!-- Debugging: Display Car ID -->
-    <p>Car ID (Debugging): <span th:text="${car.id}"></span></p>
-
-    <input type="hidden" name="carId" th:value="${car.id}">
+   
 
     <div class="mb-3 text-start">
         <label for="pickDate" class="form-label">Pickup Date</label>
@@ -73,6 +71,16 @@
     <div class="mb-3 text-start">
         <label for="returnDate" class="form-label">Return Date</label>
         <input type="date" id="returnDate" name="returnDate" class="form-control" required>
+    </div>
+    
+    <div class="form-check mb-3 text-start">
+      <label>Cars: 
+            <select name="carId">
+                <option value="">Select Cars</option>
+                <option th:each="item : ${car}" th:value="${item.id}" th:text="${item.model}"></option>
+            </select>
+        </label><br>
+    
     </div>
 
     <div class="form-check mb-3 text-start">
@@ -87,12 +95,20 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const today = new Date().toISOString().split("T")[0];
+    document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date().toISOString().split("T")[0];
 
-            document.getElementById("pickDate").setAttribute("min", today);
-            document.getElementById("returnDate").setAttribute("min", today);
+        const pickDate = document.getElementById("pickDate");
+        const returnDate = document.getElementById("returnDate");
+
+        pickDate.setAttribute("min", today);
+        returnDate.setAttribute("min", today);
+
+        pickDate.addEventListener("change", function () {
+            returnDate.setAttribute("min", this.value);
         });
+    });
+
     </script>
 </body>
 

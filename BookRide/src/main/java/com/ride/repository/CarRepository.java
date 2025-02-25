@@ -24,7 +24,7 @@ public interface CarRepository extends JpaRepository<Car,Integer>{
 	Page<Car> findByModelContainingIgnoreCaseOrCategoryContainingIgnoreCase(String ch, String ch2, Pageable pageable);
 	
 	
-
+	 List<Car> findByIsActiveTrueAndStockGreaterThan(int stock);
 
 	Page<Car> findByisActiveTrueAndModelContainingIgnoreCaseOrCategoryContainingIgnoreCase(String ch, String ch2,
 			Pageable pageable);
